@@ -84,3 +84,57 @@ These flags help to some delivery partners which don't need full list of subscri
 Once generated, you can see and download the export in the CRM admin (`/print/print-subscriptions-admin/`:
 
 ![Print admin](./src/docs/print_admin.png)
+
+## Components
+
+**EnterAddressWidget**
+
+Simple widget showing warning with missing address.
+
+![alt text](docs/_static/address_warning.png "EnterAddressWidget")
+
+[Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/EnterAddressWidget/EnterAddressWidget.php#L1)
+
+[How to use](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/PrintModule.php#L91)
+
+**PaymentSuccessPrintWidget**
+
+Widget on subscription success page with address form.
+
+![alt text](docs/_static/succes_print_widget.png "PaymentSuccessPrintWidget")
+
+[Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/PaymentSuccessPrintWidget/PaymentSuccessPrintWidget.php#L1)
+
+[How to use](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/PrintModule.php#L86)
+
+**RequestNotification**
+
+Address change request list widget.
+
+![alt text](docs/_static/address_change_request.png "RequestNotification")
+
+[Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/RequestsNotification/RequestNotification.php#L1)
+
+[How to use](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/PrintModule.php#L81)
+
+**UserChangeAddressRequests**
+
+Listing witget with address change requests.
+
+![alt text](docs/_static/address_change_requests.png "UserChangeAddressRequests")
+
+[Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/UserChangeAddressRequests/UserChangeAddressRequests.php#L1)
+
+[How to use](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/PrintModule.php#L76)
+
+**UserPrintExport**
+
+User detail print export lising widget.
+
+![alt text](docs/_static/print_exports.png "UserPrintExport")
+
+[Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/UserPrintExport/UserPrintExport.php#L1)
+
+[How to use](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/PrintModule.php#L71)
+
+

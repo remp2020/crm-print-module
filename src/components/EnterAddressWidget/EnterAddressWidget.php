@@ -7,6 +7,11 @@ use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\SubscriptionsModule\Subscription\ActualUserSubscription;
 use Crm\UsersModule\Repository\AddressesRepository;
 
+/**
+ * Simple bootstrap well widget with message about missing print address.
+ *
+ * @package Crm\PrintModule\Components
+ */
 class EnterAddressWidget extends BaseWidget
 {
     protected $templatePath = __DIR__ . DIRECTORY_SEPARATOR . 'enter_address_widget.latte';

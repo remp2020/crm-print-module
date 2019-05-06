@@ -7,6 +7,12 @@ use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Kdyby\Translation\Translator;
 
+/**
+ * Widget shown in admin user detail.
+ * with list of print exports containing this user.
+ *
+ * @package Crm\PrintModule\Components
+ */
 class UserPrintExport extends BaseWidget
 {
     private $templateName = 'user_print_export.latte';

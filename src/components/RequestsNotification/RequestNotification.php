@@ -7,6 +7,11 @@ use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Kdyby\Translation\Translator;
 
+/**
+ * Simple widget with list of not accepted address change request.
+ *
+ * @package Crm\PrintModule\Components
+ */
 class RequestNotification extends BaseWidget
 {
     private $templateName = 'request_notification.latte';

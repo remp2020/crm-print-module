@@ -7,6 +7,12 @@ use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Kdyby\Translation\Translator;
 
+/**
+ * Widget shown in admin user detail.
+ * This widget lists users adress change requests.
+ *
+ * @package Crm\PrintModule\Components
+ */
 class UserChangeAddressRequests extends BaseWidget
 {
     private $templateName = 'user_change_address_requests.latte';
