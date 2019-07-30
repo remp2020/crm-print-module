@@ -1,0 +1,30 @@
+{block #title}{_print.admin.dashboard.header}{/block}
+
+{block #content}
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{_print.admin.dashboard.title}</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">{$within30days}</span>
+                    {_print.admin.dashboard.last_30_days}
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-original-title="{_print.admin.dashboard.last_30_days_desc}"></i>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{$within90days}</span>
+                    {_print.admin.dashboard.last_90_days} <i class="fa fa-question-circle" data-toggle="tooltip" data-original-title="{_print.admin.dashboard.last_90_days_desc}"></i>
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{$notWithin90Days}</span>
+                    {_print.admin.dashboard.prior_90_days} <i class="fa fa-question-circle" data-toggle="tooltip" data-original-title="{_print.admin.dashboard.prior_90_days_desc}"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

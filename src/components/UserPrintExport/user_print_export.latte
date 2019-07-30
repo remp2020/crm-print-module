@@ -1,0 +1,45 @@
+{if $totalCount > 0}
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>{_print.component.user_print_export.fields.type}</th>
+            <th>{_print.component.user_print_export.fields.day_of_export}</th>
+            <th>{_print.component.user_print_export.fields.day_of_print}</th>
+            <th>{_print.component.user_print_export.fields.institution}</th>
+            <th>{_print.component.user_print_export.fields.surname}</th>
+            <th>{_print.component.user_print_export.fields.first_name}</th>
+            <th>{_print.component.user_print_export.fields.address}</th>
+            <th>{_print.component.user_print_export.fields.city}</th>
+            <th>{_print.component.user_print_export.fields.zip_code}</th>
+            <th>{_print.component.user_print_export.fields.email}</th>
+            <th>{_print.component.user_print_export.fields.state}</th>
+        </thead>
+        <tbody>
+            <tr n:foreach="$userPrintExports as $printSubscription">
+                <td><span class="label label-default">{$printSubscription['type']}</span></td>
+                <td>{$printSubscription['exported_at']|date,'d.m.Y'}</td>
+                <td><a href="{plink :Print:PrintSubscriptionsAdmin:show $printSubscription['export_date']->format('Y-m-d'), text => ''}">{$printSubscription['export_date']|date,'d.m.Y'}</a></td>
+                <td>{$printSubscription->institution_name}</td>
+                <td>{$printSubscription->first_name}</td>
+                <td>{$printSubscription->last_name}</td>
+                <td>{$printSubscription->address} {$printSubscription->number}</td>
+                <td>{$printSubscription->city}</td>
+                <td>{$printSubscription->zip}</td>
+                <td>{$printSubscription->email}</td>
+                <td>
+                    {if $printSubscription->status == 'new'}
+                        <span class="label label-success">{$printSubscription->status}</span>
+                    {elseif $printSubscription->status == 'removed'}
+                        <span class="label label-danger">{$printSubscription->status}</span>
+                    {else}
+                        <span class="label label-default">{$printSubscription->status}</span>
+                    {/if}
+                </td>
+            </tr>
+        <tbody>
+        </tbody>
+    </table>
+{else}
+    <div class="bs-callout bs-callout-warning">
+        <h4>{_print.component.user_print_export.not_present_in_print_export}</h4>
+    </div>
+{/if}

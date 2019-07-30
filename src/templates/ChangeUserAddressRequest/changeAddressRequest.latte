@@ -1,0 +1,28 @@
+{block #title}{_print.frontend.change_user_address.title}{/block}
+
+{block #content}
+
+<div class="page-header">
+	<h1>{_print.frontend.change_user_address.new_address}</h1>
+	<p class="lead"></p>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+
+		{control snippet 'change-address-head'}
+
+		{if $address}
+			<h3>{_print.frontend.change_user_address.actual_address}</h3>
+			<blockquote>
+				{control simpleWidget 'admin.user.address.partial', $address}
+			</blockquote>
+		{/if}
+
+		<div class="change-form">
+			{control changeAddressRequestForm}
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,5 @@
+{php echo chr(239) . chr(187) . chr(191)}"first_name";"last_name";"phone";"end";"address";"zip";"city";"price"
+{foreach $subscriptions as $subscription}
+"{$subscription->user->first_name}";"{$subscription->user->last_name}";"{$subscription->user->phone_number}";"{$subscription->end_time}";"{$subscription->user->address}";"{$subscription->user->zip}";"{$subscription->user->city}";"{$subscription->subscription_type->price}'
+{/foreach}
+
