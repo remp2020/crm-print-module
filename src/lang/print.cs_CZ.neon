@@ -1,0 +1,153 @@
+menu:
+	stats: Print
+	delivery_address: Doručovací adresa
+	print_export: Print export
+	ending_subscriptions: Končící předplatné
+admin:
+	request_notification:
+		title: Žádosti o změnu adresy
+	print_subscriptions:
+		default:
+			header: Exporty
+			day_of_export: Den exportu
+			day_of_print: Den tisku
+			new: Noví
+			continuing: Pokračující
+			ending: Končící
+			files_to_download: Soubory ke stažení
+			no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
+		show:
+			header: Export pro
+			back: Zpět na seznam
+			total: celkově
+			no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
+			fields:
+				institution: Instituce
+				surname: Příjmení
+				first_name: Jméno
+				address: Adresa
+				city: Město
+				zip_code: PSČ
+				email: Email
+				state: Stav
+				amount: Množství
+		subscribers_ended:
+			header: Výpis končících předplatných
+			without_subscription: Bez předplatného
+	dashboard:
+		header: Printové štatistiky
+		title: Používanost printových předplatných
+		last_30_days: Posledních 30 dní
+		last_30_days_desc: Mají aktuální tištěná předplatné a byli na webu za posledních 30 dní
+		last_90_days: Posledních 90 dní
+		last_90_days_desc: Mají aktuální tištěná předplatné a byli na webu za posledních 90 dní
+		prior_90_days: Pred 90 dňami
+		prior_90_days_desc: Mají aktuální tištěná předplatné a byli naposledy na webu před 90 dny
+frontend:
+	change_user_address:
+		title: Změna doručovací adresy
+		new_address: Nová adresa pro doručování novin
+		actual_address: Aktuální doručovací adresa
+		scheduled: "Váš požadavek na změnu doručovací adresy byl odeslán, změna adresy u distributora trvá většinou 1-2 týdny."
+		changed: Vaše adresa byla změněna
+	change_address_request_form:
+		first_name:
+			label: Jméno
+			placeholder: křestní jméno pro doručení
+			required: Křestní jméno musí být vyplněné
+		last_name:
+			label: Příjmení
+			placeholder: příjmení pro doručení
+			required: Příjmení musí být vyplněné
+		phone_number:
+			label: Tel. číslo
+			placeholder: vaše telefonní číslo
+		address:
+			label: Ulice
+			placeholder: napište ulici
+			required: Ulice musí být vyplněná
+		number:
+			label: Číslo domu
+			placeholder: např. 145
+			required: Číslo domu musí být vyplněné
+		zip:
+			label: PSČ
+			placeholder: např. 54100
+			required: PSČ musí být vyplněné
+		city:
+			label: Město
+			placeholder: např. Pardubice
+			required: Město musí být vyplněné
+		submit_update: Odeslat žádost o změnu
+		submit_create: Uložit
+
+component:
+	payment_success_print_widget:
+		fill_print_address: Vyplnit adresu pro doručení
+		print_address_where: Kam Vám budeme doručovat noviny?
+		pls_fill_print_address: "Vaše předplatné aktuálně obsahuje i tištěné vydání novin. Prosím, doplňte Vaši adresu pro doručení novin."
+		need_to_fill_print_address: Pro pokračování musíte vyplnit adresu pro doručení novin.
+		saved: Všechny údaje jsou uložené
+	requests_notification:
+		header: Změny adresy
+	user_change_address_requests:
+		header: Změny adresy
+		no_record: Žádný záznam
+		user_does_not_want_to_change_address: 'Vypadá to tak, že tento uživatel si zatím nechtěl změnit adresu.'
+		fields:
+			when: Kdy
+			state: Stav
+			type: Typ
+			old_address: Stará Adresa
+			new_address: Nová Adresa
+			address: Adresa
+			actions: Akce
+		accept_and_change: Akceptuj a změň
+		decline: Odmítnout
+		messages:
+			address_changed: Adresa byla změněna
+			change_declined: Zamítnuta žádost. Adresa nebyla změněna
+	user_print_export:
+		header: Printové exporty
+		not_present_in_print_export: 'Nenachází se v žádném tištěném exportu.'
+		fields:
+			type: Typ
+			day_of_export: Den exportu
+			day_of_print: Den tisku
+			institution: Instituce
+			surname: Příjmení
+			first_name: Jméno
+			address: Adresa
+			city: Město
+			zip_code: PSČ
+			email: Email
+			state: Stav
+	not_renewed_subscriptions_filter:
+		date: Datum skončení
+		filter: Filtr
+		cancel_filter: Zruš filtr
+		export: Export
+	admin_filter:
+		text: 'Příjmení / Jméno / Adresa:'
+		filter: Filter
+		cancel_filter: Zruš filtr
+form:
+	print_address:
+		label:
+			name: Jméno
+			last_name: Příjmení
+			phone_number: Tel. číslo
+			address: Ulice
+			number: Číslo domu
+			zip: PSČ
+			city: Město
+			country_id: Země
+			save: Uložit údaje
+		required:
+			name: Musíte vyplnit Vaše jméno
+			last_name: Musíte vyplnit Vaše příjmení
+			address: Musíte zadat ulici
+			number: Musíte zadat číslo domu
+			zip: Musíte zadať PSČ
+			city: Musíte zadat město
+			country_id: Musíte vybrat zeme

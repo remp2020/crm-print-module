@@ -1,0 +1,17 @@
+{
+  "name": "remp/crm-print-module",
+  "description": "CRM Print Module",
+  "type": "library",
+  "homepage": "https://remp2020.com",
+  "license": "MIT",
+  "require": {
+    "php": "^7.2"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Crm\\PrintModule\\": "src/"
+    },
+    "classmap": ["src/"]
+  }
+}

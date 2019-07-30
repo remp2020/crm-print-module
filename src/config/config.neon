@@ -1,0 +1,16 @@
+services:
+	moduleManager:
+		setup:
+			- addModule(Crm\PrintModule\PrintModule())
+
+	- Crm\PrintModule\Api\CreateAddressChangeRequestHandler
+	- Crm\PrintModule\Components\PaymentSuccessPrintWidget
+	- Crm\PrintModule\Components\RequestNotification
+	- Crm\PrintModule\Components\UserChangeAddressRequests
+	- Crm\PrintModule\Components\UserPrintExport
+	- Crm\PrintModule\Export\ExportEngine
+	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
+	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
+	- Crm\PrintModule\Repository\PrintSubscriptionsRepository
+	- Crm\PrintModule\Seeders\ConfigsSeeder
+	- Crm\PrintModule\User\AddressChangeRequestsUserDataProvider
