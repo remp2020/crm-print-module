@@ -131,6 +131,9 @@ component:
 		text: 'Příjmení / Jméno / Adresa:'
 		filter: Filter
 		cancel_filter: Zruš filtr
+	enter_address:
+		attention: Upozornění
+		message: 'Aktuálně máte předplatné obsahující i tištěné vydání. Prosím <a style="text-decoration:underline" href="%link%">doplňte vaši adresu</a> pro doručení.'
 form:
 	print_address:
 		label:

@@ -5,13 +5,16 @@ namespace Crm\PrintModule;
 use Crm\ApiModule\Api\ApiRoutersContainerInterface;
 use Crm\ApiModule\Router\ApiIdentifier;
 use Crm\ApiModule\Router\ApiRoute;
+use Crm\ApplicationModule\Commands\CommandsContainerInterface;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\ApplicationModule\SeederManager;
 use Crm\ApplicationModule\User\UserDataRegistrator;
 use Crm\ApplicationModule\Widget\WidgetManagerInterface;
+use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
+use Crm\PrintModule\Seeders\ContentAccessSeeder;
 
 class PrintModule extends CrmModule
 {
@@ -84,12 +87,19 @@ class PrintModule extends CrmModule
             'frontend.payment.success.forms',
             $this->getInstance(\Crm\PrintModule\Components\PaymentSuccessPrintWidget::class)
         );
+
+        $widgetManager->registerWidget(
+            'frontend.layout.top',
+            $this->getInstance(\Crm\PrintModule\Components\EnterAddressWidget::class),
+            100
+        );
     }
 
     public function registerApiCalls(ApiRoutersContainerInterface $apiRoutersContainer)
     {
+        // TODO: deprecated, remove when internally we use route from users module
         $apiRoutersContainer->attachRouter(
-            new ApiRoute(new ApiIdentifier('1', 'print', 'change-address-request'), \Crm\PrintModule\Api\CreateAddressChangeRequestHandler::class, \Crm\ApiModule\Authorization\BearerTokenAuthorization::class)
+            new ApiRoute(new ApiIdentifier('1', 'print', 'change-address-request'), \Crm\UsersModule\Api\CreateAddressChangeRequestHandler::class, \Crm\ApiModule\Authorization\BearerTokenAuthorization::class)
         );
     }
 
@@ -101,5 +111,12 @@ class PrintModule extends CrmModule
     public function registerSeeders(SeederManager $seederManager)
     {
         $seederManager->addSeeder($this->getInstance(ConfigsSeeder::class));
+        $seederManager->addSeeder($this->getInstance(AddressTypesSeeder::class));
+        $seederManager->addSeeder($this->getInstance(ContentAccessSeeder::class));
+    }
+
+    public function registerCommands(CommandsContainerInterface $commandsContainer)
+    {
+        $commandsContainer->registerCommand($this->getInstance(\Crm\PrintModule\Commands\ExportDailyCommand::class));
     }
 }

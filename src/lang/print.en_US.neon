@@ -132,6 +132,9 @@ component:
 		text: 'Surname / First Name / Address:'
 		filter: Filter
 		cancel_filter: Cancel filter
+	enter_address:
+		attention: Attention
+		message: 'You have bought subscription with access to print edition. Please <a style="text-decoration:underline" href="%link%">enter your delivery address here</a>.'
 form:
 	print_address:
 		label:

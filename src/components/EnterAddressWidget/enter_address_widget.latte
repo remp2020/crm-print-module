@@ -1,0 +1,6 @@
+<div class="well">
+    <h4>{_print.component.enter_address.attention}</h4>
+
+    {capture $link}{plink :Print:ChangeUserAddressRequest:changeAddressRequest}{/capture}
+    {_print.component.enter_address.message, [link => $link]|noescape}
+</div>

@@ -132,6 +132,9 @@ component:
 		text: 'Priezvisko / Meno / Adresa:'
 		filter: Filter
 		cancel_filter: Zruš filter
+	enter_address:
+		attention: Upozornenie
+		message: 'Aktuálne máte predplatné obsahujúce aj tlačené vydanie novín. Prosím <a style="text-decoration:underline" href="%link%">doplňte vašu adresu</a> pre doručenie novín.'
 form:
 	print_address:
 		label:
