@@ -13,4 +13,9 @@ services:
 	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
 	- Crm\PrintModule\Repository\PrintSubscriptionsRepository
 	- Crm\PrintModule\Seeders\ConfigsSeeder
+	- Crm\PrintModule\Seeders\AddressTypesSeeder
+	- Crm\PrintModule\Seeders\ContentAccessSeeder
 	- Crm\PrintModule\User\AddressChangeRequestsUserDataProvider
+	- Crm\PrintModule\Commands\ExportDailyCommand
+	- Crm\PrintModule\Export\DailyExportDataSource
+	- Crm\PrintModule\Export\DailyExportView
