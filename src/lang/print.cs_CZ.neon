@@ -147,10 +147,16 @@ form:
 			country_id: Země
 			save: Uložit údaje
 		required:
-			name: Musíte vyplnit Vaše jméno
-			last_name: Musíte vyplnit Vaše příjmení
-			address: Musíte zadat ulici
-			number: Musíte zadat číslo domu
-			zip: Musíte zadať PSČ
-			city: Musíte zadat město
-			country_id: Musíte vybrat zeme
+			name: "Musíte vyplnit Vaše jméno (adresa doručení)"
+			last_name: "Musíte vyplnit Vaše příjmení (adresa doručení)"
+			address: "Musíte zadat ulici (adresa doručení)"
+			number: "Musíte zadat číslo domu (adresa doručení)"
+			zip: "Musíte zadať PSČ (adresa doručení)"
+			city: "Musíte zadat město (adresa doručení)"
+			country_id: "Musíte vybrat zemi (adresa doručení)"
+
+config:
+	category: Print
+	print_export_issue:
+		name: Název vydání
+		description: "Název vydání v tištěném exportu (napr. DENIK N)"

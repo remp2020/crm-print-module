@@ -155,3 +155,9 @@ form:
 			zip: "Musíte zadať PSČ (adresa doručenia)"
 			city: "Musíte zadať mesto (adresa doručenia)"
 			country_id: "Musíte zvoliť krajinu (adresa doručenia)"
+
+config:
+	category: Print
+	print_export_issue:
+		name: Názov vydania
+		description: "Názov vydania v printovom exporte (napr. DENNIK N)"

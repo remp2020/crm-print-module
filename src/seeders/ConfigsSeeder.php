@@ -29,9 +29,10 @@ class ConfigsSeeder implements ISeeder
 
     public function seed(OutputInterface $output)
     {
-        $category = $this->configCategoriesRepository->loadByName('Print');
+        $categoryName = 'print.config.category';
+        $category = $this->configCategoriesRepository->loadByName($categoryName);
         if (!$category) {
-            $category = $this->configCategoriesRepository->add('Print', 'fa fa-newspaper', 400);
+            $category = $this->configCategoriesRepository->add($categoryName, 'fa fa-newspaper', 400);
             $output->writeln('  <comment>* config category <info>Print</info> created</comment>');
         } else {
             $output->writeln(' * config category <info>Print</info> exists');
@@ -42,8 +43,8 @@ class ConfigsSeeder implements ISeeder
         if (!$config) {
             $this->configBuilder->createNew()
                 ->setName($name)
-                ->setDisplayName('Názov vydania')
-                ->setDescription('Názov vydania v printovom exporte')
+                ->setDisplayName('print.config.print_export_issue.name')
+                ->setDescription('print.config.print_export_issue.description')
                 ->setType(ApplicationConfig::TYPE_STRING)
                 ->setAutoload(false)
                 ->setConfigCategory($category)
@@ -52,6 +53,13 @@ class ConfigsSeeder implements ISeeder
             $output->writeln("  <comment>* config item <info>$name</info> created</comment>");
         } else {
             $output->writeln("  * config item <info>$name</info> exists");
+
+            if ($config->category->name != $categoryName) {
+                $this->configsRepository->update($config, [
+                    'config_category_id' => $category->id
+                ]);
+                $output->writeln("  <comment>* config item <info>$name</info> updated</comment>");
+            }
         }
     }
 }

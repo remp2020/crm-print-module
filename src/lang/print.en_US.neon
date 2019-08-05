@@ -155,3 +155,9 @@ form:
 			zip: "ZIP is required (delivery address)"
 			city: "City is required (delivery address)"
 			country_id: "You have to select country (delivery address)"
+
+config:
+	category: Print
+	print_export_issue:
+		name: Issue name
+		description: "Issue name in print export (e.g. DENIK N)"
