@@ -2,9 +2,9 @@
 
 namespace Crm\PrintModule\Export;
 
-use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesMetaRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Nette\Utils\Json;
@@ -62,7 +62,7 @@ class ExportEngine
                 $address = null;
             }
 
-            if (!$address && in_array($criteria->getKey(), ['dennikn_daily', 'dennikn_friday', 'dennikn_magazine', 'print_daily'])) {
+            if (!$address && in_array($criteria->getKey(), ['dennikn_daily', 'dennikn_friday', 'dennikn_magazine', 'print_daily', 'print_friday', 'future_print_friday'])) {
                 continue;
             }
 
