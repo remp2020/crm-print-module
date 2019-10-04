@@ -69,7 +69,7 @@ frontend:
 			required: Ulica musí byť vyplnená
 		number:
 			label: Číslo domu
-			placeholder: napr. 145
+			placeholder: napr. 145/41
 			required: Číslo domu musí byť vyplnené
 		zip:
 			label: PSČ
@@ -155,6 +155,14 @@ form:
 			zip: "Musíte zadať PSČ (adresa doručenia)"
 			city: "Musíte zadať mesto (adresa doručenia)"
 			country_id: "Musíte zvoliť krajinu (adresa doručenia)"
+		placeholder:
+			name: krstné meno pre doručenie
+			last_name: priezvisko pre doručenie
+			phone_number: vaše telefónne číslo
+			address: napíšte ulicu
+			number: napr. 145/41
+			zip: napr. 08102
+			city: napr. Trnava
 
 config:
 	category: Print

@@ -62,7 +62,7 @@ frontend:
 			required: Last name is required
 		phone_number:
 			label: Phone number
-			placeholder: phone number for delivery
+			placeholder: Phone number for delivery
 		address:
 			label: Street
 			placeholder: Street
@@ -155,6 +155,14 @@ form:
 			zip: "ZIP is required (delivery address)"
 			city: "City is required (delivery address)"
 			country_id: "You have to select country (delivery address)"
+		placeholder:
+			name: First name for delivery
+			last_name: Last name for delivery
+			phone_number: Phone number for delivery
+			address: Street
+			number: eg. 145/41
+			zip: eg. 08102
+			city: eg. Trnava
 
 config:
 	category: Print

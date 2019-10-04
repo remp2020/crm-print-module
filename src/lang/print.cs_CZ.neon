@@ -68,7 +68,7 @@ frontend:
 			required: Ulice musí být vyplněná
 		number:
 			label: Číslo domu
-			placeholder: např. 145
+			placeholder: 'např. 145/41 (pokud existuje, vložte prosím číslo popisné i orientační)'
 			required: Číslo domu musí být vyplněné
 		zip:
 			label: PSČ
@@ -154,6 +154,14 @@ form:
 			zip: "Musíte zadať PSČ (adresa doručení)"
 			city: "Musíte zadat město (adresa doručení)"
 			country_id: "Musíte vybrat zemi (adresa doručení)"
+		placeholder:
+			name: křestní jméno pro doručení
+			last_name: příjmení pro doručení
+			phone_number: vaše telefonní číslo
+			address: napište ulici
+			number: 'např. 145/41 (pokud existuje, vložte prosím číslo popisné i orientační)'
+			zip: např. 54100
+			city: např. Pardubice
 
 config:
 	category: Print
