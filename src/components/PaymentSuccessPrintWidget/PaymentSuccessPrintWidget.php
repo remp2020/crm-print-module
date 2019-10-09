@@ -8,6 +8,7 @@ use Crm\PaymentsModule\Repository\PaymentLogsRepository;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter;
+use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
 
 /**
  * PaymentSuccessPrintWidget is directly targeted to be used in \Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter
@@ -79,6 +80,11 @@ class PaymentSuccessPrintWidget extends BaseWidget
     private function isPrintAddressRequired($payment)
     {
         foreach ($payment->related('payment_items') as $paymentItem) {
+            // ask address only for subscription type payment items
+            if ($paymentItem->type !== SubscriptionTypePaymentItem::TYPE) {
+                continue;
+            }
+
             $subscriptionType = $paymentItem->subscription_type;
             if (!$subscriptionType) {
                 continue;
