@@ -97,7 +97,7 @@ class ExportEngine
             $this->printSubscriptionsRepository->setPrintExportStatusTyzdenSpecial($criteria->getKey(), $printExportDate, $criteria->getExportAt());
         } elseif (in_array($criteria->getKey(), ['tyzden_print_new'])) {
             $this->printSubscriptionsRepository->setPrintExportStatusTyzdenDaily($criteria->getKey(), $printExportDate, $criteria->getExportAt());
-        } elseif ($criteria->getKey() != 'dennikn_magazine') {
+        } else {
             $this->printSubscriptionsRepository->setPrintExportStatus($criteria->getKey(), $printExportDate, $criteria->getExportAt());
         }
 
