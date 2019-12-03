@@ -8,8 +8,9 @@ use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Kdyby\Translation\Translator;
 
 /**
+ * This widget fetches all address change requests for specific user
+ * and renders bootstrap table with list and action buttons.
  * Widget shown in admin user detail.
- * This widget lists users adress change requests.
  *
  * @package Crm\PrintModule\Components
  */

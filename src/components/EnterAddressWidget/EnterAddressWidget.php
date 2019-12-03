@@ -8,7 +8,8 @@ use Crm\SubscriptionsModule\Subscription\ActualUserSubscription;
 use Crm\UsersModule\Repository\AddressesRepository;
 
 /**
- * Simple bootstrap well widget with message about missing print address.
+ * This widget fetches users actual subscription and renders link and info
+ * about missing pritn address in case user have print subscription and doesn't have print address filled.
  *
  * @package Crm\PrintModule\Components
  */

@@ -8,7 +8,8 @@ use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Kdyby\Translation\Translator;
 
 /**
- * Simple widget with list of not accepted address change request.
+ * This widget fetches all not accepted address change requests
+ * and renders bootstrap callout with list of of these requests.
  *
  * @package Crm\PrintModule\Components
  */

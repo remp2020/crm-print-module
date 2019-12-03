@@ -8,8 +8,8 @@ use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Kdyby\Translation\Translator;
 
 /**
- * Widget shown in admin user detail.
- * with list of print exports containing this user.
+ * This widgets fetches all users exported print subscriptions
+ * and renders bootstrap table.
  *
  * @package Crm\PrintModule\Components
  */
