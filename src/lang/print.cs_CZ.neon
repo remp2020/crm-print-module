@@ -167,4 +167,4 @@ config:
 	category: Print
 	print_export_issue:
 		name: Název vydání
-		description: "Název vydání v tištěném exportu (napr. DENIK N)"
+		description: "Název vydání v tištěném exportu (např. DENIK N)"
