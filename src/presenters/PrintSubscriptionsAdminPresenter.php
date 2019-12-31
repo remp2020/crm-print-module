@@ -51,11 +51,16 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $years = [];
         if ($this->type) {
             $firstExport = $this->printSubscriptionsRepository->firstExport($this->type);
+            $lastExport = $this->printSubscriptionsRepository->lastExport($this->type);
             $startDate = date('Y');
+            $endDate = date('Y');
             if ($firstExport) {
-                $startDate = intval($firstExport->export_date->format('Y'));
+                $startDate = (int) $firstExport->export_date->format('Y');
             }
-            while ($startDate <= date('Y')) {
+            if ($lastExport) {
+                $endDate = (int) $lastExport->export_date->format('Y');
+            }
+            while ($startDate <= $endDate) {
                 $years[] = $startDate;
                 $startDate++;
             }

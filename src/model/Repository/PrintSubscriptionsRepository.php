@@ -64,6 +64,15 @@ class PrintSubscriptionsRepository extends Repository
             ->fetch();
     }
 
+    public function lastExport(string $type)
+    {
+        return $this->getTable()
+            ->where(['type' => $type])
+            ->order('export_date DESC')
+            ->limit(1)
+            ->fetch();
+    }
+
     public function add($type, $subscriptionsId, IRow $user, IRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
     {
         if ($meta === "[]") {
