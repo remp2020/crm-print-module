@@ -3,6 +3,8 @@ services:
 		setup:
 			- addModule(Crm\PrintModule\PrintModule())
 
+	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
+
 	- Crm\PrintModule\Components\PaymentSuccessPrintWidget
 	- Crm\PrintModule\Components\RequestNotification
 	- Crm\PrintModule\Components\UserChangeAddressRequests
@@ -11,7 +13,6 @@ services:
 	- Crm\PrintModule\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
 	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
-	- Crm\PrintModule\Repository\PrintSubscriptionsRepository
 	- Crm\PrintModule\Seeders\ConfigsSeeder
 	- Crm\PrintModule\Seeders\AddressTypesSeeder
 	- Crm\PrintModule\Seeders\ContentAccessSeeder
