@@ -29,7 +29,7 @@ class PrintSubscriptionsRepository extends Repository
         $this->usersRepository = $usersRepository;
     }
 
-    public function getAllCounts(string $type, int $year)
+    final public function getAllCounts(string $type, int $year)
     {
         $nextYear = $year + 1;
         $allStatusCounts = $this->getTable()
@@ -55,7 +55,7 @@ class PrintSubscriptionsRepository extends Repository
         return $counts;
     }
 
-    public function firstExport(string $type)
+    final public function firstExport(string $type)
     {
         return $this->getTable()
             ->where(['type' => $type])
@@ -64,7 +64,7 @@ class PrintSubscriptionsRepository extends Repository
             ->fetch();
     }
 
-    public function lastExport(string $type)
+    final public function lastExport(string $type)
     {
         return $this->getTable()
             ->where(['type' => $type])
@@ -73,7 +73,7 @@ class PrintSubscriptionsRepository extends Repository
             ->fetch();
     }
 
-    public function add($type, $subscriptionsId, IRow $user, IRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
+    final public function add($type, $subscriptionsId, IRow $user, IRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
     {
         if ($meta === "[]") {
             $meta = "{}";
@@ -99,12 +99,12 @@ class PrintSubscriptionsRepository extends Repository
         ]);
     }
 
-    public function getTypes()
+    final public function getTypes()
     {
         return $this->getTable()->select('DISTINCT type')->fetchPairs('type', 'type');
     }
 
-    public function getExport($type, $date, $text = '', $status = '')
+    final public function getExport($type, $date, $text = '', $status = '')
     {
         $where = ['type' => $type];
         if ($text != '') {
@@ -121,7 +121,7 @@ class PrintSubscriptionsRepository extends Repository
         return $this->getTable()->where($where)->order('status, first_name, last_name, address ASC');
     }
 
-    public function getExportData($type, \DateTime $exportDate, \DateTime $printDate = null)
+    final public function getExportData($type, \DateTime $exportDate, \DateTime $printDate = null)
     {
         $where = [];
         $where['type'] = $type;
@@ -132,7 +132,7 @@ class PrintSubscriptionsRepository extends Repository
         return $this->getTable()->where($where)->order('first_name, last_name, address ASC');
     }
 
-    public function deleteList($type, $date)
+    final public function deleteList($type, $date)
     {
         $where = [
             'export_date' => $date,
@@ -141,7 +141,7 @@ class PrintSubscriptionsRepository extends Repository
         return $this->getTable()->where($where)->delete();
     }
 
-    public function setPrintExportStatus($type, \DateTime $printExportDate, \DateTime $exportAt)
+    final public function setPrintExportStatus($type, \DateTime $printExportDate, \DateTime $exportAt)
     {
         $date = $this->getTable()->where(['type' => $type])->select('export_date')->group('export_date')->order('export_date DESC')->limit(1, 1);
         if (!isset($date[0])) {
@@ -182,7 +182,7 @@ class PrintSubscriptionsRepository extends Repository
      *  - namiesto s user_id pracuje so subscription_id - co je asi spravne ale som sa bal to menit v tej hornej funkcii pre dennikn
      *
      */
-    public function setPrintExportStatusTyzdenSpecial($type, \DateTime $printExportDate, \DateTime $exportAt)
+    final public function setPrintExportStatusTyzdenSpecial($type, \DateTime $printExportDate, \DateTime $exportAt)
     {
         $previousExportDate = clone $printExportDate;
         $previousExportDate->sub(new \DateInterval('P1D'));
@@ -222,7 +222,7 @@ class PrintSubscriptionsRepository extends Repository
      * ble ble ble - meni fungovanie pridavanie expirovanych
      *
      */
-    public function setPrintExportStatusTyzdenDaily($type, \DateTime $printExportDate, \DateTime $exportAt)
+    final public function setPrintExportStatusTyzdenDaily($type, \DateTime $printExportDate, \DateTime $exportAt)
     {
         $previousExportDate = clone $printExportDate;
         $previousExportDate->sub(new \DateInterval('P1D'));
@@ -316,12 +316,12 @@ GROUP BY today.id
         }
     }
 
-    public function userPrintSubscriptions($userId)
+    final public function userPrintSubscriptions($userId)
     {
         return $this->getTable()->where(['user_id' => $userId])->order('export_date DESC');
     }
 
-    public function getLatestExportDate()
+    final public function getLatestExportDate()
     {
         $row = $this->getTable()->select('MAX(export_date) AS max_export_date')->fetch();
         return $row->max_export_date;
