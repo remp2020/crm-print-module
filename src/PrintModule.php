@@ -20,7 +20,7 @@ class PrintModule extends CrmModule
 {
     public function registerAdminMenuItems(MenuContainerInterface $menuContainer)
     {
-        $printMenu = new MenuItem('Print', '#', 'fa fa-newspaper', 250, false);
+        $printMenu = new MenuItem('Print', '#print', 'fa fa-newspaper', 250, false);
 
         $menuItem1 = new MenuItem(
             $this->translator->translate('print.menu.print_export'),

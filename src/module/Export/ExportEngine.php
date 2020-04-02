@@ -66,7 +66,7 @@ class ExportEngine
                 continue;
             }
 
-            $meta = [];
+            $meta = $sharedMeta;
             if ($address) {
                 $changeRequest = $address->related('address_change_requests')
                     ->where([
