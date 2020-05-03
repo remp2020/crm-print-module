@@ -92,7 +92,7 @@ class PrintSubscriptionsRepository extends Repository
             'zip' => $address ? $address->zip : null,
             'city' => $address ? $address->city : null,
             'phone_number' => $address ? $address->phone_number : null,
-            'email' => $user->email,
+            'email' => $user->email ?? $user->public_name,
             'status' => $status,
             'address_id' => $address ? $address->id : null,
             'meta' => $meta,

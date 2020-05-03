@@ -29,7 +29,7 @@ class PrintSubscriptionsPopulator extends AbstractPopulator
                 'address' => $printAddress->address,
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
-                'email' => $user->email,
+                'email' => $user->email ?? $user->public_name,
                 'status' => $this->getStatus(),
                 'institution_name' => $user->institution_name,
             ];

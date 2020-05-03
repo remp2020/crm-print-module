@@ -2,7 +2,7 @@
   <div class="bs-callout bs-callout-warning">
 	<h4>{_print.admin.request_notification.title}</h4>
 	{foreach $addressChangeRequests as $request}
-	  <a href="{plink :Users:UsersAdmin:Show $request->user_id}">{$request->user->email} <small>({$request->created_at|userDate})</small></a>{sep},{/sep}
+	  <a href="{plink :Users:UsersAdmin:Show $request->user_id}">{$request->user->public_name} <small>({$request->created_at|userDate})</small></a>{sep},{/sep}
 	{/foreach}
   </div>
 {/if}
