@@ -36,11 +36,11 @@ Print module adds `print` address type. This address type should be use for deli
 
 Module also adds new *content access* to the CRM called `print`. You can add this *content access* to selected *subscription types* and let your customers buy them. If user buys subscription with access to `print`, CRM will ask user to enter delivery (`print`) address after successful payment.
 
-![Success page print address](./src/docs/delivery_address.png)
+![Success page print address](docs/delivery_address.png)
 
 If for some reason user doesn't enter the address, she's reminded by notification to enter the missing address on every page of customer zone. Administrators are reminded by the list of all people with active print subscription with missing `print` address by widget in CRM admin.
 
-![Enter address widget](./src/docs/enter_address_widget.png) 
+![Enter address widget](docs/enter_address_widget.png) 
 
 You can always replace this widget with your own implementation by overriding the default widget in your custom module:
 
@@ -83,7 +83,7 @@ These flags help to some delivery partners which don't need full list of subscri
 
 Once generated, you can see and download the export in the CRM admin (`/print/print-subscriptions-admin/`:
 
-![Print admin](./src/docs/print_admin.png)
+![Print admin](docs/print_admin.png)
 
 ## Components
 
@@ -91,7 +91,7 @@ Once generated, you can see and download the export in the CRM admin (`/print/pr
 
 Simple widget showing warning with missing address.
 
-![alt text](docs/_static/address_warning.png "EnterAddressWidget")
+![alt text](docs/address_warning.png "EnterAddressWidget")
 
 [Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/EnterAddressWidget/EnterAddressWidget.php#L1)
 
@@ -101,7 +101,7 @@ Simple widget showing warning with missing address.
 
 Widget on subscription success page with address form.
 
-![alt text](docs/_static/succes_print_widget.png "PaymentSuccessPrintWidget")
+![alt text](docs/succes_print_widget.png "PaymentSuccessPrintWidget")
 
 [Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/PaymentSuccessPrintWidget/PaymentSuccessPrintWidget.php#L1)
 
@@ -111,7 +111,7 @@ Widget on subscription success page with address form.
 
 Address change request list widget.
 
-![alt text](docs/_static/address_change_request.png "RequestNotification")
+![alt text](docs/address_change_request.png "RequestNotification")
 
 [Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/RequestsNotification/RequestNotification.php#L1)
 
@@ -121,7 +121,7 @@ Address change request list widget.
 
 Listing witget with address change requests.
 
-![alt text](docs/_static/address_change_requests.png "UserChangeAddressRequests")
+![alt text](docs/address_change_requests.png "UserChangeAddressRequests")
 
 [Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/UserChangeAddressRequests/UserChangeAddressRequests.php#L1)
 
@@ -131,7 +131,7 @@ Listing witget with address change requests.
 
 User detail print export lising widget.
 
-![alt text](docs/_static/print_exports.png "UserPrintExport")
+![alt text](docs/print_exports.png "UserPrintExport")
 
 [Source code](https://github.com/remp2020/crm-print-module/blob/93ebdc8168a28f5bd5e754582dae60e9159d1036/src/components/UserPrintExport/UserPrintExport.php#L1)
 
