@@ -1,4 +1,28 @@
 {if $totalCount > 0}
+    {var $printSubscriptionTypes = []}
+    {foreach $userPrintExports as $printSubscription}
+        {var $printSubscriptionTypes[$printSubscription->type] = $printSubscription->type}
+    {/foreach}
+    <ul n:if="count($printSubscriptionTypes) > 1" class="nav nav-pills pull-left">
+        <li n:foreach="$printSubscriptionTypes as $printSubscriptionType" class="active">
+            <a href="#" data-print-subscription-type="{$printSubscriptionType}" class="print-subscription-type-change">{$printSubscriptionType}</a>
+        </li>
+    </ul>
+    <script>
+        $('.print-subscription-type-change').click(function(e) {
+            e.preventDefault();
+            var parent = $(this).parent();
+            var printSubscriptionType = $(this).data('print-subscription-type');
+            if ($(parent).hasClass('active')) {
+                $('tr.' + printSubscriptionType).hide();
+                $(parent).removeClass('active');
+            } else {
+                $('tr.' + printSubscriptionType).show();
+                $(parent).addClass('active');
+            }
+        })
+    </script>
+
     <table class="table table-striped table-hover">
         <thead>
             <th>{_print.component.user_print_export.fields.type}</th>
@@ -14,8 +38,11 @@
             <th>{_print.component.user_print_export.fields.state}</th>
         </thead>
         <tbody>
-            <tr n:foreach="$userPrintExports as $printSubscription">
-                <td><span class="label label-default">{$printSubscription['type']}</span></td>
+            <tr n:foreach="$userPrintExports as $printSubscription" class="{$printSubscription->type}">
+                <td>
+                    <span class="label label-default">{$printSubscription->type}</span>
+                    <small class="text-muted">(#{$printSubscription->subscription_id})</small>
+                </td>
                 <td>{$printSubscription['exported_at']|date,'d.m.Y'}</td>
                 <td><a href="{plink :Print:PrintSubscriptionsAdmin:show $printSubscription['export_date']->format('Y-m-d'), text => ''}">{$printSubscription['export_date']|date,'d.m.Y'}</a></td>
                 <td>{$printSubscription->institution_name}</td>
