@@ -48,7 +48,7 @@ frontend:
 		title: Změna doručovací adresy
 		new_address: Nová adresa pro doručování novin
 		actual_address: Aktuální doručovací adresa
-		scheduled: "Váš požadavek na změnu doručovací adresy byl odeslán, změna adresy u distributora trvá většinou 1-2 týdny."
+		scheduled: "Váš požadavek na změnu doručovací adresy byl odeslán, změna adresy u distributora trvá většinou 2 - 3 pracovní dny."
 		changed: Vaše adresa byla změněna
 	change_address_request_form:
 		first_name:
