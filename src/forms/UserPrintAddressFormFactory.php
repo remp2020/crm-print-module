@@ -31,6 +31,8 @@ class UserPrintAddressFormFactory
 
     private $translator;
 
+    private $addressType;
+
     public function __construct(
         Translator $translator,
         UsersRepository $usersRepository,
@@ -47,14 +49,16 @@ class UserPrintAddressFormFactory
         $this->dataProviderManager = $dataProviderManager;
     }
 
-    public function create(ActiveRow $payment): Form
+    public function create(ActiveRow $payment, string $addressType = 'print'): Form
     {
+        $this->addressType = $addressType;
+
         $form = new Form;
 
         $this->payment = $payment;
         $user = $this->payment->user;
 
-        $printAddress = $this->addressesRepository->address($user, 'print');
+        $printAddress = $this->addressesRepository->address($user, $this->addressType);
 
         $form->addProtection();
         $form->setTranslator($this->translator);
@@ -131,7 +135,7 @@ class UserPrintAddressFormFactory
         $user = $this->payment->user;
 
         if (isset($values->first_name)) {
-            $printAddress = $this->addressesRepository->address($user, 'print');
+            $printAddress = $this->addressesRepository->address($user, $this->addressType);
 
             $changeRequest = $this->addressChangeRequestsRepository->add(
                 $user,
@@ -148,7 +152,7 @@ class UserPrintAddressFormFactory
                 null,
                 null,
                 $values->phone_number,
-                'print'
+                $this->addressType
             );
 
             if ($changeRequest) {
