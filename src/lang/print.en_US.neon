@@ -2,7 +2,6 @@ menu:
 	stats: Print
 	delivery_address: Delivery address
 	print_export: Print export
-	ending_subscriptions: Ending subscriptions
 admin:
 	request_notification:
 		title: Address change requests
@@ -31,9 +30,6 @@ admin:
 				email: Email
 				state: State
 				amount: Amount
-		subscribers_ended:
-			header: Print of ending subscriptions
-			without_subscription: Without subscription
 	dashboard:
 		header: Print stats
 		title: Usage of print subscriptions
@@ -123,11 +119,6 @@ component:
 			zip_code: Zip Code
 			email: Email
 			state: State
-	not_renewed_subscriptions_filter:
-		date: End date
-		filter: Filter
-		cancel_filter: Cancel filter
-		export: Export
 	admin_filter:
 		text: 'Surname / First Name / Address:'
 		filter: Filter

@@ -30,16 +30,7 @@ class PrintModule extends CrmModule
             true
         );
 
-        $menuItem2 = new MenuItem(
-            $this->translator->translate('print.menu.ending_subscriptions'),
-            ':Print:PrintSubscriptionsAdmin:subscribersEnded',
-            'fa fa-calendar',
-            200,
-            true
-        );
-
         $printMenu->addChild($menuItem1);
-        $printMenu->addChild($menuItem2);
 
         $menuContainer->attachMenuItem($printMenu);
 

@@ -2,7 +2,6 @@ menu:
 	stats: Print
 	delivery_address: Doručovací adresa
 	print_export: Print export
-	ending_subscriptions: Končící předplatné
 admin:
 	request_notification:
 		title: Žádosti o změnu adresy
@@ -31,9 +30,6 @@ admin:
 				email: Email
 				state: Stav
 				amount: Množství
-		subscribers_ended:
-			header: Výpis končících předplatných
-			without_subscription: Bez předplatného
 	dashboard:
 		header: Printové štatistiky
 		title: Používanost printových předplatných
@@ -122,11 +118,6 @@ component:
 			zip_code: PSČ
 			email: Email
 			state: Stav
-	not_renewed_subscriptions_filter:
-		date: Datum skončení
-		filter: Filtr
-		cancel_filter: Zruš filtr
-		export: Export
 	admin_filter:
 		text: 'Příjmení / Jméno / Adresa:'
 		filter: Filter

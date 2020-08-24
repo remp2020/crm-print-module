@@ -2,12 +2,10 @@
 
 namespace Crm\PrintModule\Presenters;
 
-use Crm\ApplicationModule\Components\VisualPaginator;
 use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Nette\Application\UI\Form;
-use Nette\Utils\DateTime;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class PrintSubscriptionsAdminPresenter extends AdminPresenter
@@ -82,66 +80,6 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $this->template->printSubscriptionsCount = $printExports->count('*');
     }
 
-    public function renderExport()
-    {
-        $date = new DateTime();
-        if (isset($this->params['date'])) {
-            $date = new DateTime($this->params['date']);
-        }
-
-        $this->getHttpResponse()->addHeader('Content-Type', 'application/csv');
-        $this->getHttpResponse()->addHeader('Content-Disposition', 'attachment; filename=export.csv');
-
-        $this->template->subscriptions  = $this->subscriptionsRepository->getNotRenewedSubscriptions($date);
-    }
-
-    public function renderSubscribersEnded()
-    {
-        $date = new \DateTime();
-        if (isset($this->params['date'])) {
-            $date = new \DateTime($this->params['date']);
-        }
-
-        $subscriptions  = $this->subscriptionsRepository->getNotRenewedSubscriptions($date);
-
-        $vp = new VisualPaginator();
-        $this->addComponent($vp, 'vp');
-
-        $paginator = $vp->getPaginator();
-        $paginator->setItemCount($subscriptions->count('*'));
-        $paginator->setItemsPerPage($this->onPage);
-
-        $this->template->vp = $vp;
-        $this->template->usersCount =  $subscriptions->count();
-        $this->template->subscriptions = $subscriptions->limit($paginator->getLength(), $paginator->getOffset());
-    }
-
-    public function createComponentNotRenewedSubscriptionsFilterForm()
-    {
-        $form = new Form;
-        $form->setRenderer(new BootstrapInlineRenderer());
-        $form->addText('date', $this->translator->translate('print.component.not_renewed_subscriptions_filter.date'));
-
-        $form->addSubmit('send', $this->translator->translate('print.component.not_renewed_subscriptions_filter.filter'))
-            ->getControlPrototype()
-            ->setName('button')
-            ->setHtml('<i class="fa fa-filter"></i> ' . $this->translator->translate('print.component.not_renewed_subscriptions_filter.filter'));
-        $presenter = $this;
-        $form->addSubmit('cancel', $this->translator->translate('print.component.not_renewed_subscriptions_filter.cancel_filter'))->onClick[] = function () use ($presenter) {
-            $presenter->redirect('PrintSubscriptionsAdmin:subscribersEnded', ['date' => '']);
-        };
-        $export = $form->addSubmit('export', $this->translator->translate('print.component.not_renewed_subscriptions_filter.export'));
-        $export->getControlPrototype()->setName('button')->setHtml('<i class="fa fa-external-link"></i> ' . $this->translator->translate('print.component.not_renewed_subscriptions_filter.export'));
-        $export->onClick[] = function ($form) use ($presenter) {
-            $presenter->redirect('PrintSubscriptionsAdmin:Export');
-        };
-        $form->onSuccess[] = [$this, 'notRenewedSubscriptionsFilterSubmited'];
-        $form->setDefaults([
-            'date' => isset($_GET['date']) ? $_GET['date'] : '',
-        ]);
-        return $form;
-    }
-
     public function createComponentAdminFilterForm()
     {
         $form = new Form;
@@ -170,13 +108,6 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $this->redirect('show', [
             'date' => $values['date'],
             'text' => $values['text'],
-        ]);
-    }
-
-    public function notRenewedSubscriptionsFilterSubmited($form, $values)
-    {
-        $this->redirect('subscribersEnded', [
-            'date' => $values['date']
         ]);
     }
 }
