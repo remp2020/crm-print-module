@@ -67,7 +67,7 @@
               </a>
 
               {* ble ble ble - asi by bolo dobre spravit na to widget *}
-              {if $type == 'tyzden_print_new'}
+              {if in_array($type, ['tyzden_print_new', 'tyzden_print_special'])}
                 <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'new'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.new}</a>
                 <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'recurrent'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.continuing}</a>
                 <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'removed'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.ending}</a>
