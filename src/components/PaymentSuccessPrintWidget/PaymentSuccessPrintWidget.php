@@ -8,6 +8,7 @@ use Crm\PaymentsModule\Repository\PaymentLogsRepository;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter;
+use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
 
 /**
  * PaymentSuccessPrintWidget is directly targeted to be used in \Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter
@@ -49,6 +50,7 @@ class PaymentSuccessPrintWidget extends BaseWidget
             return;
         }
 
+
         $this->template->payment = $payment;
         $this->template->setFile($this->templatePath);
         $this->template->render();
@@ -71,7 +73,7 @@ class PaymentSuccessPrintWidget extends BaseWidget
     {
         $presenter = $this->getPresenter();
         if (!$presenter instanceof SalesFunnelPresenter) {
-            throw new \Exception('PaymentSuccessInvoiceWidget used within not allowed presenter: ' . get_class($presenter));
+            throw new \Exception('PaymentSuccessPrintWidget used within not allowed presenter: ' . get_class($presenter));
         }
         return $presenter;
     }
@@ -79,6 +81,9 @@ class PaymentSuccessPrintWidget extends BaseWidget
     private function isPrintAddressRequired($payment)
     {
         foreach ($payment->related('payment_items') as $paymentItem) {
+            if ($paymentItem->type !== SubscriptionTypePaymentItem::TYPE) {
+                return false;
+            }
             $subscriptionType = $paymentItem->subscription_type;
             if (!$subscriptionType) {
                 continue;
