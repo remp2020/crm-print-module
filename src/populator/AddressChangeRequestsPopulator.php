@@ -16,6 +16,7 @@ class AddressChangeRequestsPopulator extends AbstractPopulator
 
         for ($i = 0; $i < $this->count; $i++) {
             $user = $this->getRecord('users');
+            $addressType = $this->getRecord('address_types');
 
             $addresses = $user->related('addresses')->where('deleted_at IS NULL')->fetchAll();
             if (empty($addresses)) {
@@ -25,6 +26,7 @@ class AddressChangeRequestsPopulator extends AbstractPopulator
             $data = [
                 'user_id' => $user->id,
                 'address_id' => $this->getAddress($addresses),
+                'type' => $addressType->type,
                 'status' => $this->getStatus(),
                 'created_at' => $this->faker->dateTimeBetween('-2 years'),
                 'updated_at' => $this->faker->dateTimeBetween('-2 years'),
