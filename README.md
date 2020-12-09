@@ -28,6 +28,24 @@ php bin/command.php api:generate_access
 php bin/command.php application:seed
 ```
 
+## Configuration
+
+### Directory
+
+Default directory for exports, is APP_ROOT/content/export. Directory is created automatically with first upload.
+
+You can use other buckets for uploads, but you need to define them in your config file `app/config/config.neon`:
+
+```neon
+services:	
+	# ...
+	# fileManager extension - example uploads
+	exampleExportsFileSystem: League\Flysystem\Filesystem(League\Flysystem\Adapter\Local('%appDir%/../content/examples_exports'))
+	flysystemMountManager:
+		setup:
+			- mountFilesystem('exampleExports', @exampleExportsFileSystem)
+```
+
 ## Using print module
 
 ### Frontend

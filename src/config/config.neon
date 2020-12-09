@@ -5,6 +5,11 @@ services:
 
 	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
 
+	printExportFileSystem: League\Flysystem\Filesystem(League\Flysystem\Adapter\Local('%appDir%/../content/export'))
+	flysystemMountManager:
+		setup:
+			- mountFilesystem(Crm\PrintModule\Export\FileSystem::DEFAULT_BUCKET_NAME, @printExportFileSystem)
+
 	- Crm\PrintModule\Components\PaymentSuccessPrintWidget
 	- Crm\PrintModule\Components\RequestNotification
 	- Crm\PrintModule\Components\UserChangeAddressRequests
@@ -20,3 +25,4 @@ services:
 	- Crm\PrintModule\Commands\ExportDailyCommand
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView
+	- Crm\PrintModule\Export\FileSystem

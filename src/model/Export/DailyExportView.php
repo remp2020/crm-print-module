@@ -2,8 +2,8 @@
 
 namespace Crm\PrintModule\Export;
 
-use Crm\ApplicationModule\Config\ApplicationConfig;
 use Crm\ApplicationModule\ExcelFactory;
+use League\Flysystem\MountManager;
 use Nette\Utils\Json;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
@@ -11,14 +11,14 @@ class DailyExportView implements ViewInterface
 {
     private $excelFactory;
 
-    private $applicationConfig;
+    private $mountManager;
 
     public function __construct(
         ExcelFactory $excelFactory,
-        ApplicationConfig $applicationConfig
+        MountManager $mountManager
     ) {
         $this->excelFactory = $excelFactory;
-        $this->applicationConfig = $applicationConfig;
+        $this->mountManager = $mountManager;
     }
 
     public function generateExportFile(ExportCriteria $criteria, \Traversable $data)
@@ -67,7 +67,7 @@ class DailyExportView implements ViewInterface
                 $rows[] = [
                     $printSubscription->subscription_id, // subscription_id
                     $printSubscription->user->id, // user_id
-                    $meta->address_change_request_id, // address_id
+                    $meta->address_change_request_id ?? null, // address_id
                     $printSubscription->id, // ext_id
                     str_replace("\n", ", ", $name), // name
                     $printSubscription->address, // street
@@ -84,9 +84,11 @@ class DailyExportView implements ViewInterface
             $csv = new Csv($excel);
             $csv->setDelimiter(';');
 
-            $filename = APP_ROOT . 'content/export/' . $criteria->getKey() . '-' . $exportDate->format('Y-m-d') . '.csv';
-            $csv->save($filename);
-            return $filename;
+            $fileName = $criteria->getKey() . '-' . $exportDate->format('Y-m-d') . '.csv';
+            $filePath = $this->mountManager->getAdapter(FileSystem::DEFAULT_BUCKET_NAME . '://')->applyPathPrefix($fileName);
+
+            $csv->save($filePath);
+            return $filePath;
         }
 
         return null;

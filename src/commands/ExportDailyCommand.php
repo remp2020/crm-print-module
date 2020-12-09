@@ -64,6 +64,7 @@ class ExportDailyCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        ini_set('memory_limit', '512M');
         if ($inputDate = $input->getArgument('date')) {
             $exportRunDate = DateTime::from($inputDate);
             $exportRunDate->setTime(8, 0);

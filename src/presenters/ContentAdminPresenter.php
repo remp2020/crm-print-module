@@ -3,20 +3,30 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
+use Crm\PrintModule\Export\FileSystem;
+use League\Flysystem\MountManager;
 use Nette\Application\BadRequestException;
-
 use Nette\Application\Responses\FileResponse;
 
 class ContentAdminPresenter extends AdminPresenter
 {
+    /** @var MountManager @inject */
+    public $mountManager;
+
     public function renderDefault()
     {
     }
 
     public function renderExportFile($file)
     {
-        if (file_exists(APP_ROOT . 'content/export/' . $file)) {
-            $this->sendResponse(new FileResponse(APP_ROOT . 'content/export/' . $file));
+        $adapterPrefix = FileSystem::DEFAULT_BUCKET_NAME . '://';
+
+        if ($this->mountManager->has($adapterPrefix . $file)) {
+            $filePath = $this->mountManager
+                ->getAdapter($adapterPrefix)
+                ->applyPathPrefix($file);
+
+            $this->sendResponse(new FileResponse($filePath));
         } else {
             throw new BadRequestException();
         }
