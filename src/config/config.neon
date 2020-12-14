@@ -6,7 +6,7 @@ services:
 	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
 
 	printExportFileSystem: League\Flysystem\Filesystem(League\Flysystem\Adapter\Local('%appDir%/../content/export'))
-	flysystemMountManager:
+	applicationMountManager:
 		setup:
 			- mountFilesystem(Crm\PrintModule\Export\FileSystem::DEFAULT_BUCKET_NAME, @printExportFileSystem)
 

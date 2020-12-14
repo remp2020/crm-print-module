@@ -3,14 +3,14 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
+use Crm\ApplicationModule\Models\ApplicationMountManager;
 use Crm\PrintModule\Export\FileSystem;
-use League\Flysystem\MountManager;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\FileResponse;
 
 class ContentAdminPresenter extends AdminPresenter
 {
-    /** @var MountManager @inject */
+    /** @var ApplicationMountManager @inject */
     public $mountManager;
 
     public function renderDefault()

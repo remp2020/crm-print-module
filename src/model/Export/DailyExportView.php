@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Export;
 
 use Crm\ApplicationModule\ExcelFactory;
-use League\Flysystem\MountManager;
+use Crm\ApplicationModule\Models\ApplicationMountManager;
 use Nette\Utils\Json;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
@@ -15,7 +15,7 @@ class DailyExportView implements ViewInterface
 
     public function __construct(
         ExcelFactory $excelFactory,
-        MountManager $mountManager
+        ApplicationMountManager $mountManager
     ) {
         $this->excelFactory = $excelFactory;
         $this->mountManager = $mountManager;

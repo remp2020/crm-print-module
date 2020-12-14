@@ -41,7 +41,7 @@ services:
 	# ...
 	# fileManager extension - example uploads
 	exampleExportsFileSystem: League\Flysystem\Filesystem(League\Flysystem\Adapter\Local('%appDir%/../content/examples_exports'))
-	flysystemMountManager:
+	applicationMountManager:
 		setup:
 			- mountFilesystem('exampleExports', @exampleExportsFileSystem)
 ```
