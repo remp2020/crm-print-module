@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Forms;
 
 use Crm\ApplicationModule\DataProvider\DataProviderManager;
-use Crm\PrintModule\DataProvider\AddressFormDataProviderInterface;
+use Crm\UsersModule\DataProvider\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\CountriesRepository;
@@ -124,7 +124,7 @@ class UserPrintAddressFormFactory
         /** @var AddressFormDataProviderInterface[] $providers */
         $providers = $this->dataProviderManager->getProviders('sales_funnel.dataprovider.address_form', AddressFormDataProviderInterface::class);
         foreach ($providers as $sorting => $provider) {
-            $form = $provider->provide(['form' => $form, 'payment' => $payment, 'address' => $printAddress, 'self' => $this]);
+            $form = $provider->provide(['form' => $form, 'payment' => $payment, 'address' => $printAddress, 'self' => $this, 'addressType' => 'print']);
         }
 
         return $form;
