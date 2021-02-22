@@ -2,9 +2,11 @@
 
 namespace Crm\PrintModule\Repository;
 
+use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\Repository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
+use Crm\UsersModule\User\AddressesUserDataProvider;
 use Nette\Caching\IStorage;
 use Nette\Database\Context;
 use Nette\Database\Table\IRow;
@@ -12,6 +14,12 @@ use Nette\Utils\DateTime;
 
 class PrintSubscriptionsRepository extends Repository
 {
+    use NowTrait;
+
+    const STATUS_NEW = 'new';
+    const STATUS_REMOVED = 'removed';
+    const STATUS_RECURRENT = 'recurrent';
+
     protected $tableName = 'print_subscriptions';
 
     private $addressesRepository;
@@ -141,6 +149,35 @@ class PrintSubscriptionsRepository extends Repository
         return $this->getTable()->where($where)->delete();
     }
 
+    final public function removeUnusedPrintAddresses()
+    {
+        // check deleted users' (print subscriptions) addresses
+        // if all user's print subscription addresses are unused (=last export for each type has status 'removed'), we can safely delete such addresses
+        $sql = <<<SQL
+SELECT t2.address_id from 
+  (SELECT ps.type, ps.user_id, MAX(ps.export_date) AS export_date 
+    FROM addresses a 
+    JOIN users u ON u.id = a.user_id 
+       AND a.deleted_at IS NULL 
+       AND u.deleted_at IS NOT NULL 
+       AND u.deleted_at  >= DATE_SUB(?, INTERVAL 2 YEAR)
+    JOIN print_subscriptions ps ON ps.address_id = a.id
+    GROUP BY ps.type, ps.user_id) t1 
+  JOIN print_subscriptions t2 ON t1.user_id = t2.user_id AND t1.export_date = t2.export_date AND t1.type = t2.type
+  GROUP BY t2.address_id
+  HAVING SUM(CASE WHEN t2.status != ? THEN 1 else 0 END) = 0
+SQL;
+
+        $gdprRemovalTemplate = AddressesUserDataProvider::gdprRemovalTemplate($this->getNow());
+
+        foreach ($this->getDatabase()->query($sql, $this->getNow(), self::STATUS_REMOVED) as $row) {
+            $addressRow = $this->addressesRepository->find($row->address_id);
+            if ($addressRow) {
+                $this->addressesRepository->update($addressRow, $gdprRemovalTemplate);
+            }
+        }
+    }
+
     final public function setPrintExportStatus($type, \DateTime $printExportDate, \DateTime $exportAt)
     {
         $date = $this->getTable()->where(['type' => $type])->select('export_date')->group('export_date')->order('export_date DESC')->limit(1, 1);
@@ -153,13 +190,13 @@ class PrintSubscriptionsRepository extends Repository
         $temp = $this->getTable()->select('user_id')
             ->where(['type' => $type])
             ->where('export_date', $previousExportDate)
-            ->where('status != ?', 'removed');
+            ->where('status != ?', self::STATUS_REMOVED);
 
         $this->getTable()
             ->where('user_id', $temp)
             ->where(['type' => $type])
             ->where('export_date', $printExportDate)
-            ->update(['status' => 'recurrent']);
+            ->update(['status' => self::STATUS_RECURRENT]);
 
         $temp = $this->getTable()
             ->select('user_id')
@@ -171,9 +208,9 @@ class PrintSubscriptionsRepository extends Repository
             ->where(['type' => $type])
             ->where('user_id NOT', $temp)
             ->where('export_date', $previousExportDate)
-            ->where('status != ?', 'removed');
+            ->where('status != ?', self::STATUS_REMOVED);
         foreach ($printEnded as $row) {
-            $this->add($type, $row->subscription_id, $row->user, $row->addr, $printExportDate, 'removed', $exportAt);
+            $this->add($type, $row->subscription_id, $row->user, $row->addr, $printExportDate, self::STATUS_REMOVED, $exportAt);
         }
     }
 

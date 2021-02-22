@@ -22,6 +22,7 @@ services:
 	- Crm\PrintModule\Seeders\AddressTypesSeeder
 	- Crm\PrintModule\Seeders\ContentAccessSeeder
 	- Crm\PrintModule\User\AddressChangeRequestsUserDataProvider
+	- Crm\PrintModule\User\PrintAddressesUserDataProvider
 	- Crm\PrintModule\Commands\ExportDailyCommand
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView

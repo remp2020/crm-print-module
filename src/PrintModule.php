@@ -5,6 +5,7 @@ namespace Crm\PrintModule;
 use Crm\ApiModule\Api\ApiRoutersContainerInterface;
 use Crm\ApiModule\Router\ApiIdentifier;
 use Crm\ApiModule\Router\ApiRoute;
+use Crm\ApplicationModule\CallbackManagerInterface;
 use Crm\ApplicationModule\Commands\CommandsContainerInterface;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
@@ -12,9 +13,11 @@ use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\ApplicationModule\SeederManager;
 use Crm\ApplicationModule\User\UserDataRegistrator;
 use Crm\ApplicationModule\Widget\WidgetManagerInterface;
+use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
 use Crm\PrintModule\Seeders\ContentAccessSeeder;
+use Nette\DI\Container;
 
 class PrintModule extends CrmModule
 {
@@ -97,6 +100,7 @@ class PrintModule extends CrmModule
     public function registerUserData(UserDataRegistrator $dataRegistrator)
     {
         $dataRegistrator->addUserDataProvider($this->getInstance(\Crm\PrintModule\User\AddressChangeRequestsUserDataProvider::class));
+        $dataRegistrator->addUserDataProvider($this->getInstance(\Crm\PrintModule\User\PrintAddressesUserDataProvider::class));
     }
 
     public function registerSeeders(SeederManager $seederManager)
@@ -109,5 +113,14 @@ class PrintModule extends CrmModule
     public function registerCommands(CommandsContainerInterface $commandsContainer)
     {
         $commandsContainer->registerCommand($this->getInstance(\Crm\PrintModule\Commands\ExportDailyCommand::class));
+    }
+
+    public function registerCleanupFunction(CallbackManagerInterface $cleanUpManager)
+    {
+        $cleanUpManager->add(PrintSubscriptionsRepository::class, function (Container $container) {
+            /** @var PrintSubscriptionsRepository $printSubscriptionsRepository */
+            $printSubscriptionsRepository = $container->getByType(PrintSubscriptionsRepository::class);
+            $printSubscriptionsRepository->removeUnusedPrintAddresses();
+        });
     }
 }
