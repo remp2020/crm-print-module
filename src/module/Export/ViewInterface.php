@@ -6,5 +6,5 @@ use Traversable;
 
 interface ViewInterface
 {
-    public function generateExportFile(ExportCriteria $criteria, Traversable $rows);
+    public function generateExportFile(ExportCriteria $criteria, Traversable $data);
 }
