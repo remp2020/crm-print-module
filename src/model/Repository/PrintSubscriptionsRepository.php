@@ -195,13 +195,13 @@ SQL;
         $this->getTable()
             ->where('user_id', $temp)
             ->where(['type' => $type])
-            ->where('export_date', $printExportDate)
+            ->where('export_date', $printExportDate->format('Y-m-d'))
             ->update(['status' => self::STATUS_RECURRENT]);
 
         $temp = $this->getTable()
             ->select('user_id')
             ->where(['type' => $type])
-            ->where('export_date', $printExportDate);
+            ->where('export_date', $printExportDate->format('Y-m-d'));
 
         $printEnded = $this->getTable()
             ->select('*')
