@@ -40,6 +40,9 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $this->template->type = $this->type;
     }
 
+    /**
+     * @admin-access-level read
+     */
     public function renderDefault($year = null)
     {
         if (!$year) {
@@ -72,6 +75,9 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $this->template->actualYear = $year;
     }
 
+    /**
+     * @admin-access-level read
+     */
     public function renderShow($date)
     {
         $this->template->date = $date;

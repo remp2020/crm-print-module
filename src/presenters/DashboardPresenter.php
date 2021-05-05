@@ -11,6 +11,9 @@ class DashboardPresenter extends AdminPresenter
     /** @var ContentAccessRepository @inject */
     public $contentAccessRepository;
 
+    /**
+     * @admin-access-level read
+     */
     public function renderDefault()
     {
         $contentAccess = $this->contentAccessRepository->findBy('name', 'print');

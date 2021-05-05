@@ -13,10 +13,16 @@ class ContentAdminPresenter extends AdminPresenter
     /** @var ApplicationMountManager @inject */
     public $mountManager;
 
+    /**
+     * @admin-access-level read
+     */
     public function renderDefault()
     {
     }
 
+    /**
+     * @admin-access-level read
+     */
     public function renderExportFile($file)
     {
         $adapterPrefix = FileSystem::DEFAULT_BUCKET_NAME . '://';
