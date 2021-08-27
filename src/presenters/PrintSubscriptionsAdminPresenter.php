@@ -91,7 +91,7 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $form = new Form;
         $form->setRenderer(new BootstrapInlineRenderer());
         $form->addText('text', $this->translator->translate('print.component.admin_filter.text'))
-            ->setAttribute('autofocus');
+            ->setHtmlAttribute('autofocus');
         $form->addSubmit('send', $this->translator->translate('print.component.admin_filter.filter'))
             ->getControlPrototype()
             ->setName('button')

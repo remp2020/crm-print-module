@@ -66,24 +66,24 @@ class UserPrintAddressFormFactory
         $form->getElementPrototype()->addClass('ajax');
 
         $form->addText('first_name', 'print.form.print_address.label.name')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.name')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.name')
             ->setRequired('print.form.print_address.required.name');
         $form->addText('last_name', 'print.form.print_address.label.last_name')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.last_name')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.last_name')
             ->setRequired('print.form.print_address.required.last_name');
         $form->addText('phone_number', 'print.form.print_address.label.phone_number')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.phone_number');
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.phone_number');
         $form->addText('address', 'print.form.print_address.label.address')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.address')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.address')
             ->setRequired('print.form.print_address.required.address');
         $form->addText('number', 'print.form.print_address.label.number')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.number')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.number')
             ->setRequired('print.form.print_address.required.number');
         $form->addText('zip', 'print.form.print_address.label.zip')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.zip')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.zip')
             ->setRequired('print.form.print_address.required.zip');
         $form->addText('city', 'print.form.print_address.label.city')
-            ->setAttribute('placeholder', 'print.form.print_address.placeholder.city')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.city')
             ->setRequired('print.form.print_address.required.city');
         $form->addSelect('country_id', 'print.form.print_address.label.country_id', $this->countriesRepository->getDefaultCountryPair())
             ->setRequired('print.form.print_address.required.country_id');

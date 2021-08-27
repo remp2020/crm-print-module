@@ -81,24 +81,24 @@ class ChangeAddressRequestFormFactory
         $form->addProtection();
 
         $form->addText('first_name', $this->translator->translate('print.frontend.change_address_request_form.first_name.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.first_name.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.first_name.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.first_name.required'));
         $form->addText('last_name', $this->translator->translate('print.frontend.change_address_request_form.last_name.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.last_name.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.last_name.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.last_name.required'));
         $form->addText('phone_number', $this->translator->translate('print.frontend.change_address_request_form.phone_number.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.phone_number.placeholder'));
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.phone_number.placeholder'));
         $form->addText('address', $this->translator->translate('print.frontend.change_address_request_form.address.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.address.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.address.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.address.required'));
         $form->addText('number', $this->translator->translate('print.frontend.change_address_request_form.number.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.number.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.number.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.number.required'));
         $form->addText('zip', $this->translator->translate('print.frontend.change_address_request_form.zip.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.zip.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.zip.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.zip.required'));
         $form->addText('city', $this->translator->translate('print.frontend.change_address_request_form.city.label'))
-            ->setAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.city.placeholder'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.city.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.city.required'));
 
         $userRow = $this->usersRepository->find($user->id);
