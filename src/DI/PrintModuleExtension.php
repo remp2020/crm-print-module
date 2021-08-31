@@ -3,7 +3,6 @@
 namespace Crm\PrintModule\DI;
 
 use Kdyby\Translation\DI\ITranslationProvider;
-use Nette\DI\Compiler;
 use Nette\DI\CompilerExtension;
 
 class PrintModuleExtension extends CompilerExtension implements ITranslationProvider
@@ -12,14 +11,11 @@ class PrintModuleExtension extends CompilerExtension implements ITranslationProv
 
     public function loadConfiguration()
     {
-        $builder = $this->getContainerBuilder();
-
         // set default values if user didn't define them
         $this->config = $this->validateConfig($this->defaults);
 
         // load services from config and register them to Nette\DI Container
-        Compiler::loadDefinitions(
-            $builder,
+        $this->compiler->loadDefinitionsFromConfig(
             $this->loadFromFile(__DIR__.'/../config/config.neon')['services']
         );
     }
