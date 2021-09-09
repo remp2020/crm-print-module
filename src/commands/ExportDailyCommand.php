@@ -106,7 +106,7 @@ class ExportDailyCommand extends Command
 
         if ($printExportDate === null) {
             $output->writeln("Not printing day");
-            return 0;
+            return Command::SUCCESS;
         }
 
         $criteria = new ExportCriteria('print_daily', $exportRunDate, $printExportDate);
@@ -116,6 +116,6 @@ class ExportDailyCommand extends Command
         $this->printSubscriptionsRepository->deleteList($criteria->getKey(), $printExportDate->format('Y-m-d'));
         $storedCsv = $this->exportEngine->run($criteria, $this->dataSource, $this->view);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
