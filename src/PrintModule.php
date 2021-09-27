@@ -2,9 +2,6 @@
 
 namespace Crm\PrintModule;
 
-use Crm\ApiModule\Api\ApiRoutersContainerInterface;
-use Crm\ApiModule\Router\ApiIdentifier;
-use Crm\ApiModule\Router\ApiRoute;
 use Crm\ApplicationModule\CallbackManagerInterface;
 use Crm\ApplicationModule\Commands\CommandsContainerInterface;
 use Crm\ApplicationModule\CrmModule;
@@ -86,14 +83,6 @@ class PrintModule extends CrmModule
             'frontend.layout.top',
             $this->getInstance(\Crm\PrintModule\Components\EnterAddressWidget::class),
             100
-        );
-    }
-
-    public function registerApiCalls(ApiRoutersContainerInterface $apiRoutersContainer)
-    {
-        // TODO: deprecated, remove when internally we use route from users module
-        $apiRoutersContainer->attachRouter(
-            new ApiRoute(new ApiIdentifier('1', 'print', 'change-address-request'), \Crm\UsersModule\Api\CreateAddressChangeRequestHandler::class, \Crm\ApiModule\Authorization\BearerTokenAuthorization::class)
         );
     }
 
