@@ -36,6 +36,7 @@
             <th>{_print.component.user_print_export.fields.zip_code}</th>
             <th>{_print.component.user_print_export.fields.email}</th>
             <th>{_print.component.user_print_export.fields.state}</th>
+            <th></th>
         </thead>
         <tbody>
             <tr n:foreach="$userPrintExports as $printSubscription" class="{$printSubscription->type}">
@@ -60,6 +61,9 @@
                     {else}
                         <span class="label label-default">{$printSubscription->status}</span>
                     {/if}
+                </td>
+                <td>
+                    {control simpleWidget 'admin.user.detail.print_export_actions', $printSubscription}
                 </td>
             </tr>
         <tbody>
