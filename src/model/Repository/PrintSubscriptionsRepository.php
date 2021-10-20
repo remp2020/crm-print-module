@@ -9,7 +9,7 @@ use Crm\UsersModule\Repository\UsersRepository;
 use Crm\UsersModule\User\AddressesUserDataProvider;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Utils\DateTime;
 
 class PrintSubscriptionsRepository extends Repository
@@ -81,7 +81,7 @@ class PrintSubscriptionsRepository extends Repository
             ->fetch();
     }
 
-    final public function add($type, $subscriptionsId, IRow $user, IRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
+    final public function add($type, $subscriptionsId, ActiveRow $user, ActiveRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
     {
         if ($meta === "[]") {
             $meta = "{}";
