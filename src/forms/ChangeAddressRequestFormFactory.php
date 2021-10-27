@@ -9,7 +9,7 @@ use Crm\UsersModule\Repository\UsersRepository;
 use League\Event\Emitter;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\Security\User;
 use Tomaj\Form\Renderer\BootstrapRenderer;
 
@@ -41,7 +41,7 @@ class ChangeAddressRequestFormFactory
         AddressesRepository $addressesRepository,
         CountriesRepository $countriesRepository,
         Emitter $emitter,
-        ITranslator $translator
+        Translator $translator
     ) {
         $this->usersRepository = $usersRepository;
         $this->addressChangeRequestsRepository = $addressChangeRequestsRepository;
