@@ -4,11 +4,14 @@ namespace Crm\PrintModule\Components;
 
 use Crm\ApplicationModule\Widget\BaseWidget;
 use Crm\ApplicationModule\Widget\WidgetManager;
+use Crm\PaymentsModule\Gateways\BankTransfer;
+use Crm\PaymentsModule\Presenters\BankTransferPresenter;
 use Crm\PaymentsModule\Repository\PaymentLogsRepository;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter;
 use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * PaymentSuccessPrintWidget is directly targeted to be used in \Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter
@@ -42,14 +45,14 @@ class PaymentSuccessPrintWidget extends BaseWidget
 
     public function render()
     {
-        $payment = $this->presenter()->getPayment();
-        if ($payment->status !== PaymentsRepository::STATUS_PAID) {
-            return;
-        }
-        if (!$this->isPrintAddressRequired($payment)) {
+        $payment = $this->getPayment();
+        if ($payment->status !== PaymentsRepository::STATUS_PAID && $payment->payment_gateway->code !== BankTransfer::GATEWAY_CODE) {
             return;
         }
 
+        if (!$this->isPrintAddressRequired($payment)) {
+            return;
+        }
 
         $this->template->payment = $payment;
         $this->template->setFile($this->templatePath);
@@ -58,7 +61,7 @@ class PaymentSuccessPrintWidget extends BaseWidget
 
     public function createComponentUserPrintAddressForm(UserPrintAddressFormFactory $factory)
     {
-        $payment = $this->presenter()->getPayment();
+        $payment = $this->getPayment();
 
         $form = $factory->create($payment);
         $factory->onSave = function ($form, $user) {
@@ -69,13 +72,14 @@ class PaymentSuccessPrintWidget extends BaseWidget
         return $form;
     }
 
-    public function presenter(): SalesFunnelPresenter
+    public function getPayment(): ActiveRow
     {
         $presenter = $this->getPresenter();
-        if (!$presenter instanceof SalesFunnelPresenter) {
-            throw new \Exception('PaymentSuccessPrintWidget used within not allowed presenter: ' . get_class($presenter));
+        if ($presenter instanceof SalesFunnelPresenter || $presenter instanceof BankTransferPresenter) {
+            return $presenter->getPayment();
         }
-        return $presenter;
+
+        throw new \Exception('PaymentSuccessPrintWidget used within not allowed presenter: ' . get_class($presenter));
     }
 
     private function isPrintAddressRequired($payment)

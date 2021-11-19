@@ -75,7 +75,7 @@ class PrintModule extends CrmModule
             1000
         );
         $widgetManager->registerWidget(
-            'frontend.payment.success.forms',
+            'payment.address',
             $this->getInstance(\Crm\PrintModule\Components\PaymentSuccessPrintWidget::class)
         );
 
