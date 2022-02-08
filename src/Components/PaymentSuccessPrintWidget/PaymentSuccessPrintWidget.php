@@ -5,11 +5,10 @@ namespace Crm\PrintModule\Components;
 use Crm\ApplicationModule\Widget\BaseWidget;
 use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\PaymentsModule\Gateways\BankTransfer;
-use Crm\PaymentsModule\Presenters\BankTransferPresenter;
+use Crm\PaymentsModule\PaymentAwareInterface;
 use Crm\PaymentsModule\Repository\PaymentLogsRepository;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
-use Crm\SalesFunnelModule\Presenters\SalesFunnelPresenter;
 use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
 use Nette\Database\Table\ActiveRow;
 
@@ -75,7 +74,7 @@ class PaymentSuccessPrintWidget extends BaseWidget
     public function getPayment(): ActiveRow
     {
         $presenter = $this->getPresenter();
-        if ($presenter instanceof SalesFunnelPresenter || $presenter instanceof BankTransferPresenter) {
+        if ($presenter instanceof PaymentAwareInterface) {
             return $presenter->getPayment();
         }
 
