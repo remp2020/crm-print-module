@@ -79,9 +79,9 @@ frontend:
 
 component:
 	payment_success_print_widget:
-		fill_print_address: Vyplnit adresu pro doručení
 		print_address_where: Kam Vám budeme doručovat noviny?
 		pls_fill_print_address: "Vaše předplatné aktuálně obsahuje i tištěné vydání novin. Prosím, doplňte Vaši adresu pro doručení novin."
+		fill_print_address: Vyplnit adresu pro doručení
 		need_to_fill_print_address: Pro pokračování musíte vyplnit adresu pro doručení novin.
 		saved: Všechny údaje jsou uložené
 	requests_notification:
