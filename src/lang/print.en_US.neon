@@ -1,162 +1,162 @@
 menu:
-	stats: Print
-	delivery_address: Delivery address
-	print_export: Print export
+    stats: Print
+    delivery_address: Delivery address
+    print_export: Print export
 admin:
-	request_notification:
-		title: Address change requests
-	print_subscriptions:
-		default:
-			header: Exports
-			day_of_export: Day of export
-			day_of_print: Day of print
-			new: New
-			continuing: Continuing
-			ending: Ending
-			files_to_download: Files to download
-			no_records_found: 'No records match selected filter'
-		show:
-			header: Export for
-			back: back to list
-			total: total
-			no_records_found: 'No records match selected filter'
-			fields:
-				institution: Institution
-				surname: Surname
-				first_name: First Name
-				address: Address
-				city: City
-				zip_code: Zip Code
-				email: Email
-				state: State
-				amount: Amount
-	dashboard:
-		header: Print stats
-		title: Usage of print subscriptions
-		last_30_days: Last 30 days
-		last_30_days_desc: Have ongoing print subscription and were on web in last 30 days.
-		last_90_days: Last 90 day
-		last_90_days_desc: Have ongoing print subscription and were on web in last 90 days.
-		prior_90_days: Prior 90 days
-		prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days.
+    request_notification:
+        title: Address change requests
+    print_subscriptions:
+        default:
+            header: Exports
+            day_of_export: Day of export
+            day_of_print: Day of print
+            new: New
+            continuing: Continuing
+            ending: Ending
+            files_to_download: Files to download
+            no_records_found: 'No records match selected filter'
+        show:
+            header: Export for
+            back: back to list
+            total: total
+            no_records_found: 'No records match selected filter'
+            fields:
+                institution: Institution
+                surname: Surname
+                first_name: First Name
+                address: Address
+                city: City
+                zip_code: Zip Code
+                email: Email
+                state: State
+                amount: Amount
+    dashboard:
+        header: Print stats
+        title: Usage of print subscriptions
+        last_30_days: Last 30 days
+        last_30_days_desc: Have ongoing print subscription and were on web in last 30 days.
+        last_90_days: Last 90 day
+        last_90_days_desc: Have ongoing print subscription and were on web in last 90 days.
+        prior_90_days: Prior 90 days
+        prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days.
 frontend:
-	change_user_address:
-		title: Delivery address change
-		new_address: New delivery address
-		actual_address: Actual delivery address
-		scheduled: "Your request will be handled by support team within two business days. Actual change will be handled by Slovak post office within 1-2 weeks."
-		changed: Your address has been changed
+    change_user_address:
+        title: Delivery address change
+        new_address: New delivery address
+        actual_address: Actual delivery address
+        scheduled: "Your request will be handled by support team within two business days. Actual change will be handled by Slovak post office within 1-2 weeks."
+        changed: Your address has been changed
 
-	change_address_request_form:
-		first_name:
-			label: First name
-			placeholder: First name for delivery
-			required: First name is required
-		last_name:
-			label: Last name
-			placeholder: Last name for delivery
-			required: Last name is required
-		phone_number:
-			label: Phone number
-			placeholder: Phone number for delivery
-		address:
-			label: Street
-			placeholder: Street
-			required: Street is required
-		number:
-			label: House number
-			placeholder: eg. 145
-			required: House number is required
-		zip:
-			label: ZIP
-			placeholder: eg. 08102
-			required: ZIP is required
-		city:
-			label: City
-			placeholder: eg. Trnava
-			required: City is required
-		submit_update: Request a change of address
-		submit_create: Save
+    change_address_request_form:
+        first_name:
+            label: First name
+            placeholder: First name for delivery
+            required: First name is required
+        last_name:
+            label: Last name
+            placeholder: Last name for delivery
+            required: Last name is required
+        phone_number:
+            label: Phone number
+            placeholder: Phone number for delivery
+        address:
+            label: Street
+            placeholder: Street
+            required: Street is required
+        number:
+            label: House number
+            placeholder: eg. 145
+            required: House number is required
+        zip:
+            label: ZIP
+            placeholder: eg. 08102
+            required: ZIP is required
+        city:
+            label: City
+            placeholder: eg. Trnava
+            required: City is required
+        submit_update: Request a change of address
+        submit_create: Save
 
 component:
-	payment_success_print_widget:
-		print_address_where: Where to deliver newspaper?
-		pls_fill_print_address: You have also ordered print issues. Please fill in delivery address.
-		fill_print_address: Fill in the delivery address
-		need_to_fill_print_address: You have to fill delivery address to continue.
-		saved: Saved
-	requests_notification:
-		header: Address changes
-	user_change_address_requests:
-		header: Address changes
-		no_record: No record
-		user_does_not_want_to_change_address: 'It seems the user does not want to change the address yet'
-		fields:
-			when: When
-			state: State
-			type: Type
-			old_address: Old Address
-			new_address: New Address
-			address: Address
-			actions: Actions
-		accept_and_change: Accept and change
-		decline: Decline
-		messages:
-			address_changed: Address was changed
-			change_declined: Request rejected. The address has not been changed
-	user_print_export:
-		header: Print exports
-		not_present_in_print_export: 'Not present in any print export.'
-		fields:
-			type: Type
-			day_of_export: Day of export
-			day_of_print: Day of print
-			institution: Institution
-			surname: Surname
-			first_name: First Name
-			address: Address
-			city: City
-			zip_code: Zip Code
-			email: Email
-			state: State
-	admin_filter:
-		text: 'Surname / First Name / Address:'
-		filter: Filter
-		cancel_filter: Cancel filter
-	enter_address:
-		attention: Attention
-		message: 'You have bought subscription with access to print edition. Please <a style="text-decoration:underline" href="%link%">enter your delivery address here</a>.'
+    payment_success_print_widget:
+        print_address_where: Where to deliver newspaper?
+        pls_fill_print_address: You have also ordered print issues. Please fill in delivery address.
+        fill_print_address: Fill in the delivery address
+        need_to_fill_print_address: You have to fill delivery address to continue.
+        saved: Saved
+    requests_notification:
+        header: Address changes
+    user_change_address_requests:
+        header: Address changes
+        no_record: No record
+        user_does_not_want_to_change_address: 'It seems the user does not want to change the address yet'
+        fields:
+            when: When
+            state: State
+            type: Type
+            old_address: Old Address
+            new_address: New Address
+            address: Address
+            actions: Actions
+        accept_and_change: Accept and change
+        decline: Decline
+        messages:
+            address_changed: Address was changed
+            change_declined: Request rejected. The address has not been changed
+    user_print_export:
+        header: Print exports
+        not_present_in_print_export: 'Not present in any print export.'
+        fields:
+            type: Type
+            day_of_export: Day of export
+            day_of_print: Day of print
+            institution: Institution
+            surname: Surname
+            first_name: First Name
+            address: Address
+            city: City
+            zip_code: Zip Code
+            email: Email
+            state: State
+    admin_filter:
+        text: 'Surname / First Name / Address:'
+        filter: Filter
+        cancel_filter: Cancel filter
+    enter_address:
+        attention: Attention
+        message: 'You have bought subscription with access to print edition. Please <a style="text-decoration:underline" href="%link%">enter your delivery address here</a>.'
 form:
-	print_address:
-		label:
-			name: First name
-			last_name: Last name
-			phone_number: Phone number
-			address: Street
-			number: House number
-			zip: ZIP
-			city: City
-			country_id: Country
-			save: Save
-		required:
-			name: "First name is required (delivery address)"
-			last_name: "Last name is required (delivery address)"
-			address: "Address is required (delivery address)"
-			number: "House number is required (delivery address)"
-			zip: "ZIP is required (delivery address)"
-			city: "City is required (delivery address)"
-			country_id: "You have to select country (delivery address)"
-		placeholder:
-			name: First name for delivery
-			last_name: Last name for delivery
-			phone_number: Phone number for delivery
-			address: Street
-			number: eg. 145/41
-			zip: eg. 08102
-			city: eg. Trnava
+    print_address:
+        label:
+            name: First name
+            last_name: Last name
+            phone_number: Phone number
+            address: Street
+            number: House number
+            zip: ZIP
+            city: City
+            country_id: Country
+            save: Save
+        required:
+            name: "First name is required (delivery address)"
+            last_name: "Last name is required (delivery address)"
+            address: "Address is required (delivery address)"
+            number: "House number is required (delivery address)"
+            zip: "ZIP is required (delivery address)"
+            city: "City is required (delivery address)"
+            country_id: "You have to select country (delivery address)"
+        placeholder:
+            name: First name for delivery
+            last_name: Last name for delivery
+            phone_number: Phone number for delivery
+            address: Street
+            number: eg. 145/41
+            zip: eg. 08102
+            city: eg. Trnava
 
 config:
-	category: Print
-	print_export_issue:
-		name: Issue name
-		description: "Issue name in print export (e.g. DENIK N)"
+    category: Print
+    print_export_issue:
+        name: Issue name
+        description: "Issue name in print export (e.g. DENIK N)"
