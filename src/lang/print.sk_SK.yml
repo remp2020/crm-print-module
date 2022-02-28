@@ -102,8 +102,8 @@ component:
         accept_and_change: Akceptuj a zmeň
         decline: Odmietni
         messages:
-            address_changed: Adresa bola zmenená
-            change_declined: Zamietnutá žiadosť. Adresa nebola zmenená
+            address_changed: Adresa bola zmenená.
+            change_declined: Zamietnutá žiadosť. Adresa nebola zmenená.
     user_print_export:
         header: Printové exporty
         not_present_in_print_export: 'Nenachádza sa v žiadnom printovom exporte.'
