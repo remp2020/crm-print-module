@@ -1,0 +1,162 @@
+menu:
+    stats: Print
+    delivery_address: Doručovacia adresa
+    print_export: Print export
+admin:
+    request_notification:
+        title: Žiadosti o zmenu adresy
+    print_subscriptions:
+        default:
+            header: Exporty
+            day_of_export: Deň exportu
+            day_of_print: Deň tlače
+            new: Noví
+            continuing: Pokračujúci
+            ending: Končiaci
+            files_to_download: Súbory na stiahnutie
+            no_records_found: 'Nenašli sa žiadne záznamy, ktoré by zodpovedali filtru'
+        show:
+            header: Export pre
+            back: späť na zoznam
+            total: celkovo
+            no_records_found: 'Nenašli sa žiadne záznamy, ktoré by zodpovedali filtru'
+            fields:
+                institution: Inštitúcia
+                surname: Priezvisko
+                first_name: Meno
+                address: Adresa
+                city: Mesto
+                zip_code: PSČ
+                email: Email
+                state: Stav
+                amount: Množstvo
+    dashboard:
+        header: Printové štatistiky
+        title: Použivanosť printových predplatných
+        last_30_days: Posledných 30 dní
+        last_30_days_desc: Majú aktuálne printové predplatné a boli na webe za posledných 30 dní
+        last_90_days: Posledných 90 dní
+        last_90_days_desc: Majú aktuálne printové predplatné a boli na webe za posledných 30 dní
+        prior_90_days: Pred 90 dňami
+        prior_90_days_desc: Majú aktuálne printové predplatné a boli naposledy na webe pred 90 dňami
+frontend:
+    change_user_address:
+        title: Zmena doručovacej adresy
+        new_address: Nová adresa na doručovanie časopisu
+        actual_address: Aktuálna doručovacia adresa
+        scheduled: "Vaša požiadavka o zmenu adresy doručovania bola odoslaná, zmena adresy u doručujúcej pošty typicky potrvá 1-2 týždne."
+        changed: Vaša adresa bola zmenená
+
+    change_address_request_form:
+        first_name:
+            label: Meno
+            placeholder: krstné meno pre doručenie
+            required: Krstné meno musí byť vyplnené
+        last_name:
+            label: Priezvisko
+            placeholder: priezvisko pre doručenie
+            required: Priezvisko musí byť vyplnené
+        phone_number:
+            label: Tel. číslo
+            placeholder: vaše telefónne číslo
+        address:
+            label: Ulica
+            placeholder: napíšte ulicu
+            required: Ulica musí byť vyplnená
+        number:
+            label: Číslo domu
+            placeholder: napr. 145/41
+            required: Číslo domu musí byť vyplnené
+        zip:
+            label: PSČ
+            placeholder: napr. 08102
+            required: PSČ musí byť vyplnené
+        city:
+            label: Mesto
+            placeholder: napr. Trnava
+            required: Mesto musí byť vyplnené
+        submit_update: Odošli žiadosť o zmenu
+        submit_create: Uložiť
+
+component:
+    payment_success_print_widget:
+        print_address_where: Kam vám doručíme noviny?
+        pls_fill_print_address: Aktuálne máte predplatné obsahujúce aj tlačové vydanie novín. Prosím doplňte vašu adresu pre doručenie novín.
+        fill_print_address: Vyplniť adresu doručenia
+        need_to_fill_print_address: Pre pokračovanie musíte vyplniť adresu pre doručenie novín.
+        saved: Všetky údaje uložené
+    requests_notification:
+        header: Zmeny adresy
+    user_change_address_requests:
+        header: Zmeny adresy
+        no_record: Žiaden záznam
+        user_does_not_want_to_change_address: 'Vyzerá to tak, že tento používateľ si zatiaľ nechcel zmeniť adresu.'
+        fields:
+            when: Kedy
+            state: Stav
+            type: Typ
+            old_address: Stará Adresa
+            new_address: Nová Adresa
+            address: Adresa
+            actions: Akcie
+        accept_and_change: Akceptuj a zmeň
+        decline: Odmietni
+        messages:
+            address_changed: Adresa bola zmenená
+            change_declined: Zamietnutá žiadosť. Adresa nebola zmenená
+    user_print_export:
+        header: Printové exporty
+        not_present_in_print_export: 'Nenachádza sa v žiadnom printovom exporte.'
+        fields:
+            type: Typ
+            day_of_export: Deň exportu
+            day_of_print: Deň tlače
+            institution: Inštitúcia
+            surname: Priezvisko
+            first_name: Meno
+            address: Adresa
+            city: Mesto
+            zip_code: PSČ
+            email: Email
+            state: Stav
+    admin_filter:
+        text: 'Priezvisko / Meno / Adresa:'
+        filter: Filter
+        cancel_filter: Zruš filter
+    enter_address:
+        attention: Upozornenie
+        message: 'Aktuálne máte predplatné obsahujúce aj tlačené vydanie novín. Prosím <a style="text-decoration:underline" href="%link%">doplňte vašu adresu</a> pre doručenie novín.'
+form:
+    print_address:
+        label:
+            name: Meno
+            last_name: Priezvisko
+            phone_number: Tel. číslo
+            address: Ulica
+            number: Číslo domu
+            zip: PSČ
+            city: Mesto
+            country_id: Krajina
+            save: Uložiť údaje
+        required:
+            name: "Musíte vyplniť Vaše meno (adresa doručenia)"
+            last_name: "Musíte vyplniť Vaše priezvisko (adresa doručenia)"
+            address: "Musíte zadať ulicu (adresa doručenia)"
+            number: "Musíte zadať číslo domu (adresa doručenia)"
+            zip: "Musíte zadať PSČ (adresa doručenia)"
+            city: "Musíte zadať mesto (adresa doručenia)"
+            country_id: "Musíte zvoliť krajinu (adresa doručenia)"
+        placeholder:
+            name: krstné meno pre doručenie
+            last_name: priezvisko pre doručenie
+            phone_number: vaše telefónne číslo
+            address: napíšte ulicu
+            number: napr. 145/41
+            zip: napr. 08102
+            city: napr. Trnava
+
+config:
+    category: Print
+    print_export_issue:
+        name: Názov vydania
+        description: "Názov vydania v printovom exporte (napr. DENNIK N)"
