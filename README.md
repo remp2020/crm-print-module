@@ -1,5 +1,7 @@
 # CRM Print Module
 
+[![Translation status @ Weblate](https://hosted.weblate.org/widgets/remp-crm/-/print-module/svg-badge.svg)](https://hosted.weblate.org/projects/remp-crm/print-module/)
+
 The purpose of *Print module* is to give you ability to generate exports of users who should receive print version of your newspaper/magazine, keep track of which issues the user got and give you ability to create your own module on top of *Print module* to integrate with your print delivery provider.
 
 ## Installing module
