@@ -34,11 +34,11 @@ admin:
         header: Print stats
         title: Usage of print subscriptions
         last_30_days: Last 30 days
-        last_30_days_desc: Have ongoing print subscription and were on web in last 30 days.
+        last_30_days_desc: Have ongoing print subscription and were on web in last 30 days
         last_90_days: Last 90 day
-        last_90_days_desc: Have ongoing print subscription and were on web in last 90 days.
+        last_90_days_desc: Have ongoing print subscription and were on web in last 90 days
         prior_90_days: Prior 90 days
-        prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days.
+        prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days
 frontend:
     change_user_address:
         title: Delivery address change
@@ -90,7 +90,7 @@ component:
     user_change_address_requests:
         header: Address changes
         no_record: No record
-        user_does_not_want_to_change_address: 'It seems the user does not want to change the address yet'
+        user_does_not_want_to_change_address: 'It seems the user does not want to change the address yet.'
         fields:
             when: When
             state: State
@@ -102,8 +102,8 @@ component:
         accept_and_change: Accept and change
         decline: Decline
         messages:
-            address_changed: Address was changed
-            change_declined: Request rejected. The address has not been changed
+            address_changed: Address was changed.
+            change_declined: Request rejected. The address has not been changed.
     user_print_export:
         header: Print exports
         not_present_in_print_export: 'Not present in any print export.'

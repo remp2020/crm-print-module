@@ -34,11 +34,11 @@ admin:
         header: Nyomtatás statisztikák
         title: Nyomtatott számra előfizetők
         last_30_days: Utolsó 30 nap
-        last_30_days_desc: Nyomtatott számra előfizetők az utolsó 30 napból.
+        last_30_days_desc: Nyomtatott számra előfizetők az utolsó 30 napból
         last_90_days: Utolsó 90 nap
-        last_90_days_desc: Nyomtatott számra előfizetők az utolsó 90 napból.
+        last_90_days_desc: Nyomtatott számra előfizetők az utolsó 90 napból
         prior_90_days: Előző 90 nap
-        prior_90_days_desc: Nyomtatott számra előfizetők az prior előző 90 nap.
+        prior_90_days_desc: Nyomtatott számra előfizetők az prior előző 90 nap
 frontend:
     change_user_address:
         title: Szállítási cím módosítás
@@ -102,11 +102,11 @@ component:
         accept_and_change: Módosítás elfogadása
         decline: Elutasítás
         messages:
-            address_changed: Cím sikeresen módosítva
+            address_changed: Cím sikeresen módosítva.
             change_declined: Igény elutasítva. Cím nem változott.
     user_print_export:
         header: Nyomtaott szám exportok
-        not_present_in_print_export: 'Nem szerepel egy nyomtatási exportban sem'
+        not_present_in_print_export: 'Nem szerepel egy nyomtatási exportban sem.'
         fields:
             type: Típus
             day_of_export: Exportálás napja
