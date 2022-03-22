@@ -3,10 +3,8 @@
 namespace Crm\PrintModule\Components;
 
 use Crm\ApplicationModule\Widget\BaseWidget;
-use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\PaymentsModule\Gateways\BankTransfer;
 use Crm\PaymentsModule\PaymentAwareInterface;
-use Crm\PaymentsModule\Repository\PaymentLogsRepository;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
@@ -20,22 +18,6 @@ use Nette\Database\Table\ActiveRow;
 class PaymentSuccessPrintWidget extends BaseWidget
 {
     protected $templatePath = __DIR__ . DIRECTORY_SEPARATOR . 'payment_success_print_widget.latte';
-
-    private $paymentLogsRepository;
-
-    private $paymentsRepository;
-
-    private $payment;
-
-    public function __construct(
-        WidgetManager $widgetManager,
-        PaymentLogsRepository $paymentLogsRepository,
-        PaymentsRepository $paymentsRepository
-    ) {
-        parent::__construct($widgetManager);
-        $this->paymentLogsRepository = $paymentLogsRepository;
-        $this->paymentsRepository = $paymentsRepository;
-    }
 
     public function identifier()
     {
