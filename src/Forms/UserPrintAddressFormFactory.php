@@ -95,8 +95,7 @@ class UserPrintAddressFormFactory
             ->getControlPrototype()
             ->setName('button')
             ->setAttribute('class', 'btn btn-success')
-            ->setAttribute('style', 'float: right')
-            ->setHtml($this->translator->translate('print.form.print_address.label.save'));
+            ->setAttribute('style', 'float: right');
 
         $defaults = [
             'first_name' => $user->first_name,
