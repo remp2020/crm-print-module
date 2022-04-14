@@ -41,7 +41,7 @@ admin:
         prior_90_days_desc: Nyomtatott számra előfizetők az prior előző 90 nap
 frontend:
     change_user_address:
-        title: Szállítási cím módosítása
+        title: Kézbesítési cím módosítása
         new_address: Új szállítási cím
         actual_address: Jelenlegi szállítási cím
         scheduled: "Kérelmét az ügyfélszolgálathoz továbbítottuk. A tényleges változást 1-2 héten belül a szlovák posta intézi."
@@ -82,7 +82,7 @@ component:
     payment_success_print_widget:
         print_address_where: Hova szállítsuk az újságot?
         pls_fill_print_address: Nyomtatott számot is igényelt. Kérünk töltsd ki a szállítási címet.
-        fill_print_address: Szállítási cím kitöltése
+        fill_print_address: Kézbesítési cím kitöltése
         need_to_fill_print_address: Folytatáshoz ki kell tölteni a szállítási címet.
         saved: Minden adat mentve
     requests_notification:
@@ -159,4 +159,4 @@ config:
     category: Nyomtatott szám
     print_export_issue:
         name: Szám címe
-        description: "Szám címe exportálásnál (pl. DENNIK N)"
+        description: "Kiadási név nyomtatott lap exportja esetén (pl. DENNIK N)"
