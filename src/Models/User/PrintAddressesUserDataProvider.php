@@ -2,12 +2,15 @@
 
 namespace Crm\PrintModule\User;
 
+use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\User\UserDataProviderInterface;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\UsersModule\User\AddressesUserDataProvider;
 
 class PrintAddressesUserDataProvider implements UserDataProviderInterface
 {
+    use NowTrait;
+
     private $printSubscriptionsRepository;
 
     public function __construct(
@@ -36,6 +39,22 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
         return [];
     }
 
+    public static function gdprRemovalTemplate($deletedAt)
+    {
+        return [
+            'first_name' => 'GDPR removal',
+            'last_name' => 'GDPR removal',
+            'address' => 'GDPR removal',
+            'number' => 'GDPR removal',
+            'zip' => 'GDPR removal',
+            'city' => 'GDPR removal',
+            'phone_number' => 'GDPR removal',
+            'institution_name' => 'GDPR removal',
+            'email' => 'GDPR removal',
+            'deleted_at' => $deletedAt,
+        ];
+    }
+
     public function protect($userId): array
     {
         // Protect addresses that are still used in print exports
@@ -51,11 +70,24 @@ SQL;
         $excludedAddresses = $this->printSubscriptionsRepository->getDatabase()
             ->query($sql, $userId, $userId, PrintSubscriptionsRepository::STATUS_REMOVED)
             ->fetchAssoc('address_id=address_id');
-        return [AddressesUserDataProvider::identifier() => array_values($excludedAddresses)];
+        return [
+            AddressesUserDataProvider::identifier() => array_values($excludedAddresses),
+            self::identifier() => array_values($excludedAddresses),
+        ];
     }
 
     public function delete($userId, $protectedData = [])
     {
+        $query = $this->printSubscriptionsRepository->userPrintSubscriptions($userId);
+        if (count($protectedData) > 0) {
+            $query = $query->where('address_id NOT IN (?)', $protectedData);
+        }
+
+        $printSubscriptions = $query->fetchAll();
+        $gdprRemovalTemplate = self::gdprRemovalTemplate($this->getNow());
+        foreach ($printSubscriptions as $printSubscription) {
+            $this->printSubscriptionsRepository->update($printSubscription, $gdprRemovalTemplate);
+        }
     }
 
     public function canBeDeleted($userId): array
