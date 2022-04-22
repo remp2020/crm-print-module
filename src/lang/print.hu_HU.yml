@@ -1,7 +1,7 @@
 menu:
     stats: Nyomtatott
-    delivery_address: Szállítási cím
-    print_export: Nyomtatás export
+    delivery_address: Kézbesítési cím
+    print_export: Nyomtatott export
 admin:
     request_notification:
         title: Cím módosítási igények
@@ -42,27 +42,27 @@ admin:
 frontend:
     change_user_address:
         title: Kézbesítési cím módosítása
-        new_address: Új szállítási cím
-        actual_address: Jelenlegi szállítási cím
-        scheduled: "Kérelmét az ügyfélszolgálathoz továbbítottuk. A tényleges változást 1-2 héten belül a szlovák posta intézi."
+        new_address: Új kézbesítési cím
+        actual_address: Aktuális kézbesítési cím
+        scheduled: "A kézbesítési cím módosítására vonatkozó kérelmét továbbítottuk, a posta várhatóan 1-2 héten belül hajtja végre a változtatást."
         changed: Cím sikeresen módosítva
 
     change_address_request_form:
         first_name:
             label: Keresztnév
-            placeholder: Keresztnév szállításhoz
+            placeholder: Keresztnév kézbesítéshez
             required: Keresztnév megadása kötelező
         last_name:
             label: Vezetéknév
-            placeholder: Vezetéknév szállításhoz
+            placeholder: vezetéknév kézbesítéshez
             required: Vezetéknév megadása kötelező
         phone_number:
             label: Telefonszám
-            placeholder: Telefonszám szállításhoz
+            placeholder: az ön telefonszáma
         address:
             label: Utca
-            placeholder: Írja be az utcanevet
-            required: Utca megadása kötelező
+            placeholder: írja be az utcanevet
+            required: Utcanév megadása kötelező
         number:
             label: Házszám
             placeholder: pl. 145/41
@@ -80,17 +80,17 @@ frontend:
 
 component:
     payment_success_print_widget:
-        print_address_where: Hova szállítsuk az újságot?
-        pls_fill_print_address: Nyomtatott számot is igényelt. Kérünk töltsd ki a szállítási címet.
+        print_address_where: Hova kézbesítsük az újságot?
+        pls_fill_print_address: Aktuális előfizetése a nyomtatott lap küldését is tartalmazza. Kérjük, adja meg a kézbesítési címet.
         fill_print_address: Kézbesítési cím kitöltése
-        need_to_fill_print_address: Folytatáshoz ki kell tölteni a szállítási címet.
+        need_to_fill_print_address: Folytatáshoz ki kell tölteni a kézbesítési címet.
         saved: Minden adat mentve
     requests_notification:
         header: Címmódosítások
     user_change_address_requests:
         header: Címmódosítások
         no_record: Nincs találat
-        user_does_not_want_to_change_address: 'Úgy tűnik, ez a felhasználó eddig még nem szeretett volna címet módosítani.'
+        user_does_not_want_to_change_address: 'Úgy tűnik, ez a felhasználó egyelőre nem akarta megváltoztatni a címét.'
         fields:
             when: Mikor
             state: Állapot
@@ -103,7 +103,7 @@ component:
         decline: Elutasítás
         messages:
             address_changed: Cím sikeresen módosítva.
-            change_declined: Igény elutasítva. Cím nem változott.
+            change_declined: Kérés elutasítva. A cím nem változott meg.
     user_print_export:
         header: Nyomtatott szám exportok
         not_present_in_print_export: 'Nem szerepel egy nyomtatási exportban sem.'
@@ -125,7 +125,7 @@ component:
         cancel_filter: Visszaállítás
     enter_address:
         attention: Figyelmeztetés
-        message: 'Előfizetésehez tartozik nyomtatott szám. Kérjük, <a style="text-decoration:underline" href="%link%">adja meg a szállítási címet itt</a>.'
+        message: 'Aktuális előfizetése a nyomtatott lap küldését is tartalmazza. Kérjük, <a style="text-decoration:underline" href="%link%">adja meg a kézbesítési címet itt</a>.'
 form:
     print_address:
         label:
@@ -139,24 +139,24 @@ form:
             country_id: Ország
             save: Adatok mentése
         required:
-            name: "Keresztnév kitöltése kötelező (Szállítási cím)"
-            last_name: "Vezetéknév kitöltése kötelező (Szállítási cím)"
-            address: "Utcanév kitöltése kötelező (Szállítási cím)"
-            number: "Házszám kitöltése kötelező (Szállítási cím)"
-            zip: "Irányítószám kitöltése kötelező (Szállítási cím)"
-            city: "Település kitöltése kötelező (Szállítási cím)"
-            country_id: "Válasszon országot (Szállítási cím)"
+            name: "Keresztnév kitöltése kötelező (kézbesítési cím)"
+            last_name: "Vezetéknév kitöltése kötelező (kézbesítési cím)"
+            address: "Utcanév kitöltése kötelező (kézbesítési cím)"
+            number: "Házszám kitöltése kötelező (kézbesítési cím)"
+            zip: "Irányítószám kitöltése kötelező (kézbesítési cím)"
+            city: "Település kitöltése kötelező (kézbesítési cím)"
+            country_id: "Válasszon országot (kézbesítési cím)"
         placeholder:
-            name: Keresztnév szállításhoz
-            last_name: Vezetéknév szállításhoz
-            phone_number: Telefonszám szállításhoz
-            address: Írja be az utcanevet
+            name: keresztnév kézbesítéshez
+            last_name: vezetéknév kézbesítéshez
+            phone_number: az ön telefonszáma
+            address: írja be az utcanevet
             number: pl. 145/41
             zip: pl. 08102
             city: pl. Trnava
 
 config:
-    category: Nyomtatott szám
+    category: Nyomtatott
     print_export_issue:
-        name: Szám címe
-        description: "Kiadási név nyomtatott lap exportja esetén (pl. DENNIK N)"
+        name: Kiadvány címe
+        description: "Kiadványnév nyomtatott lap exportja esetén (pl. DENNIK N)"
