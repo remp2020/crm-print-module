@@ -4,6 +4,7 @@ namespace Crm\PrintModule\Repository;
 
 use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\Repository;
+use Crm\PrintModule\User\PrintAddressesUserDataProvider;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use Crm\UsersModule\User\AddressesUserDataProvider;
@@ -174,6 +175,9 @@ SQL;
             $addressRow = $this->addressesRepository->find($row->address_id);
             if ($addressRow) {
                 $this->addressesRepository->update($addressRow, $gdprRemovalTemplate);
+
+                $printSubscriptionGdprRemovalTemplate = PrintAddressesUserDataProvider::gdprRemovalTemplate();
+                $this->getTable()->where('address_id', $addressRow->id)->update($printSubscriptionGdprRemovalTemplate);
             }
         }
     }

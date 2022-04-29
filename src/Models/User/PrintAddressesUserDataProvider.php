@@ -39,7 +39,7 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
         return [];
     }
 
-    public static function gdprRemovalTemplate($deletedAt)
+    public static function gdprRemovalTemplate()
     {
         return [
             'first_name' => 'GDPR removal',
@@ -51,7 +51,6 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
             'phone_number' => 'GDPR removal',
             'institution_name' => 'GDPR removal',
             'email' => 'GDPR removal',
-            'deleted_at' => $deletedAt,
         ];
     }
 
@@ -62,10 +61,10 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
 SELECT DISTINCT address_id 
   FROM print_subscriptions p1 
   JOIN 
-    (SELECT MAX(export_date) AS export_date, type, subscription_id
+    (SELECT MAX(export_date) AS export_date, type
     FROM print_subscriptions WHERE user_id = ?
-    GROUP BY type, subscription_id) p2
-  ON p1.export_date = p2.export_date AND p1.type = p2.type AND p1.subscription_id = p2.subscription_id AND p1.user_id = ? AND p1.status != ?
+    GROUP BY type) p2
+  ON p1.export_date = p2.export_date AND p1.type = p2.type AND p1.user_id = ? AND p1.status != ?
 SQL;
         $excludedAddresses = $this->printSubscriptionsRepository->getDatabase()
             ->query($sql, $userId, $userId, PrintSubscriptionsRepository::STATUS_REMOVED)
@@ -84,7 +83,7 @@ SQL;
         }
 
         $printSubscriptions = $query->fetchAll();
-        $gdprRemovalTemplate = self::gdprRemovalTemplate($this->getNow());
+        $gdprRemovalTemplate = self::gdprRemovalTemplate();
         foreach ($printSubscriptions as $printSubscription) {
             $this->printSubscriptionsRepository->update($printSubscription, $gdprRemovalTemplate);
         }
