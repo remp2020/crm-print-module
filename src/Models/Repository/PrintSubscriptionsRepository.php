@@ -182,7 +182,7 @@ SQL;
 
         $gdprRemovalTemplate = AddressesUserDataProvider::gdprRemovalTemplate($this->getNow());
 
-        foreach ($this->getDatabase()->query($sql, $this->getNow(), self::STATUS_REMOVED) as $row) {
+        foreach ($this->getDatabase()->query($sql, self::STATUS_REMOVED) as $row) {
             $addressRow = $this->addressesRepository->find($row->address_id);
             if ($addressRow) {
                 $this->addressesRepository->update($addressRow, $gdprRemovalTemplate);
