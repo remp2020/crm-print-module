@@ -155,18 +155,29 @@ class PrintSubscriptionsRepository extends Repository
         // check deleted users' (print subscriptions) addresses
         // if all user's print subscription addresses are unused (=last export for each type has status 'removed'), we can safely delete such addresses
         $sql = <<<SQL
+-- anonymize all addresses that were "removed" from their exports
 SELECT t2.address_id from 
   (SELECT ps.type, ps.user_id, MAX(ps.export_date) AS export_date 
     FROM addresses a 
     JOIN users u ON u.id = a.user_id 
        AND a.deleted_at IS NULL 
-       AND u.deleted_at IS NOT NULL 
-       AND u.deleted_at  >= DATE_SUB(?, INTERVAL 2 YEAR)
+       AND u.deleted_at IS NOT NULL
     JOIN print_subscriptions ps ON ps.address_id = a.id
     GROUP BY ps.type, ps.user_id) t1 
   JOIN print_subscriptions t2 ON t1.user_id = t2.user_id AND t1.export_date = t2.export_date AND t1.type = t2.type
   GROUP BY t2.address_id
   HAVING SUM(CASE WHEN t2.status != ? THEN 1 else 0 END) = 0
+
+UNION
+
+-- anonymize addresses of deleted users not used for more than 6 months (in case they weren't matched by status=removed above)
+SELECT address_id
+FROM print_subscriptions
+INNER JOIN users
+   ON user_id = users.id
+   AND deleted_at IS NOT NULL
+GROUP BY address_id
+HAVING MAX(export_date) < NOW() - INTERVAL 6 month
 SQL;
 
         $gdprRemovalTemplate = AddressesUserDataProvider::gdprRemovalTemplate($this->getNow());
