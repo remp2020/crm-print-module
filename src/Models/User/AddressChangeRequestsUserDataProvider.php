@@ -19,9 +19,9 @@ class AddressChangeRequestsUserDataProvider implements UserDataProviderInterface
         return 'address_change_requests';
     }
 
-    public function data($userId)
+    public function data($userId): ?array
     {
-        return [];
+        return null;
     }
 
     public function download($userId)
