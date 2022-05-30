@@ -1,11 +1,11 @@
-{block #title}{_print.admin.print_subscriptions.default.header} {$type}{/block}
+{block #title}{_'print.admin.print_subscriptions.default.header'} {$type}{/block}
 
 {block #content}
 
 <div class="row">
   <div class="col-md-12">
     <h1 class="page-header">
-      {_print.admin.print_subscriptions.default.header} <small n:if="$type">({$type})</small>
+      {_'print.admin.print_subscriptions.default.header'} <small n:if="$type">({$type})</small>
     </h1>
   </div>
 </div>
@@ -37,12 +37,12 @@
         <thead>
           <tr>
             {* POZOR: prudky hack kvoli tyzden_print_special exportu - su tam naopak tie data lebo sa exportuje viacero dni ku konkretnemu dnu tlace. *}
-            <th>{if in_array($actualType, ['tyzden_print_special', 'tyzden_print_new'])}{_print.admin.print_subscriptions.default.day_of_print}{else}{_print.admin.print_subscriptions.default.day_of_export}{/if}</th>
-            <th>{if in_array($actualType, ['tyzden_print_special', 'tyzden_print_new'])}{_print.admin.print_subscriptions.default.day_of_export}{else}{_print.admin.print_subscriptions.default.day_of_print}{/if}</th>
-            <th>{_print.admin.print_subscriptions.default.new}</th>
-            <th>{_print.admin.print_subscriptions.default.continuing}</th>
-            <th>{_print.admin.print_subscriptions.default.ending}</th>
-            <th>{_print.admin.print_subscriptions.default.files_to_download}</th>
+            <th>{if in_array($actualType, ['tyzden_print_special', 'tyzden_print_new'])}{_'print.admin.print_subscriptions.default.day_of_print'}{else}{_'print.admin.print_subscriptions.default.day_of_export'}{/if}</th>
+            <th>{if in_array($actualType, ['tyzden_print_special', 'tyzden_print_new'])}{_'print.admin.print_subscriptions.default.day_of_export'}{else}{_'print.admin.print_subscriptions.default.day_of_print'}{/if}</th>
+            <th>{_'print.admin.print_subscriptions.default.new'}</th>
+            <th>{_'print.admin.print_subscriptions.default.continuing'}</th>
+            <th>{_'print.admin.print_subscriptions.default.ending'}</th>
+            <th>{_'print.admin.print_subscriptions.default.files_to_download'}</th>
           </tr>
         </thead>
         <tbody>
@@ -68,16 +68,16 @@
 
               {* ble ble ble - asi by bolo dobre spravit na to widget *}
               {if in_array($type, ['tyzden_print_new', 'tyzden_print_special'])}
-                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'new'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.new}</a>
-                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'recurrent'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.continuing}</a>
-                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'removed'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_print.admin.print_subscriptions.default.ending}</a>
+                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'new'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_'print.admin.print_subscriptions.default.new'}</a>
+                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'recurrent'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_'print.admin.print_subscriptions.default.continuing'}</a>
+                <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'removed'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_'print.admin.print_subscriptions.default.ending'}</a>
               {/if}
             </td>
           </tr>
         </tbody>
       </table>
     {else}
-      <p class="text-muted text-center well">{_print.admin.print_subscriptions.default.no_records_found}</p>
+      <p class="text-muted text-center well">{_'print.admin.print_subscriptions.default.no_records_found'}</p>
     {/if}
   </div>
 </div>
