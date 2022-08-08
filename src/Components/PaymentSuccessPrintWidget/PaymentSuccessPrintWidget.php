@@ -8,6 +8,7 @@ use Crm\PaymentsModule\PaymentAwareInterface;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SubscriptionsModule\PaymentItem\SubscriptionTypePaymentItem;
+use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 
 /**
@@ -47,6 +48,9 @@ class PaymentSuccessPrintWidget extends BaseWidget
         $form = $factory->create($payment);
         $factory->onSave = function ($form, $user) {
             $form['done']->setValue(1);
+            $this->redrawControl('printAddressFormSnippet');
+        };
+        $form->onError[] = function (Form $form) {
             $this->redrawControl('printAddressFormSnippet');
         };
 
