@@ -2,10 +2,10 @@
 
 namespace Crm\PrintModule\DI;
 
-use Kdyby\Translation\DI\ITranslationProvider;
+use Contributte\Translation\DI\TranslationProviderInterface;
 use Nette\DI\CompilerExtension;
 
-class PrintModuleExtension extends CompilerExtension implements ITranslationProvider
+class PrintModuleExtension extends CompilerExtension implements TranslationProviderInterface
 {
     private $defaults = [];
 
@@ -32,7 +32,7 @@ class PrintModuleExtension extends CompilerExtension implements ITranslationProv
      * Return array of directories, that contain resources for translator.
      * @return string[]
      */
-    public function getTranslationResources()
+    public function getTranslationResources(): array
     {
         return [__DIR__ . '/../lang/'];
     }

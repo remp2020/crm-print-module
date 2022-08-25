@@ -2,10 +2,10 @@
 
 namespace Crm\PrintModule\Components;
 
+use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Widget\BaseWidget;
 use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
-use Kdyby\Translation\Translator;
 
 /**
  * This widgets fetches all users exported print subscriptions

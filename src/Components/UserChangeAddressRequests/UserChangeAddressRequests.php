@@ -2,10 +2,10 @@
 
 namespace Crm\PrintModule\Components;
 
+use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Widget\BaseWidget;
 use Crm\ApplicationModule\Widget\WidgetManager;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
-use Kdyby\Translation\Translator;
 
 /**
  * This widget fetches all address change requests for specific user

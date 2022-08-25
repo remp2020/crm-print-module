@@ -21,7 +21,7 @@
     <script type="text/javascript">
         $(function() {
             registerFormCallback(function() {
-                var $userPrintAddressForm = $("#{$control['userPrintAddressForm']->getElementPrototype()->id|noescape}");
+                var $userPrintAddressForm = $("#" + {$control['userPrintAddressForm']->getElementPrototype()->id|noescape});
                 if (!Nette.validateForm($userPrintAddressForm[0])) {
                     errorCallback();
                     return;
@@ -34,7 +34,7 @@
                     complete: function() {
                         // this case handles scenario when Nette.validateForm said all is fine, but successHandler
                         // on backend could have triggered an error anyway
-                        var printFormSaved = $('#{$control["userPrintAddressForm"]["done"]->htmlId|noescape}').val() === "1";
+                        var printFormSaved = $('#' + {$control["userPrintAddressForm"]["done"]->htmlId|noescape}).val() === "1";
                         if (!printFormSaved) {
                             alert({_print.component.payment_success_print_widget.need_to_fill_print_address});
                             errorCallback();
@@ -50,6 +50,6 @@
     </script>
 
     <script n:if="!$presenter->isAjax()">
-        $("#{$control['userPrintAddressForm']->getElementPrototype()->id|noescape}").hide();
+        $("#" + {$control['userPrintAddressForm']->getElementPrototype()->id|noescape}).hide();
     </script>
 {/block}
