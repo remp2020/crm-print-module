@@ -2,8 +2,8 @@
 
 namespace Crm\PrintModule\Components;
 
-use Crm\ApplicationModule\Widget\BaseWidget;
-use Crm\ApplicationModule\Widget\WidgetManager;
+use Crm\ApplicationModule\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Widget\LazyWidgetManager;
 use Crm\SubscriptionsModule\Subscription\ActualUserSubscription;
 use Crm\UsersModule\Repository\AddressesRepository;
 
@@ -13,7 +13,7 @@ use Crm\UsersModule\Repository\AddressesRepository;
  *
  * @package Crm\PrintModule\Components
  */
-class EnterAddressWidget extends BaseWidget
+class EnterAddressWidget extends BaseLazyWidget
 {
     protected $templatePath = __DIR__ . DIRECTORY_SEPARATOR . 'enter_address_widget.latte';
 
@@ -22,11 +22,11 @@ class EnterAddressWidget extends BaseWidget
     private $addressesRepository;
 
     public function __construct(
-        WidgetManager $widgetManager,
+        LazyWidgetManager $lazyWidgetManager,
         ActualUserSubscription $actualUserSubscription,
         AddressesRepository $addressesRepository
     ) {
-        parent::__construct($widgetManager);
+        parent::__construct($lazyWidgetManager);
         $this->actualUserSubscription = $actualUserSubscription;
         $this->addressesRepository = $addressesRepository;
     }

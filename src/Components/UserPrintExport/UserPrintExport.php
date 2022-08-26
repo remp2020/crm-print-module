@@ -3,8 +3,8 @@
 namespace Crm\PrintModule\Components;
 
 use Contributte\Translation\Translator;
-use Crm\ApplicationModule\Widget\BaseWidget;
-use Crm\ApplicationModule\Widget\WidgetManager;
+use Crm\ApplicationModule\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Widget\LazyWidgetManager;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 
 /**
@@ -13,7 +13,7 @@ use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
  *
  * @package Crm\PrintModule\Components
  */
-class UserPrintExport extends BaseWidget
+class UserPrintExport extends BaseLazyWidget
 {
     private $templateName = 'user_print_export.latte';
 
@@ -24,11 +24,11 @@ class UserPrintExport extends BaseWidget
     private $translator;
 
     public function __construct(
-        WidgetManager $widgetManager,
+        LazyWidgetManager $lazyWidgetManager,
         PrintSubscriptionsRepository $printSubscriptionsRepository,
         Translator $translator
     ) {
-        parent::__construct($widgetManager);
+        parent::__construct($lazyWidgetManager);
         $this->printSubscriptionsRepository = $printSubscriptionsRepository;
         $this->translator = $translator;
     }

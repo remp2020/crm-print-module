@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\Components;
 
-use Crm\ApplicationModule\Widget\BaseWidget;
+use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\PaymentsModule\Gateways\BankTransfer;
 use Crm\PaymentsModule\PaymentAwareInterface;
 use Crm\PaymentsModule\Repository\PaymentsRepository;
@@ -16,7 +16,7 @@ use Nette\Database\Table\ActiveRow;
  * and extends the success page with invoice form.
  * Any other usage ends up with Exception.
  */
-class PaymentSuccessPrintWidget extends BaseWidget
+class PaymentSuccessPrintWidget extends BaseLazyWidget
 {
     protected $templatePath = __DIR__ . DIRECTORY_SEPARATOR . 'payment_success_print_widget.latte';
 

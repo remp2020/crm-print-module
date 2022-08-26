@@ -9,7 +9,7 @@ use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\ApplicationModule\SeederManager;
 use Crm\ApplicationModule\User\UserDataRegistrator;
-use Crm\ApplicationModule\Widget\WidgetManagerInterface;
+use Crm\ApplicationModule\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
@@ -57,31 +57,31 @@ class PrintModule extends CrmModule
         $menuContainer->attachMenuItem($menuItem);
     }
 
-    public function registerWidgets(WidgetManagerInterface $widgetManager)
+    public function registerLazyWidgets(LazyWidgetManagerInterface $widgetManager)
     {
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
-            $this->getInstance(\Crm\PrintModule\Components\UserPrintExport::class),
+            \Crm\PrintModule\Components\UserPrintExport::class,
             777
         );
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
-            $this->getInstance(\Crm\PrintModule\Components\UserChangeAddressRequests::class),
+            \Crm\PrintModule\Components\UserChangeAddressRequests::class,
             1100
         );
         $widgetManager->registerWidget(
             'admin.users.top',
-            $this->getInstance(\Crm\PrintModule\Components\RequestNotification::class),
+            \Crm\PrintModule\Components\RequestNotification::class,
             1000
         );
         $widgetManager->registerWidget(
             'payment.address',
-            $this->getInstance(\Crm\PrintModule\Components\PaymentSuccessPrintWidget::class)
+            \Crm\PrintModule\Components\PaymentSuccessPrintWidget::class
         );
 
         $widgetManager->registerWidget(
             'frontend.layout.top',
-            $this->getInstance(\Crm\PrintModule\Components\EnterAddressWidget::class),
+            \Crm\PrintModule\Components\EnterAddressWidget::class,
             100
         );
     }

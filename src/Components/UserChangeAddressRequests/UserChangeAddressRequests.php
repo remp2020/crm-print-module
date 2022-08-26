@@ -3,8 +3,8 @@
 namespace Crm\PrintModule\Components;
 
 use Contributte\Translation\Translator;
-use Crm\ApplicationModule\Widget\BaseWidget;
-use Crm\ApplicationModule\Widget\WidgetManager;
+use Crm\ApplicationModule\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Widget\LazyWidgetManager;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 
 /**
@@ -14,25 +14,22 @@ use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
  *
  * @package Crm\PrintModule\Components
  */
-class UserChangeAddressRequests extends BaseWidget
+class UserChangeAddressRequests extends BaseLazyWidget
 {
     private $templateName = 'user_change_address_requests.latte';
 
     /** @var AddressChangeRequestsRepository */
     private $changeRequestsRepository;
 
-    /** @var WidgetManager */
-    protected $widgetManager;
-
     /** @var Translator */
     private $translator;
 
     public function __construct(
-        WidgetManager $widgetManager,
+        LazyWidgetManager $lazyWidgetManager,
         AddressChangeRequestsRepository $changeRequestsRepository,
         Translator $translator
     ) {
-        parent::__construct($widgetManager);
+        parent::__construct($lazyWidgetManager);
         $this->changeRequestsRepository = $changeRequestsRepository;
         $this->translator = $translator;
     }
