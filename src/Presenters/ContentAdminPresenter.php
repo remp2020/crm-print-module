@@ -32,7 +32,10 @@ class ContentAdminPresenter extends AdminPresenter
                 ->getAdapter($adapterPrefix)
                 ->applyPathPrefix($file);
 
-            $this->sendResponse(new FileResponse($filePath));
+            $response = new FileResponse($filePath);
+            // Nette appends Content-Range header even when no Range header is present, Varnish doesn't like that
+            $response->resuming = false;
+            $this->sendResponse($response);
         } else {
             throw new BadRequestException();
         }
