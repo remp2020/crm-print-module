@@ -42,17 +42,15 @@ class PrintSubscriptionsRepository extends Repository
     {
         $nextYear = $year + 1;
         $allStatusCounts = $this->getTable()
+            ->where('type', $type)
             ->where(['export_date >= ?' => DateTime::from(strtotime("1.1.{$year} 00:00:00"))])
             ->where(['export_date < ?' => DateTime::from(strtotime("1.1.{$nextYear} 00:00:00"))])
-            ->select('type, exported_at, export_date, status, count(*) AS "total"')
-            ->group('type, exported_at, export_date, status')
+            ->select('exported_at, export_date, status, count(*) AS "total"')
+            ->group('export_date, exported_at, status')
             ->order('export_date DESC');
 
         $counts = [];
         foreach ($allStatusCounts as $row) {
-            if ($row->type !== $type) {
-                continue;
-            }
             $printDate = $row->export_date->format('Y-m-d');
             if (!isset($counts[$printDate])) {
                 $counts[$printDate] = [];
