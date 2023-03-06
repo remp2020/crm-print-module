@@ -49,13 +49,13 @@ class AddressChangeRequestsPopulator extends AbstractPopulator
             AddressChangeRequestsRepository::STATUS_ACCEPTED,
             AddressChangeRequestsRepository::STATUS_REJECTED,
         ];
-        return $items[rand(0, count($items) - 1)];
+        return $items[random_int(0, count($items) - 1)];
     }
 
     private function getAddress($addresses)
     {
         $ids = array_keys($addresses);
-        $randomId = $ids[rand(0, count($ids)-1)];
+        $randomId = $ids[random_int(0, count($ids)-1)];
         return $addresses[$randomId];
     }
 }

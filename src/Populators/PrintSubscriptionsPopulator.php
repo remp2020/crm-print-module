@@ -44,6 +44,6 @@ class PrintSubscriptionsPopulator extends AbstractPopulator
         $statues = [
             'new', 'removed', 'recurrent'
         ];
-        return $statues[rand(0, count($statues) - 1)];
+        return $statues[random_int(0, count($statues) - 1)];
     }
 }
