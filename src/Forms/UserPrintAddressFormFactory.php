@@ -11,6 +11,7 @@ use Crm\UsersModule\Repository\CountriesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
+use Nette\Utils\ArrayHash;
 use Tomaj\Form\Renderer\BootstrapRenderer;
 
 class UserPrintAddressFormFactory
@@ -128,7 +129,7 @@ class UserPrintAddressFormFactory
         return $form;
     }
 
-    public function formSucceeded($form, $values)
+    public function formSucceeded(Form $form, ArrayHash $values)
     {
         $user = $this->payment->user;
 
