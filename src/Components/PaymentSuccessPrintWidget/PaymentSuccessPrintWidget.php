@@ -83,7 +83,7 @@ class PaymentSuccessPrintWidget extends BaseLazyWidget
 
             // TODO: this might be redundant due to ask_address
             foreach ($subscriptionType->related('subscription_type_content_access') as $stca) {
-                if (in_array($stca->content_access->name, ['print', 'print_friday'])) {
+                if (in_array($stca->content_access->name, ['print', 'print_friday'], true)) {
                     return true;
                 }
             }

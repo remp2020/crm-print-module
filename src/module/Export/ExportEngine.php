@@ -40,7 +40,7 @@ class ExportEngine
         foreach ($data as $row) {
             $user = $row->user;
 
-            if (in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'])) {
+            if (in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'], true)) {
                 $address = $row->address;
             } elseif ($criteria->getKey() == 'dennikn_magazine') {
                 $address = $this->addressesRepository->address($user, 'magazine_print');
@@ -62,7 +62,7 @@ class ExportEngine
                 $address = null;
             }
 
-            if (!$address && in_array($criteria->getKey(), ['dennikn_daily', 'dennikn_friday', 'dennikn_magazine', 'print_daily', 'print_friday', 'future_print_friday'])) {
+            if (!$address && in_array($criteria->getKey(), ['dennikn_daily', 'dennikn_friday', 'dennikn_magazine', 'print_daily', 'print_friday', 'future_print_friday'], true)) {
                 continue;
             }
 
@@ -93,9 +93,9 @@ class ExportEngine
                     $this->printSubscriptionsRepository->update($row, ['status' => 'updated']);
                 }
             }
-        } elseif (in_array($criteria->getKey(), ['tyzden_print_special'])) {
+        } elseif (in_array($criteria->getKey(), ['tyzden_print_special'], true)) {
             $this->printSubscriptionsRepository->setPrintExportStatusTyzdenSpecial($criteria->getKey(), $printExportDate, $criteria->getExportAt());
-        } elseif (in_array($criteria->getKey(), ['tyzden_print_new'])) {
+        } elseif (in_array($criteria->getKey(), ['tyzden_print_new'], true)) {
             $this->printSubscriptionsRepository->setPrintExportStatusTyzdenDaily($criteria->getKey(), $printExportDate, $criteria->getExportAt());
         } else {
             $this->printSubscriptionsRepository->setPrintExportStatus($criteria->getKey(), $printExportDate, $criteria->getExportAt());
