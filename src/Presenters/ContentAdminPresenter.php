@@ -31,7 +31,7 @@ class ContentAdminPresenter extends AdminPresenter
         if ($this->mountManager->has($adapterPrefix . $file)) {
             $filePath = $this->mountManager->getAdapter($adapterPrefix);
             if ($filePath instanceof AbstractAdapter) {
-                $filePath->applyPathPrefix($file);
+                $filePath = $filePath->applyPathPrefix($file);
             }
 
             $response = new FileResponse($filePath);
