@@ -86,6 +86,7 @@ SQL;
         $gdprRemovalTemplate = self::gdprRemovalTemplate();
         foreach ($printSubscriptions as $printSubscription) {
             $this->printSubscriptionsRepository->update($printSubscription, $gdprRemovalTemplate);
+            $this->printSubscriptionsRepository->markAuditLogsForDelete($printSubscription->getSignature());
         }
     }
 
