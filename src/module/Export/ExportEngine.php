@@ -82,7 +82,15 @@ class ExportEngine
                 }
             }
 
-            $this->printSubscriptionsRepository->add($criteria->getKey(), $row->id, $user, $address, $printExportDate, 'new', $criteria->getExportAt(), Json::encode($meta));
+            $this->printSubscriptionsRepository->add(
+                type: $criteria->getKey(),
+                subscriptionId: $row->id,
+                user: $user,
+                exportDate: $printExportDate,
+                address: $address,
+                exportAt: $criteria->getExportAt(),
+                meta: Json::encode($meta)
+            );
         }
 
         if ($criteria->getKey() == 'tyzden_daily') {

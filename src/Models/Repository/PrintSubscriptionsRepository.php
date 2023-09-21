@@ -6,6 +6,7 @@ use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\Repository;
 use Crm\PrintModule\User\PrintAddressesUserDataProvider;
 use Crm\UsersModule\Repository\AddressesRepository;
+use Crm\UsersModule\Repository\CountriesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use Crm\UsersModule\User\AddressesUserDataProvider;
 use Nette\Caching\Storage;
@@ -17,25 +18,20 @@ class PrintSubscriptionsRepository extends Repository
 {
     use NowTrait;
 
-    const STATUS_NEW = 'new';
-    const STATUS_REMOVED = 'removed';
-    const STATUS_RECURRENT = 'recurrent';
+    public const STATUS_NEW = 'new';
+    public const STATUS_REMOVED = 'removed';
+    public const STATUS_RECURRENT = 'recurrent';
 
     protected $tableName = 'print_subscriptions';
 
-    private $addressesRepository;
-
-    private $usersRepository;
-
     public function __construct(
         Explorer $database,
-        AddressesRepository $addressesRepository,
-        UsersRepository $usersRepository,
+        private AddressesRepository $addressesRepository,
+        private UsersRepository $usersRepository,
+        private CountriesRepository $countriesRepository,
         Storage $cacheStorage = null
     ) {
         parent::__construct($database, $cacheStorage);
-        $this->addressesRepository = $addressesRepository;
-        $this->usersRepository = $usersRepository;
     }
 
     final public function getAllCounts(string $type, int $year)
@@ -80,28 +76,37 @@ class PrintSubscriptionsRepository extends Repository
             ->fetch();
     }
 
-    final public function add($type, $subscriptionsId, ActiveRow $user, ActiveRow $address = null, \DateTime $exportDate = null, $status = 'new', $exportAt = null, $meta = 'null')
-    {
+    final public function add(
+        $type,
+        $subscriptionId,
+        ActiveRow $user,
+        \DateTime $exportDate,
+        ActiveRow $address = null,
+        $status = 'new',
+        $exportAt = null,
+        $meta = 'null'
+    ) {
         if ($meta === "[]") {
             $meta = "{}";
         }
         return $this->insert([
             'type' => $type,
-            'subscription_id' => $subscriptionsId,
+            'subscription_id' => $subscriptionId,
             'user_id' => $user->id,
-            'exported_at' => $exportAt ? $exportAt : new DateTime(),
+            'exported_at' => $exportAt ?: new DateTime(),
             'export_date' => $exportDate->format('Y-m-d'),
-            'institution_name' => $address ? $address->company_name : $user->institution_name,
-            'first_name' => $address ? $address->first_name : null,
-            'last_name' => $address ? $address->last_name : null,
-            'address' => $address ? $address->address : null,
-            'number' => $address ? $address->number : null,
-            'zip' => $address ? $address->zip : null,
-            'city' => $address ? $address->city : null,
-            'phone_number' => $address ? $address->phone_number : null,
+            'institution_name' => $address->company_name ?? $user->institution_name,
+            'first_name' => $address?->first_name,
+            'last_name' => $address?->last_name,
+            'address' => $address?->address,
+            'number' => $address?->number,
+            'zip' => $address?->zip,
+            'city' => $address?->city,
+            'phone_number' => $address?->phone_number,
+            'country_id' => $address?->country_id ?? $this->countriesRepository->defaultCountry()->id,
             'email' => $user->email ?? $user->public_name,
             'status' => $status,
-            'address_id' => $address ? $address->id : null,
+            'address_id' => $address?->id,
             'meta' => $meta,
         ]);
     }
@@ -222,8 +227,17 @@ SQL;
             ->where('user_id NOT', $temp)
             ->where('export_date', $previousExportDate)
             ->where('status != ?', self::STATUS_REMOVED);
+
         foreach ($printEnded as $row) {
-            $this->add($type, $row->subscription_id, $row->user, $row->addr, $printExportDate, self::STATUS_REMOVED, $exportAt);
+            $this->add(
+                type: $type,
+                subscriptionId: $row->subscription_id,
+                user: $row->user,
+                exportDate: $printExportDate,
+                address: $row->addr,
+                status: self::STATUS_REMOVED,
+                exportAt: $exportAt
+            );
         }
     }
 
@@ -262,8 +276,17 @@ SQL;
             ->where('subscription_id NOT', $temp)
             ->where('export_date', $previousExportDate)
             ->where('status != ?', 'removed');
+
         foreach ($printEnded as $row) {
-            $this->add($type, $row->subscription_id, $row->user, $row->addr, $printExportDate, 'removed', $exportAt);
+            $this->add(
+                type: $type,
+                subscriptionId: $row->subscription_id,
+                user: $row->user,
+                exportDate: $printExportDate,
+                address: $row->addr,
+                status: self::STATUS_REMOVED,
+                exportAt: $exportAt
+            );
         }
     }
 
@@ -362,7 +385,15 @@ GROUP BY today.id
             if (!$address) {
                 $address = null;
             }
-            $this->add($type, $row->id, $user, $address, $printExportDate, 'removed', $exportAt);
+            $this->add(
+                type: $type,
+                subscriptionId: $row->id,
+                user: $user,
+                exportDate: $printExportDate,
+                address: $address,
+                status: self::STATUS_REMOVED,
+                exportAt: $exportAt
+            );
         }
     }
 
