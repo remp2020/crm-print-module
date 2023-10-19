@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Export;
 
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\SubscriptionsModule\Repository\SubscriptionMetaRepository;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesMetaRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
@@ -11,24 +11,12 @@ use Nette\Utils\Json;
 
 class ExportEngine
 {
-    private $addressesRepository;
-
-    private $addressesMetaRepository;
-
-    private $printSubscriptionsRepository;
-
-    private $subscriptionsRepository;
-
     public function __construct(
-        AddressesRepository $addressesRepository,
-        AddressesMetaRepository $addressesMetaRepository,
-        PrintSubscriptionsRepository $printSubscriptionsRepository,
-        SubscriptionsRepository $subscriptionsRepository
+        private AddressesRepository $addressesRepository,
+        private AddressesMetaRepository $addressesMetaRepository,
+        private PrintSubscriptionsRepository $printSubscriptionsRepository,
+        private SubscriptionMetaRepository $subscriptionMetaRepository,
     ) {
-        $this->addressesRepository = $addressesRepository;
-        $this->addressesMetaRepository = $addressesMetaRepository;
-        $this->printSubscriptionsRepository = $printSubscriptionsRepository;
-        $this->subscriptionsRepository = $subscriptionsRepository;
     }
 
     public function run(ExportCriteria $criteria, SourceInterface $source, ViewInterface $view, $sharedMeta = [])
@@ -81,6 +69,9 @@ class ExportEngine
                     ]);
                 }
             }
+
+            // save also subscription meta
+            $meta = array_merge($meta, $this->subscriptionMetaRepository->subscriptionMeta($row));
 
             $this->printSubscriptionsRepository->add(
                 type: $criteria->getKey(),
