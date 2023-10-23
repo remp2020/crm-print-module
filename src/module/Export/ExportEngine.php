@@ -66,6 +66,10 @@ class ExportEngine
                 continue;
             }
 
+            if ($address && !$criteria->shouldDeliverToCountry($address->country->iso_code)) {
+                continue;
+            }
+
             $meta = $sharedMeta;
             if ($address) {
                 $changeRequest = $address->related('address_change_requests')

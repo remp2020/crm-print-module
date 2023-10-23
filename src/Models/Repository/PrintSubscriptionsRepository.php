@@ -350,7 +350,7 @@ GROUP BY today.id
             echo "updatujem {$row->id} na recurrent\n";
             $this->getTable()->where(['id' => $row->id])->update(['status' => 'recurrent']);
         }
-        
+
         $date = $printExportDate->format('Y-m-d 6:10');
 
 //        $rows = $this->getDatabase()->query("SELECT end_subscription.*
