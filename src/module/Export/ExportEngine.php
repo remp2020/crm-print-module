@@ -26,6 +26,16 @@ class ExportEngine
         $printExportDate = $criteria->getExportTo();
 
         foreach ($data as $row) {
+            // if only new subscribers should be processed, check if subscription already has a record
+            if ($criteria->getBackIssues()
+                && $this->printSubscriptionsRepository->getTable()
+                    ->where([
+                        'subscription_id' => $row->id,
+                    ])->fetch()
+            ) {
+                continue;
+            }
+
             $user = $row->user;
 
             if (in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'], true)) {

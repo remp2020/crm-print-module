@@ -6,31 +6,38 @@ use DateTime;
 
 class ExportCriteria
 {
-    private $key;
-
-    private $exportAt;
-
-    private $exportTo;
-
-    public function __construct($key, DateTime $exportAt, DateTime $exportTo)
-    {
-        $this->key = $key;
-        $this->exportAt = $exportAt;
-        $this->exportTo = $exportTo;
+    /**
+     * @param string $key Issue type (eg. print_daily, print_friday, monthly_special).
+     * @param DateTime $exportAt Date and time of export (stored to print_subscriptions.exported_at).
+     * @param DateTime $exportTo Date of issue publication (stored to print_subscriptions.export_date).
+     * @param bool $backIssues If set to true, only new subscriptions (for back issues) are generated
+     *                         and exported (eg. running export week after first batch).
+     */
+    public function __construct(
+        private string $key,
+        private DateTime $exportAt,
+        private DateTime $exportTo,
+        private bool $backIssues = false,
+    ) {
     }
 
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function getExportAt()
+    public function getExportAt(): DateTime
     {
         return $this->exportAt;
     }
 
-    public function getExportTo()
+    public function getExportTo(): DateTime
     {
         return $this->exportTo;
+    }
+
+    public function getBackIssues(): bool
+    {
+        return $this->backIssues;
     }
 }
