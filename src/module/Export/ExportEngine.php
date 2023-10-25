@@ -50,7 +50,9 @@ class ExportEngine
                 $address = null;
             }
 
-            if (!$address && in_array($criteria->getKey(), ['dennikn_daily', 'dennikn_friday', 'dennikn_magazine', 'print_daily', 'print_friday', 'future_print_friday'], true)) {
+            if (!$address &&
+                !in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'], true)
+            ) {
                 continue;
             }
 
