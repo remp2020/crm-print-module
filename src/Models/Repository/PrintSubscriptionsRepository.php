@@ -38,10 +38,10 @@ class PrintSubscriptionsRepository extends Repository
     {
         $nextYear = $year + 1;
         $allStatusCounts = $this->getTable()
+            ->select('exported_at, export_date, status, count(*) AS "total", SUM(COALESCE(JSON_EXTRACT(meta, "$.item_count"), 1)) AS "delivering_pcs"')
             ->where('type', $type)
             ->where(['export_date >= ?' => DateTime::from(strtotime("1.1.{$year} 00:00:00"))])
             ->where(['export_date < ?' => DateTime::from(strtotime("1.1.{$nextYear} 00:00:00"))])
-            ->select('exported_at, export_date, status, count(*) AS "total"')
             ->group('export_date, exported_at, status')
             ->order('export_date DESC');
 
@@ -49,7 +49,13 @@ class PrintSubscriptionsRepository extends Repository
         foreach ($allStatusCounts as $row) {
             $printDate = $row->export_date->format('Y-m-d');
             if (!isset($counts[$printDate])) {
-                $counts[$printDate] = [];
+                $counts[$printDate] = [
+                    'delivering_pcs' => 0,
+                ];
+            }
+
+            if (in_array($row->status, ['new', 'recurrent'], true)) {
+                $counts[$printDate]['delivering_pcs'] += $row->delivering_pcs;
             }
 
             $counts[$printDate]['exported_at'] = $row->exported_at->format('Y-m-d');

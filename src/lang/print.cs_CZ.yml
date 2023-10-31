@@ -13,6 +13,7 @@ admin:
             new: Noví
             continuing: Pokračující
             ending: Končící
+            delivering_pcs: Doručovaných ks
             files_to_download: Soubory ke stažení
             no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
         show:

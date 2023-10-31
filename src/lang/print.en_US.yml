@@ -13,6 +13,7 @@ admin:
             new: New
             continuing: Continuing
             ending: Ending
+            delivering: Delivering (pcs)
             files_to_download: Files to download
             no_records_found: 'No records match selected filter'
         show:
