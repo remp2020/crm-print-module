@@ -38,7 +38,7 @@ class PrintSubscriptionsRepository extends Repository
     {
         $nextYear = $year + 1;
         $allStatusCounts = $this->getTable()
-            ->select('exported_at, export_date, status, count(*) AS "total", SUM(COALESCE(JSON_EXTRACT(meta, "$.item_count"), 1)) AS "delivering_pcs"')
+            ->select('exported_at, export_date, status, count(*) AS "total", SUM(COALESCE(JSON_UNQUOTE(JSON_EXTRACT(meta, "$.item_count")), 1)) AS "delivering_pcs"')
             ->where('type', $type)
             ->where(['export_date >= ?' => DateTime::from(strtotime("1.1.{$year} 00:00:00"))])
             ->where(['export_date < ?' => DateTime::from(strtotime("1.1.{$nextYear} 00:00:00"))])

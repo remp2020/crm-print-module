@@ -3,9 +3,12 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
+use Crm\PrintModule\Models\Export\FilePatternConfig;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Nette\Application\UI\Form;
+use Nette\Utils\DateTime;
+use Nette\Utils\Finder;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class PrintSubscriptionsAdminPresenter extends AdminPresenter
@@ -15,6 +18,9 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
 
     /** @var  SubscriptionsRepository @inject */
     public $subscriptionsRepository;
+
+    /** @var FilePatternConfig @inject */
+    public $filePatternConfig;
 
     /** @persistent */
     public $date;
@@ -66,11 +72,23 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
                 $startDate++;
             }
             rsort($years);
-            $this->template->exportList = $this->printSubscriptionsRepository->getAllCounts($this->type, $year);
+            $exportList = $this->printSubscriptionsRepository->getAllCounts($this->type, $year);
+
+            foreach ($exportList as $date => $export) {
+                $dateTime = DateTime::from($date);
+                $pattern = $this->filePatternConfig->evaluate($this->type, $dateTime);
+                if ($pattern) {
+                    $files = Finder::findFiles($pattern)->from(APP_ROOT . '/content/export/');
+                    foreach ($files as $file) {
+                        $exportList[$date]['files'][] = $file->getFilename();
+                    }
+                }
+            }
         } else {
-            $this->template->exportList = [];
+            $exportList = [];
         }
 
+        $this->template->exportList = $exportList;
         $this->template->years = $years;
         $this->template->actualYear = $year;
     }

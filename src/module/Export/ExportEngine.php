@@ -70,6 +70,10 @@ class ExportEngine
                 continue;
             }
 
+            if (!$criteria->shouldDeliver($row, $address)) {
+                continue;
+            }
+
             $meta = $sharedMeta;
             if ($address) {
                 $changeRequest = $address->related('address_change_requests')

@@ -61,6 +61,12 @@
             <td>{(isset($export['removed']) ? $export['removed'] : 0)}</td>
             <td>{$export['delivering_pcs'] ?? 0}</td>
             <td>
+              {foreach $export['files'] ?? [] as $file}
+                <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file}">
+                  <i class="fa fa-download"></i>
+                </a>
+              {/foreach}
+
               <a n:if="file_exists(APP_ROOT . '/content/export/' . $type . '-' . $date . '.xls')" class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile  $type . '-' . $date . '.xls'}">
                 <i class="fa fa-download"></i>
               </a>

@@ -27,3 +27,4 @@ services:
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView
 	- Crm\PrintModule\Export\FileSystem
+	printFilePatternConfig: Crm\PrintModule\Models\Export\FilePatternConfig
