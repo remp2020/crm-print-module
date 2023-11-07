@@ -8,7 +8,6 @@ use Crm\UsersModule\DataProvider\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\CountriesRepository;
-use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 use Nette\Utils\ArrayHash;
@@ -16,37 +15,21 @@ use Tomaj\Form\Renderer\BootstrapRenderer;
 
 class UserPrintAddressFormFactory
 {
-    private $usersRepository;
-    private $addressesRepository;
-    private $countriesRepository;
-    private $addressChangeRequestsRepository;
-
-    private $dataProviderManager;
-
     /* callback function */
     public $onSave;
 
     /** @var ActiveRow */
     private $payment;
 
-    private $translator;
-
     private $addressType;
 
     public function __construct(
-        Translator $translator,
-        UsersRepository $usersRepository,
-        AddressesRepository $addressesRepository,
-        AddressChangeRequestsRepository $addressChangeRequestsRepository,
-        CountriesRepository $countriesRepository,
-        DataProviderManager $dataProviderManager
+        private Translator $translator,
+        private AddressesRepository $addressesRepository,
+        private AddressChangeRequestsRepository $addressChangeRequestsRepository,
+        private CountriesRepository $countriesRepository,
+        private DataProviderManager $dataProviderManager
     ) {
-        $this->translator = $translator;
-        $this->usersRepository = $usersRepository;
-        $this->addressesRepository = $addressesRepository;
-        $this->addressChangeRequestsRepository = $addressChangeRequestsRepository;
-        $this->countriesRepository = $countriesRepository;
-        $this->dataProviderManager = $dataProviderManager;
     }
 
     public function create(ActiveRow $payment, string $addressType = 'print'): Form
@@ -126,6 +109,8 @@ class UserPrintAddressFormFactory
             $form = $provider->provide(['form' => $form, 'payment' => $payment, 'address' => $printAddress, 'self' => $this, 'addressType' => 'print']);
         }
 
+        $form->onSuccess[] = [$this, 'formSucceededAfterProviders'];
+
         return $form;
     }
 
@@ -133,7 +118,7 @@ class UserPrintAddressFormFactory
     {
         $user = $this->payment->user;
 
-        if (isset($values->first_name)) {
+        if (isset($values['first_name'])) {
             $printAddress = $this->addressesRepository->address($user, $this->addressType);
 
             $changeRequest = $this->addressChangeRequestsRepository->add(
@@ -158,7 +143,10 @@ class UserPrintAddressFormFactory
                 $this->addressChangeRequestsRepository->acceptRequest($changeRequest);
             }
         }
+    }
 
-        $this->onSave->__invoke($form, $user);
+    public function formSucceededAfterProviders(Form $form, $values): void
+    {
+        $this->onSave->__invoke($form, $this->payment->user);
     }
 }

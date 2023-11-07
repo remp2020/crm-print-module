@@ -2,11 +2,12 @@
 
 namespace Crm\PrintModule\Forms;
 
+use Crm\ApplicationModule\DataProvider\DataProviderManager;
+use Crm\UsersModule\DataProvider\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\CountriesRepository;
 use Crm\UsersModule\Repository\UsersRepository;
-use League\Event\Emitter;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
@@ -23,39 +24,19 @@ class ChangeAddressRequestFormFactory
 
     private $user;
 
-    private $usersRepository;
-
-    private $addressChangeRequestsRepository;
-
-    private $addressesRepository;
-
-    private $countriesRepository;
-
-    private $emitter;
-
-    private $translator;
+    private $request;
 
     public function __construct(
-        UsersRepository $usersRepository,
-        AddressChangeRequestsRepository $addressChangeRequestsRepository,
-        AddressesRepository $addressesRepository,
-        CountriesRepository $countriesRepository,
-        Emitter $emitter,
-        Translator $translator
+        private UsersRepository $usersRepository,
+        private AddressChangeRequestsRepository $addressChangeRequestsRepository,
+        private AddressesRepository $addressesRepository,
+        private CountriesRepository $countriesRepository,
+        private Translator $translator,
+        private DataProviderManager $dataProviderManager,
     ) {
-        $this->usersRepository = $usersRepository;
-        $this->addressChangeRequestsRepository = $addressChangeRequestsRepository;
-        $this->addressesRepository = $addressesRepository;
-        $this->countriesRepository = $countriesRepository;
-        $this->emitter = $emitter;
-        $this->translator = $translator;
     }
 
-    /**
-     * @params $user
-     * @return Form
-     */
-    public function create(User $user)
+    public function create(User $user): Form
     {
         $form = new Form;
         $this->user = $user;
@@ -111,6 +92,15 @@ class ChangeAddressRequestFormFactory
         $form->setDefaults($defaults);
 
         $form->onSuccess[] = [$this, 'formSucceeded'];
+
+        /** @var AddressFormDataProviderInterface[] $providers */
+        $providers = $this->dataProviderManager->getProviders('print.dataprovider.change_address_form', AddressFormDataProviderInterface::class);
+        foreach ($providers as $sorting => $provider) {
+            $form = $provider->provide(['form' => $form, 'addressType' => 'print', 'user' => $userRow]);
+        }
+
+        $form->onSuccess[] = [$this, 'formSucceededAfterProviders'];
+
         return $form;
     }
 
@@ -120,7 +110,7 @@ class ChangeAddressRequestFormFactory
 
         $printAddress = $this->addressesRepository->address($userRow, 'print');
 
-        $request = $this->addressChangeRequestsRepository->add(
+        $this->request = $request = $this->addressChangeRequestsRepository->add(
             $userRow,
             $printAddress,
             $values['first_name'],
@@ -141,11 +131,7 @@ class ChangeAddressRequestFormFactory
         if (!$printAddress) {
             // accept the initial request directly
             $this->addressChangeRequestsRepository->acceptRequest($request);
-            $this->onUserUpdate->__invoke($form, $request);
-            return;
         }
-
-        $this->onSuccessRequest->__invoke($form, $request);
     }
 
     private function loadUserRow()
@@ -155,5 +141,18 @@ class ChangeAddressRequestFormFactory
             throw new BadRequestException();
         }
         return $row;
+    }
+
+    public function formSucceededAfterProviders(Form $form, $values): void
+    {
+        $userRow = $this->loadUserRow();
+        $printAddress = $this->addressesRepository->address($userRow, 'print');
+
+        if (!$printAddress) {
+            $this->onUserUpdate->__invoke($form, $this->request);
+            return;
+        }
+
+        $this->onSuccessRequest->__invoke($form, $this->request);
     }
 }
