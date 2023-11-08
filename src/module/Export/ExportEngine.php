@@ -102,11 +102,13 @@ class ExportEngine
                 exportDate: $printExportDate,
                 address: $address,
                 exportAt: $criteria->getExportAt(),
-                meta: Json::encode($meta)
+                meta: Json::encode($meta),
             );
         }
 
-        if ($criteria->getKey() == 'tyzden_daily') {
+        if ($criteria->hasChangeStatusCallback()) {
+            $criteria->callChangeStatusCallback($criteria->getKey(), $printExportDate, $criteria->getExportAt());
+        } elseif ($criteria->getKey() == 'tyzden_daily') {
             $rows = $this->printSubscriptionsRepository->getExportData($criteria->getKey(), $printExportDate);
             foreach ($rows as $row) {
                 $subscription = $row->subscription;

@@ -13,9 +13,12 @@ class ExportCriteria
      * @param DateTime $exportTo Date of issue publication (stored to print_subscriptions.export_date).
      * @param bool $backIssues If set to true, only new subscriptions (for back issues) are generated
      *                         and exported (eg. running export week after first batch).
-     * @param array|null $allowedCountries Whitelist countries (ISO code).
-     *                                     If set to null, all countries are allowed in export.
-     * @param callable|null $shouldDeliverCallback
+     * @param ?array $allowedCountries Whitelist countries (ISO code).
+     *                                 If set to null, all countries are allowed in export.
+     * @param ?\Closure $shouldDeliverCallback
+     * @param ?\Closure $changeStatusCallback This callback is called after print_subscriptions are stored
+     *                                        to update status of these entries. If no callback is set, default
+     *                                        PrintSubscriptionsRepository::setPrintExportStatus() is used.
      */
     public function __construct(
         private string $key,
@@ -23,7 +26,8 @@ class ExportCriteria
         private DateTime $exportTo,
         private bool $backIssues = false,
         private ?array $allowedCountries = null,
-        private $shouldDeliverCallback = null,
+        private ?\Closure $shouldDeliverCallback = null,
+        private ?\Closure $changeStatusCallback = null,
     ) {
     }
 
@@ -68,5 +72,21 @@ class ExportCriteria
         }
 
         return in_array($isoCode, $this->allowedCountries, true);
+    }
+
+    public function hasChangeStatusCallback(): bool
+    {
+        return $this->changeStatusCallback !== null;
+    }
+
+    public function callChangeStatusCallback(
+        string $exportType,
+        DateTime $exportPrintDate,
+        DateTime $exportRunDate,
+    ): bool {
+        if ($this->changeStatusCallback === null) {
+            return false;
+        }
+        return ($this->changeStatusCallback)($exportType, $exportPrintDate, $exportRunDate);
     }
 }

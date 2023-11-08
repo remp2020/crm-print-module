@@ -21,6 +21,7 @@ class PrintSubscriptionsRepository extends Repository
     public const STATUS_NEW = 'new';
     public const STATUS_REMOVED = 'removed';
     public const STATUS_RECURRENT = 'recurrent';
+    public const STATUS_CHANGED = 'changed';
 
     protected $tableName = 'print_subscriptions';
 
