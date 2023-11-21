@@ -8,15 +8,6 @@ final class AddCountryIdToPrintSubscriptions extends AbstractMigration
 {
     public function up(): void
     {
-        $app = $GLOBALS['application'] ?? null;
-        if (!$app) {
-            throw new \Exception("Unable to load application from \$GLOBALS['application'], cannot load default country id.");
-        }
-
-        /** @var CountriesRepository $countriesRepository */
-        $countriesRepository = $app->getContainer()->getByType(CountriesRepository::class);
-        $defaultCountryId = $countriesRepository->defaultCountry()->id;
-
         $this->execute('SET foreign_key_checks = 0');
 
         // first, create new column; this could take some time, but it's not blocking
@@ -27,9 +18,22 @@ final class AddCountryIdToPrintSubscriptions extends AbstractMigration
             LOCK=NONE
         ');
 
-        $this->execute('UPDATE print_subscriptions SET country_id = :country_id', [
-            'country_id' => $defaultCountryId
-        ]);
+        $recordCount = $this->query('SELECT COUNT(*) AS "count" FROM print_subscriptions')->fetch()['count'];
+
+        if ((int) $recordCount > 0) {
+            $app = $GLOBALS['application'] ?? null;
+            if (!$app) {
+                throw new \Exception("Unable to load application from \$GLOBALS['application'], cannot load default country id.");
+            }
+
+            /** @var CountriesRepository $countriesRepository */
+            $countriesRepository = $app->getContainer()->getByType(CountriesRepository::class);
+            $defaultCountryId = $countriesRepository->defaultCountry()->id;
+
+            $this->execute('UPDATE print_subscriptions SET country_id = :country_id', [
+                'country_id' => $defaultCountryId
+            ]);
+        }
 
         // Add foreign key later
         $this->execute('
