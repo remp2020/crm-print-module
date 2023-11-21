@@ -66,12 +66,8 @@ class ExportEngine
                 continue;
             }
 
-            // .tyzden exports do not require address
             if ($address) {
                 if (!$criteria->shouldDeliverToCountry($address->country->iso_code)) {
-                    continue;
-                }
-                if (!$criteria->shouldDeliver($row, $address)) {
                     continue;
                 }
             }

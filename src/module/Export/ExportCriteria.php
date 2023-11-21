@@ -3,7 +3,6 @@
 namespace Crm\PrintModule\Export;
 
 use DateTime;
-use Nette\Database\Table\ActiveRow;
 
 class ExportCriteria
 {
@@ -15,7 +14,6 @@ class ExportCriteria
      *                         and exported (eg. running export week after first batch).
      * @param ?array $allowedCountries Whitelist countries (ISO code).
      *                                 If set to null, all countries are allowed in export.
-     * @param ?\Closure $shouldDeliverCallback
      * @param ?\Closure $changeStatusCallback This callback is called after print_subscriptions are stored
      *                                        to update status of these entries. If no callback is set, default
      *                                        PrintSubscriptionsRepository::setPrintExportStatus() is used.
@@ -26,7 +24,6 @@ class ExportCriteria
         private DateTime $exportTo,
         private bool $backIssues = false,
         private ?array $allowedCountries = null,
-        private ?\Closure $shouldDeliverCallback = null,
         private ?\Closure $changeStatusCallback = null,
     ) {
     }
@@ -54,14 +51,6 @@ class ExportCriteria
     public function getAllowedCountries(): ?array
     {
         return $this->allowedCountries;
-    }
-
-    public function shouldDeliver(ActiveRow $subscription, ActiveRow $address): bool
-    {
-        if (!isset($this->shouldDeliverCallback)) {
-            return true;
-        }
-        return ($this->shouldDeliverCallback)($subscription, $address);
     }
 
     public function shouldDeliverToCountry(string $isoCode): bool
