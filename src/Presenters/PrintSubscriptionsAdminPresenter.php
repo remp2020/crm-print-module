@@ -3,9 +3,11 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
+use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FilePatternConfig;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\UsersModule\Repository\UserActionsLogRepository;
 use Nette\Application\UI\Form;
 use Nette\Utils\DateTime;
 use Nette\Utils\Finder;
@@ -13,14 +15,17 @@ use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class PrintSubscriptionsAdminPresenter extends AdminPresenter
 {
-    /** @var  PrintSubscriptionsRepository @inject */
-    public $printSubscriptionsRepository;
+    /** @inject */
+    public PrintSubscriptionsRepository $printSubscriptionsRepository;
 
-    /** @var  SubscriptionsRepository @inject */
-    public $subscriptionsRepository;
+    /** @inject */
+    public SubscriptionsRepository $subscriptionsRepository;
 
-    /** @var FilePatternConfig @inject */
-    public $filePatternConfig;
+    /** @inject */
+    public FilePatternConfig $filePatternConfig;
+
+    /** @inject */
+    public UserActionsLogRepository $userActionsLogRepository;
 
     /** @persistent */
     public $date;
@@ -56,6 +61,9 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         }
 
         $years = [];
+        $exportList = [];
+        $matchedFiles = [];
+
         if ($this->type) {
             $firstExport = $this->printSubscriptionsRepository->firstExport($this->type);
             $lastExport = $this->printSubscriptionsRepository->lastExport($this->type);
@@ -80,17 +88,25 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
                 if ($pattern) {
                     $files = Finder::findFiles($pattern)->from(APP_ROOT . '/content/export/');
                     foreach ($files as $file) {
+                        $matchedFiles[] = $file->getFilename();
                         $exportList[$date]['files'][] = $file->getFilename();
                     }
                 }
             }
-        } else {
-            $exportList = [];
         }
+
+        $lastFileDownloads = $this->userActionsLogRepository->getTable()
+            ->select('MAX(created_at) AS last_download, JSON_UNQUOTE(JSON_EXTRACT(params, "$.file")) AS file')
+            ->where('action = ?', Config::USER_ACTION_PRINT_EXPORT_DOWNLOAD)
+            ->where('user_id = ?', $this->getUser()->getId())
+            ->where('JSON_UNQUOTE(JSON_EXTRACT(params, "$.file")) IN ?', $matchedFiles)
+            ->group('file')
+            ->fetchPairs('file', 'last_download');
 
         $this->template->exportList = $exportList;
         $this->template->years = $years;
         $this->template->actualYear = $year;
+        $this->template->lastFileDownloads = $lastFileDownloads;
     }
 
     /**

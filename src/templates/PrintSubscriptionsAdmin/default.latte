@@ -44,6 +44,7 @@
             <th>{_'print.admin.print_subscriptions.default.ending'}</th>
             <th>{_'print.admin.print_subscriptions.default.delivering_pcs'}</th>
             <th>{_'print.admin.print_subscriptions.default.files_to_download'}</th>
+            <th>{_'print.admin.print_subscriptions.default.last_download_at'}</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +62,12 @@
             <td>{(isset($export['removed']) ? $export['removed'] : 0)}</td>
             <td>{$export['delivering_pcs'] ?? 0}</td>
             <td>
+              {var $lastDownloadAt = null}
               {foreach $export['files'] ?? [] as $file}
+                {if isset($lastFileDownloads[$file]) && $lastFileDownloads[$file] > $lastDownloadAt}
+                  {var $lastDownloadAt = $lastFileDownloads[$file]}
+                {/if}
+
                 <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file}">
                   <i class="fa fa-download"></i>
                 </a>
@@ -80,6 +86,11 @@
                 <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'recurrent'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_'print.admin.print_subscriptions.default.continuing'}</a>
                 <a n:href=":Tyzden:PrintSubscriptions:export $type, $date, 'removed'" target="_blank" class="btn btn-sm btn-warning"><i class="fa fa-cloud-download"></i> {_'print.admin.print_subscriptions.default.ending'}</a>
               {/if}
+            </td>
+            <td>
+              {ifset $lastDownloadAt}
+                {$lastDownloadAt|userDate}
+              {/ifset}
             </td>
           </tr>
         </tbody>

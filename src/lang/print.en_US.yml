@@ -14,6 +14,7 @@ admin:
             continuing: Continuing
             ending: Ending
             files_to_download: Files to download
+            last_download_at: Last download at
             no_records_found: 'No records match selected filter'
         show:
             header: Export for

@@ -15,6 +15,7 @@ admin:
             ending: Končící
             delivering_pcs: Doručovaných ks
             files_to_download: Soubory ke stažení
+            last_download_at: Čas posledního stažení
             no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
         show:
             header: Export pro
