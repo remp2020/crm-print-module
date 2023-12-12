@@ -9,7 +9,6 @@ use Crm\PrintModule\Models\Config;
 use Crm\UsersModule\Repository\UserActionsLogRepository;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
-use Nette\Application\Responses\FileResponse;
 
 class ContentAdminPresenter extends AdminPresenter
 {
@@ -44,7 +43,7 @@ class ContentAdminPresenter extends AdminPresenter
         );
 
         $path = $this->mountManager->getFilePath(FileSystem::DEFAULT_BUCKET_NAME, $file);
-        $mimeType = $this->mountManager->getMimetype($path);
+        $mimeType = $this->mountManager->mimeType($path);
         $fileSize = $this->mountManager->fileSize($path);
 
         $this->getHttpResponse()->setHeader('Content-Type', $mimeType);

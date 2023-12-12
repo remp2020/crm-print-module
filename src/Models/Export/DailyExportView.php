@@ -81,14 +81,18 @@ class DailyExportView implements ViewInterface
             $excel->getActiveSheet()
                 ->fromArray($rows);
 
-            $csv = new Csv($excel);
-            $csv->setDelimiter(';');
+            $csvWriter = new Csv($excel);
+            $csvWriter->setDelimiter(';');
 
             $fileName = $criteria->getKey() . '-' . $exportDate->format('Y-m-d') . '.csv';
-            $filePath = $this->mountManager->getAdapter(FileSystem::DEFAULT_BUCKET_NAME . '://')->applyPathPrefix($fileName);
 
-            $csv->save($filePath);
-            return $filePath;
+            $f = fopen('php://memory', 'rb+');
+            $csvWriter->save($f);
+            $path = $this->mountManager->getFilePath(FileSystem::DEFAULT_BUCKET_NAME, $fileName);
+            $this->mountManager->writeStream($path, $f);
+            fclose($f);
+
+            return $path;
         }
 
         return null;
