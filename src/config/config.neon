@@ -5,7 +5,7 @@ services:
 
 	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
 
-	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export', null)
+	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export')
 	printExportFileSystem: League\Flysystem\Filesystem(@printExportAdapter)
 
 	mountManagerConfig:
