@@ -7,8 +7,8 @@ use Crm\ApplicationModule\Models\ApplicationMountManager;
 use Crm\PrintModule\Export\FileSystem;
 use Crm\PrintModule\Models\Config;
 use Crm\UsersModule\Repository\UserActionsLogRepository;
-use League\Flysystem\Adapter\AbstractAdapter;
 use Nette\Application\BadRequestException;
+use Nette\Application\Responses\CallbackResponse;
 use Nette\Application\Responses\FileResponse;
 
 class ContentAdminPresenter extends AdminPresenter
@@ -43,14 +43,15 @@ class ContentAdminPresenter extends AdminPresenter
             params: ['file' => $file],
         );
 
-        $filePath = $this->mountManager->getAdapter($adapterPrefix);
-        if ($filePath instanceof AbstractAdapter) {
-            $filePath = $filePath->applyPathPrefix($file);
-        }
+        $path = $this->mountManager->getFilePath(FileSystem::DEFAULT_BUCKET_NAME, $file);
+        $mimeType = $this->mountManager->getMimetype($path);
+        $fileSize = $this->mountManager->fileSize($path);
 
-        $response = new FileResponse($filePath);
-        // Nette appends Content-Range header even when no Range header is present, Varnish doesn't like that
-        $response->resuming = false;
+        $this->getHttpResponse()->setHeader('Content-Type', $mimeType);
+
+        $response = new CallbackResponse(function () use ($path) {
+            echo $this->mountManager->read($path);
+        });
         $this->sendResponse($response);
     }
 }

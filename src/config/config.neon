@@ -5,10 +5,12 @@ services:
 
 	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
 
-	printExportFileSystem: League\Flysystem\Filesystem(League\Flysystem\Adapter\Local('%appDir%/../content/export'))
-	applicationMountManager:
+	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export', null)
+	printExportFileSystem: League\Flysystem\Filesystem(@printExportAdapter)
+
+	mountManagerConfig:
 		setup:
-			- mountFilesystem(Crm\PrintModule\Export\FileSystem::DEFAULT_BUCKET_NAME, @printExportFileSystem)
+			- mountFilesystem(Crm\PrintModule\Export\FileSystem::DEFAULT_BUCKET_NAME,@printExportFileSystem)
 
 	- Crm\PrintModule\Components\PaymentSuccessPrintWidget
 	- Crm\PrintModule\Components\RequestNotification
