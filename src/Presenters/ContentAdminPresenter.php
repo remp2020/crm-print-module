@@ -47,6 +47,7 @@ class ContentAdminPresenter extends AdminPresenter
         $fileSize = $this->mountManager->fileSize($path);
 
         $this->getHttpResponse()->setHeader('Content-Type', $mimeType);
+        $this->getHttpResponse()->addHeader('Content-Disposition', "attachment; filename=" . $this->mountManager->getFileName($path));
 
         $response = new CallbackResponse(function () use ($path) {
             echo $this->mountManager->read($path);
