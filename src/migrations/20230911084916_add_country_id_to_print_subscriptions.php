@@ -13,9 +13,7 @@ final class AddCountryIdToPrintSubscriptions extends AbstractMigration
         // first, create new column; this could take some time, but it's not blocking
         $this->execute('
             ALTER TABLE print_subscriptions
-            ADD COLUMN country_id int(11) NULL AFTER phone_number,
-            ALGORITHM=INPLACE,
-            LOCK=NONE
+            ADD COLUMN country_id int(11) NULL AFTER phone_number
         ');
 
         $recordCount = $this->query('SELECT COUNT(*) AS "count" FROM print_subscriptions')->fetch()['count'];
@@ -39,9 +37,7 @@ final class AddCountryIdToPrintSubscriptions extends AbstractMigration
         $this->execute('
             ALTER TABLE print_subscriptions
             CHANGE country_id country_id int(11) NOT NULL,
-            ADD FOREIGN KEY fk_country_id(country_id) REFERENCES countries(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-            ALGORITHM=INPLACE,
-            LOCK=NONE
+            ADD FOREIGN KEY fk_country_id(country_id) REFERENCES countries(id) ON DELETE RESTRICT ON UPDATE RESTRICT
         ');
 
         $this->execute('SET foreign_key_checks = 1');
