@@ -4,12 +4,13 @@ namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\SubscriptionsModule\Repository\ContentAccessRepository;
+use Nette\DI\Attributes\Inject;
 use Nette\Utils\DateTime;
 
 class DashboardPresenter extends AdminPresenter
 {
-    /** @var ContentAccessRepository @inject */
-    public $contentAccessRepository;
+    #[Inject]
+    public ContentAccessRepository $contentAccessRepository;
 
     /**
      * @admin-access-level read

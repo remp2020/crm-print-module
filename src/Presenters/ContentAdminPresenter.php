@@ -9,13 +9,14 @@ use Crm\PrintModule\Models\Config;
 use Crm\UsersModule\Repository\UserActionsLogRepository;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
+use Nette\DI\Attributes\Inject;
 
 class ContentAdminPresenter extends AdminPresenter
 {
-    /** @inject */
+    #[Inject]
     public ApplicationMountManager $mountManager;
 
-    /** @inject */
+    #[Inject]
     public UserActionsLogRepository $userActionsLogRepository;
 
     /**

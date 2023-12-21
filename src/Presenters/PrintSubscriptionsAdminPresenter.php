@@ -8,31 +8,33 @@ use Crm\PrintModule\Models\Export\FilePatternConfig;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\UsersModule\Repository\UserActionsLogRepository;
+use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
+use Nette\DI\Attributes\Inject;
 use Nette\Utils\DateTime;
 use Nette\Utils\Finder;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class PrintSubscriptionsAdminPresenter extends AdminPresenter
 {
-    /** @inject */
+    #[Inject]
     public PrintSubscriptionsRepository $printSubscriptionsRepository;
 
-    /** @inject */
+    #[Inject]
     public SubscriptionsRepository $subscriptionsRepository;
 
-    /** @inject */
+    #[Inject]
     public FilePatternConfig $filePatternConfig;
 
-    /** @inject */
+    #[Inject]
     public UserActionsLogRepository $userActionsLogRepository;
 
-    /** @persistent */
+    #[Persistent]
     public $date;
 
     public $exportDate;
 
-    /** @persistent */
+    #[Persistent]
     public $type;
 
     public function startup()
