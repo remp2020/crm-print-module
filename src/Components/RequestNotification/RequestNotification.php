@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Components;
+namespace Crm\PrintModule\Components\RequestNotification;
 
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Widget\BaseLazyWidget;

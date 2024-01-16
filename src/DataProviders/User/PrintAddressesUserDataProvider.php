@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\User;
+namespace Crm\PrintModule\DataProviders\User;
 
 use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\User\UserDataProviderInterface;

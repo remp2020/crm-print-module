@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Populator;
+namespace Crm\PrintModule\Populators;
 
 use Crm\ApplicationModule\Populator\AbstractPopulator;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;

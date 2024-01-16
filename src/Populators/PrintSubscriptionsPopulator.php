@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Populator;
+namespace Crm\PrintModule\Populators;
 
 use Crm\ApplicationModule\Populator\AbstractPopulator;
 use Symfony\Component\Console\Helper\ProgressBar;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Components;
+namespace Crm\PrintModule\Components\PaymentSuccessPrintWidget;
 
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\PaymentsModule\Gateways\BankTransfer;

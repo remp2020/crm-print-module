@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Repository;
+namespace Crm\PrintModule\Repositories;
 
 use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\Repository;

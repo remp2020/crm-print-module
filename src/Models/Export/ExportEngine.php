@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Export;
+namespace Crm\PrintModule\Models\Export;
 
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionMetaRepository;

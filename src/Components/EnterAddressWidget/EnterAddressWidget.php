@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\PrintModule\Components;
+namespace Crm\PrintModule\Components\EnterAddressWidget;
 
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Widget\LazyWidgetManager;
