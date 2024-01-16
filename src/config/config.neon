@@ -3,30 +3,30 @@ services:
 		setup:
 			- addModule(Crm\PrintModule\PrintModule())
 
-	printSubscriptionsRepository: Crm\PrintModule\Repository\PrintSubscriptionsRepository
+	printSubscriptionsRepository: Crm\PrintModule\Repositories\PrintSubscriptionsRepository
 
 	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export')
 	printExportFileSystem: League\Flysystem\Filesystem(@printExportAdapter)
 
 	mountManagerConfig:
 		setup:
-			- mountFilesystem(Crm\PrintModule\Export\FileSystem::DEFAULT_BUCKET_NAME,@printExportFileSystem)
+			- mountFilesystem(Crm\PrintModule\Models\Export\FileSystem::DEFAULT_BUCKET_NAME,@printExportFileSystem)
 
-	- Crm\PrintModule\Components\PaymentSuccessPrintWidget
-	- Crm\PrintModule\Components\RequestNotification
-	- Crm\PrintModule\Components\UserChangeAddressRequests
-	- Crm\PrintModule\Components\UserPrintExport
-	- Crm\PrintModule\Components\EnterAddressWidget
-	- Crm\PrintModule\Export\ExportEngine
+	- Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget
+	- Crm\PrintModule\Components\RequestNotification\RequestNotification
+	- Crm\PrintModule\Components\UserChangeAddressRequests\UserChangeAddressRequests
+	- Crm\PrintModule\Components\UserPrintExport\UserPrintExport
+	- Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget
+	- Crm\PrintModule\Models\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
 	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
 	- Crm\PrintModule\Seeders\ConfigsSeeder
 	- Crm\PrintModule\Seeders\AddressTypesSeeder
 	- Crm\PrintModule\Seeders\ContentAccessSeeder
-	- Crm\PrintModule\User\AddressChangeRequestsUserDataProvider
-	- Crm\PrintModule\User\PrintAddressesUserDataProvider
+	- Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider
+	- Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider
 	- Crm\PrintModule\Commands\ExportDailyCommand
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView
-	- Crm\PrintModule\Export\FileSystem
+	- Crm\PrintModule\Models\Export\FileSystem
 	printFilePatternConfig: Crm\PrintModule\Models\Export\FilePatternConfig

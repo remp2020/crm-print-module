@@ -4,6 +4,9 @@ namespace Crm\PrintModule\Export;
 
 use Crm\ApplicationModule\ExcelFactory;
 use Crm\ApplicationModule\Models\ApplicationMountManager;
+use Crm\PrintModule\Models\Export\ExportCriteria;
+use Crm\PrintModule\Models\Export\FileSystem;
+use Crm\PrintModule\Models\Export\ViewInterface;
 use Nette\Utils\Json;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 

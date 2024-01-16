@@ -4,9 +4,9 @@ namespace Crm\PrintModule\Commands;
 
 use Crm\PrintModule\Export\DailyExportDataSource;
 use Crm\PrintModule\Export\DailyExportView;
-use Crm\PrintModule\Export\ExportCriteria;
-use Crm\PrintModule\Export\ExportEngine;
-use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
+use Crm\PrintModule\Models\Export\ExportCriteria;
+use Crm\PrintModule\Models\Export\ExportEngine;
+use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\UsersModule\Repository\AddressesMetaRepository;
 use Crm\UsersModule\Repository\AddressesRepository;

@@ -4,7 +4,7 @@ namespace Crm\PrintModule\Repositories;
 
 use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\Repository;
-use Crm\PrintModule\User\PrintAddressesUserDataProvider;
+use Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Crm\UsersModule\Repository\CountriesRepository;
 use Crm\UsersModule\Repository\UsersRepository;

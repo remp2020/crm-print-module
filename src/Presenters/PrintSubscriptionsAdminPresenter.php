@@ -5,7 +5,7 @@ namespace Crm\PrintModule\Presenters;
 use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FilePatternConfig;
-use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
+use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\UsersModule\Repository\UserActionsLogRepository;
 use Nette\Application\Attributes\Persistent;

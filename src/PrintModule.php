@@ -11,17 +11,17 @@ use Crm\ApplicationModule\SeederManager;
 use Crm\ApplicationModule\User\UserDataRegistrator;
 use Crm\ApplicationModule\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Commands\ExportDailyCommand;
-use Crm\PrintModule\Components\EnterAddressWidget;
-use Crm\PrintModule\Components\PaymentSuccessPrintWidget;
-use Crm\PrintModule\Components\RequestNotification;
-use Crm\PrintModule\Components\UserChangeAddressRequests;
-use Crm\PrintModule\Components\UserPrintExport;
-use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
+use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
+use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
+use Crm\PrintModule\Components\RequestNotification\RequestNotification;
+use Crm\PrintModule\Components\UserChangeAddressRequests\UserChangeAddressRequests;
+use Crm\PrintModule\Components\UserPrintExport\UserPrintExport;
+use Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider;
+use Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider;
+use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
 use Crm\PrintModule\Seeders\ContentAccessSeeder;
-use Crm\PrintModule\User\AddressChangeRequestsUserDataProvider;
-use Crm\PrintModule\User\PrintAddressesUserDataProvider;
 use Nette\DI\Container;
 
 class PrintModule extends CrmModule

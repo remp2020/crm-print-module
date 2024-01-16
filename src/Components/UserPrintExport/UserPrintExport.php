@@ -5,7 +5,7 @@ namespace Crm\PrintModule\Components\UserPrintExport;
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Widget\LazyWidgetManager;
-use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
+use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 
 /**
  * This widgets fetches all users exported print subscriptions

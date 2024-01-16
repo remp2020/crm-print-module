@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\Models\Export;
 
-use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
+use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionMetaRepository;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repository\AddressesMetaRepository;
