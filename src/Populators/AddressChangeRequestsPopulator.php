@@ -4,11 +4,12 @@ namespace Crm\PrintModule\Populator;
 
 use Crm\ApplicationModule\Populator\AbstractPopulator;
 use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class AddressChangeRequestsPopulator extends AbstractPopulator
 {
     /**
-     * @param \Symfony\Component\Console\Helper\ProgressBar $progressBar
+     * @param ProgressBar $progressBar
      */
     public function seed($progressBar)
     {

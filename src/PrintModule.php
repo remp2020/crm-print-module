@@ -10,10 +10,18 @@ use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\ApplicationModule\SeederManager;
 use Crm\ApplicationModule\User\UserDataRegistrator;
 use Crm\ApplicationModule\Widget\LazyWidgetManagerInterface;
+use Crm\PrintModule\Commands\ExportDailyCommand;
+use Crm\PrintModule\Components\EnterAddressWidget;
+use Crm\PrintModule\Components\PaymentSuccessPrintWidget;
+use Crm\PrintModule\Components\RequestNotification;
+use Crm\PrintModule\Components\UserChangeAddressRequests;
+use Crm\PrintModule\Components\UserPrintExport;
 use Crm\PrintModule\Repository\PrintSubscriptionsRepository;
 use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
 use Crm\PrintModule\Seeders\ContentAccessSeeder;
+use Crm\PrintModule\User\AddressChangeRequestsUserDataProvider;
+use Crm\PrintModule\User\PrintAddressesUserDataProvider;
 use Nette\DI\Container;
 
 class PrintModule extends CrmModule
@@ -61,35 +69,35 @@ class PrintModule extends CrmModule
     {
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
-            \Crm\PrintModule\Components\UserPrintExport::class,
+            UserPrintExport::class,
             777
         );
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
-            \Crm\PrintModule\Components\UserChangeAddressRequests::class,
+            UserChangeAddressRequests::class,
             1100
         );
         $widgetManager->registerWidget(
             'admin.users.top',
-            \Crm\PrintModule\Components\RequestNotification::class,
+            RequestNotification::class,
             1000
         );
         $widgetManager->registerWidget(
             'payment.address',
-            \Crm\PrintModule\Components\PaymentSuccessPrintWidget::class
+            PaymentSuccessPrintWidget::class
         );
 
         $widgetManager->registerWidget(
             'frontend.layout.top',
-            \Crm\PrintModule\Components\EnterAddressWidget::class,
+            EnterAddressWidget::class,
             100
         );
     }
 
     public function registerUserData(UserDataRegistrator $dataRegistrator)
     {
-        $dataRegistrator->addUserDataProvider($this->getInstance(\Crm\PrintModule\User\AddressChangeRequestsUserDataProvider::class));
-        $dataRegistrator->addUserDataProvider($this->getInstance(\Crm\PrintModule\User\PrintAddressesUserDataProvider::class));
+        $dataRegistrator->addUserDataProvider($this->getInstance(AddressChangeRequestsUserDataProvider::class));
+        $dataRegistrator->addUserDataProvider($this->getInstance(PrintAddressesUserDataProvider::class));
     }
 
     public function registerSeeders(SeederManager $seederManager)
@@ -101,7 +109,7 @@ class PrintModule extends CrmModule
 
     public function registerCommands(CommandsContainerInterface $commandsContainer)
     {
-        $commandsContainer->registerCommand($this->getInstance(\Crm\PrintModule\Commands\ExportDailyCommand::class));
+        $commandsContainer->registerCommand($this->getInstance(ExportDailyCommand::class));
     }
 
     public function registerCleanupFunction(CallbackManagerInterface $cleanUpManager)
