@@ -5,7 +5,7 @@ namespace Crm\PrintModule\DataProviders\User;
 use Crm\ApplicationModule\NowTrait;
 use Crm\ApplicationModule\User\UserDataProviderInterface;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
-use Crm\UsersModule\User\AddressesUserDataProvider;
+use Crm\UsersModule\DataProviders\AddressesUserDataProvider;
 
 class PrintAddressesUserDataProvider implements UserDataProviderInterface
 {

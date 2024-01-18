@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\DataProviders\User;
 
 use Crm\ApplicationModule\User\UserDataProviderInterface;
-use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
+use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 
 class AddressChangeRequestsUserDataProvider implements UserDataProviderInterface
 {

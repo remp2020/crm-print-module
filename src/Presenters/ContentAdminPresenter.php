@@ -6,7 +6,7 @@ use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\ApplicationModule\Models\ApplicationMountManager;
 use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FileSystem;
-use Crm\UsersModule\Repository\UserActionsLogRepository;
+use Crm\UsersModule\Repositories\UserActionsLogRepository;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
 use Nette\DI\Attributes\Inject;

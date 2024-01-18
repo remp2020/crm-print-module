@@ -5,7 +5,7 @@ namespace Crm\PrintModule\Components\RequestNotification;
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Widget\LazyWidgetManager;
-use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
+use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 
 /**
  * This widget fetches all not accepted address change requests

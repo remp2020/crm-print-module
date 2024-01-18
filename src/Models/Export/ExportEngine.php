@@ -4,9 +4,9 @@ namespace Crm\PrintModule\Models\Export;
 
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionMetaRepository;
-use Crm\UsersModule\Repository\AddressChangeRequestsRepository;
-use Crm\UsersModule\Repository\AddressesMetaRepository;
-use Crm\UsersModule\Repository\AddressesRepository;
+use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
+use Crm\UsersModule\Repositories\AddressesMetaRepository;
+use Crm\UsersModule\Repositories\AddressesRepository;
 use Nette\Utils\Json;
 
 class ExportEngine

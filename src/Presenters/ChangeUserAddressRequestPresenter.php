@@ -4,7 +4,7 @@ namespace Crm\PrintModule\Presenters;
 
 use Crm\ApplicationModule\Presenters\FrontendPresenter;
 use Crm\PrintModule\Forms\ChangeAddressRequestFormFactory;
-use Crm\UsersModule\Repository\AddressesRepository;
+use Crm\UsersModule\Repositories\AddressesRepository;
 
 class ChangeUserAddressRequestPresenter extends FrontendPresenter
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Crm\UsersModule\Repository\CountriesRepository;
+use Crm\UsersModule\Repositories\CountriesRepository;
 use Phinx\Migration\AbstractMigration;
 
 final class AddCountryIdToPrintSubscriptions extends AbstractMigration

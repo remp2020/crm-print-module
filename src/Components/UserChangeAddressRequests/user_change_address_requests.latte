@@ -19,11 +19,11 @@
 	   <tr>
 		 <td>{$request->created_at|userDate}</td>
 		 <td>
-		   {if $request->status == \Crm\UsersModule\Repository\AddressChangeRequestsRepository::STATUS_NEW}
+		   {if $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
 			 <span class="label label-warning">{$request->status}</span>
-		   {elseif $request->status == \Crm\UsersModule\Repository\AddressChangeRequestsRepository::STATUS_ACCEPTED}
+		   {elseif $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_ACCEPTED}
 			 <span class="label label-success">{$request->status}</span>
-		   {elseif $request->status == \Crm\UsersModule\Repository\AddressChangeRequestsRepository::STATUS_REJECTED}
+		   {elseif $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_REJECTED}
 			 <span class="label label-danger">{$request->status}</span>
 		   {/if}
 		 </td>
@@ -48,7 +48,7 @@
 		 </td>
 		 <td class="text-muted">{if $request->address_id}#{$request->address_id}{else}n/a{/if}</td>
 		 <td>
-		   {if $request->status == \Crm\UsersModule\Repository\AddressChangeRequestsRepository::STATUS_NEW}
+		   {if $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
 			 <a href="{link AcceptAddressChangeRequest! $request->id}" class="btn btn-primary"><i class="fa fa-check"></i> {_print.component.user_change_address_requests.accept_and_change}</a>
 			 <a href="{link RejectAddressChangeRequest! $request->id}" class="btn btn-warning"><i class="fa fa-times"></i> {_print.component.user_change_address_requests.decline}</a>
 		   {/if}

@@ -5,7 +5,7 @@ namespace Crm\PrintModule\Components\EnterAddressWidget;
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Widget\LazyWidgetManager;
 use Crm\SubscriptionsModule\Models\Subscription\ActualUserSubscription;
-use Crm\UsersModule\Repository\AddressesRepository;
+use Crm\UsersModule\Repositories\AddressesRepository;
 
 /**
  * This widget fetches users actual subscription and renders link and info
