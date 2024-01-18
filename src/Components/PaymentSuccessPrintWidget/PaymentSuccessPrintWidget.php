@@ -3,9 +3,9 @@
 namespace Crm\PrintModule\Components\PaymentSuccessPrintWidget;
 
 use Crm\ApplicationModule\Widget\BaseLazyWidget;
-use Crm\PaymentsModule\Gateways\BankTransfer;
-use Crm\PaymentsModule\PaymentAwareInterface;
-use Crm\PaymentsModule\Repository\PaymentsRepository;
+use Crm\PaymentsModule\Models\Gateways\BankTransfer;
+use Crm\PaymentsModule\Models\PaymentAwareInterface;
+use Crm\PaymentsModule\Repositories\PaymentsRepository;
 use Crm\PrintModule\Forms\UserPrintAddressFormFactory;
 use Crm\SubscriptionsModule\Models\PaymentItem\SubscriptionTypePaymentItem;
 use Nette\Application\UI\Form;
