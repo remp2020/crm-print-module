@@ -7,7 +7,7 @@ use Crm\PrintModule\Export\DailyExportView;
 use Crm\PrintModule\Models\Export\ExportCriteria;
 use Crm\PrintModule\Models\Export\ExportEngine;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Crm\UsersModule\Repository\AddressesMetaRepository;
 use Crm\UsersModule\Repository\AddressesRepository;
 use Nette\Utils\DateTime;

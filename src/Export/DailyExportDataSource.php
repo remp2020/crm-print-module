@@ -4,7 +4,7 @@ namespace Crm\PrintModule\Export;
 
 use Crm\PrintModule\Models\Export\ExportCriteria;
 use Crm\PrintModule\Models\Export\SourceInterface;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 
 class DailyExportDataSource implements SourceInterface
 {

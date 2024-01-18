@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
-use Crm\SubscriptionsModule\Repository\ContentAccessRepository;
+use Crm\SubscriptionsModule\Repositories\ContentAccessRepository;
 use Nette\DI\Attributes\Inject;
 use Nette\Utils\DateTime;
 

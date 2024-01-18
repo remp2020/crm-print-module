@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Seeders;
 
 use Crm\ApplicationModule\Seeders\ISeeder;
-use Crm\SubscriptionsModule\Repository\ContentAccessRepository;
+use Crm\SubscriptionsModule\Repositories\ContentAccessRepository;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ContentAccessSeeder implements ISeeder
