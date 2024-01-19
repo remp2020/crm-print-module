@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\DataProviders\User;
 
-use Crm\ApplicationModule\User\UserDataProviderInterface;
+use Crm\ApplicationModule\Models\User\UserDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 
 class AddressChangeRequestsUserDataProvider implements UserDataProviderInterface

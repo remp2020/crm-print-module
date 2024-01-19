@@ -2,8 +2,8 @@
 
 namespace Crm\PrintModule\Components\EnterAddressWidget;
 
-use Crm\ApplicationModule\Widget\BaseLazyWidget;
-use Crm\ApplicationModule\Widget\LazyWidgetManager;
+use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\SubscriptionsModule\Models\Subscription\ActualUserSubscription;
 use Crm\UsersModule\Repositories\AddressesRepository;
 

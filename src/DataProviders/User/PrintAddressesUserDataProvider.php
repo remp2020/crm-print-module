@@ -2,8 +2,8 @@
 
 namespace Crm\PrintModule\DataProviders\User;
 
-use Crm\ApplicationModule\NowTrait;
-use Crm\ApplicationModule\User\UserDataProviderInterface;
+use Crm\ApplicationModule\Models\NowTrait;
+use Crm\ApplicationModule\Models\User\UserDataProviderInterface;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\UsersModule\DataProviders\AddressesUserDataProvider;
 

@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Forms;
 
 use Contributte\Translation\Translator;
-use Crm\ApplicationModule\DataProvider\DataProviderManager;
+use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
 use Crm\UsersModule\DataProviders\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;

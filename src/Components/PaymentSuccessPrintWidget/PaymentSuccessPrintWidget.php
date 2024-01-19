@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\Components\PaymentSuccessPrintWidget;
 
-use Crm\ApplicationModule\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
 use Crm\PaymentsModule\Models\Gateways\BankTransfer;
 use Crm\PaymentsModule\Models\PaymentAwareInterface;
 use Crm\PaymentsModule\Repositories\PaymentsRepository;

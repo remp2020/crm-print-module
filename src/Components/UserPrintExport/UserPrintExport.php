@@ -3,8 +3,8 @@
 namespace Crm\PrintModule\Components\UserPrintExport;
 
 use Contributte\Translation\Translator;
-use Crm\ApplicationModule\Widget\BaseLazyWidget;
-use Crm\ApplicationModule\Widget\LazyWidgetManager;
+use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 
 /**

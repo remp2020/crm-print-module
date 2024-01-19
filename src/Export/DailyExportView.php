@@ -2,8 +2,8 @@
 
 namespace Crm\PrintModule\Export;
 
-use Crm\ApplicationModule\ExcelFactory;
-use Crm\ApplicationModule\Models\ApplicationMountManager;
+use Crm\ApplicationModule\Application\Managers\ApplicationMountManager;
+use Crm\ApplicationModule\Models\Exports\ExcelFactory;
 use Crm\PrintModule\Models\Export\ExportCriteria;
 use Crm\PrintModule\Models\Export\FileSystem;
 use Crm\PrintModule\Models\Export\ViewInterface;

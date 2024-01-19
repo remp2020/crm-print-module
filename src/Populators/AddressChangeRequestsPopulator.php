@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\Populators;
 
-use Crm\ApplicationModule\Populator\AbstractPopulator;
+use Crm\ApplicationModule\Populators\AbstractPopulator;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Symfony\Component\Console\Helper\ProgressBar;
 

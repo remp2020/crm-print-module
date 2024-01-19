@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
-use Crm\ApplicationModule\Models\ApplicationMountManager;
+use Crm\ApplicationModule\Application\Managers\ApplicationMountManager;
 use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FileSystem;
 use Crm\UsersModule\Repositories\UserActionsLogRepository;

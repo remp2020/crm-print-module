@@ -2,14 +2,14 @@
 
 namespace Crm\PrintModule;
 
-use Crm\ApplicationModule\CallbackManagerInterface;
-use Crm\ApplicationModule\Commands\CommandsContainerInterface;
+use Crm\ApplicationModule\Application\CommandsContainerInterface;
+use Crm\ApplicationModule\Application\Managers\CallbackManagerInterface;
+use Crm\ApplicationModule\Application\Managers\SeederManager;
 use Crm\ApplicationModule\CrmModule;
-use Crm\ApplicationModule\Menu\MenuContainerInterface;
-use Crm\ApplicationModule\Menu\MenuItem;
-use Crm\ApplicationModule\SeederManager;
-use Crm\ApplicationModule\User\UserDataRegistrator;
-use Crm\ApplicationModule\Widget\LazyWidgetManagerInterface;
+use Crm\ApplicationModule\Models\Menu\MenuContainerInterface;
+use Crm\ApplicationModule\Models\Menu\MenuItem;
+use Crm\ApplicationModule\Models\User\UserDataRegistrator;
+use Crm\ApplicationModule\Models\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Commands\ExportDailyCommand;
 use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
 use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
