@@ -22,6 +22,8 @@ admin:
             total: total
             no_records_found: 'No records match selected filter'
             fields:
+                user_id: User
+                subscription_id: Subscription
                 institution: Institution
                 surname: Surname
                 first_name: First Name

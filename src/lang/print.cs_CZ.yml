@@ -23,6 +23,8 @@ admin:
             total: celkově
             no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
             fields:
+                user_id: Uživatel
+                subscription_id: Předplatné
                 institution: Instituce
                 surname: Příjmení
                 first_name: Jméno

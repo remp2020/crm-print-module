@@ -23,6 +23,8 @@ admin:
             total: celkovo
             no_records_found: 'Nenašli sa žiadne záznamy, ktoré by zodpovedali filtru'
             fields:
+                user_id: Používateľ
+                subscription_id: Predplatné
                 institution: Inštitúcia
                 surname: Priezvisko
                 first_name: Meno
