@@ -38,6 +38,7 @@
             <th>{_print.admin.print_subscriptions.show.fields.zip_code}</th>
             <th>{_print.admin.print_subscriptions.show.fields.email}</th>
             <th>{_print.admin.print_subscriptions.show.fields.state}</th>
+            {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => true]}
           </tr>
         </thead>
         <tbody>
@@ -52,7 +53,6 @@
               <td>{$printSubscription->city}</td>
               <td>{$printSubscription->zip}</td>
               <td>{$printSubscription->email}</td>
-              <td>{$printSubscription->subscription_id}</td>
               <td>
                 {if $printSubscription->status == 'new'}
                   <span class="label label-success">{$printSubscription->status}</span>
@@ -62,6 +62,7 @@
                   <span class="label label-default">{$printSubscription->status}</span>
                 {/if}
               </td>
+              {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => false, 'print_subscription' => $printSubscription]}
             </tr>
           {/foreach}
         </tbody>
