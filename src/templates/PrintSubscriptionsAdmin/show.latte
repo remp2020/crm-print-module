@@ -38,6 +38,7 @@
             <th>{_print.admin.print_subscriptions.show.fields.zip_code}</th>
             <th>{_print.admin.print_subscriptions.show.fields.email}</th>
             <th>{_print.admin.print_subscriptions.show.fields.state}</th>
+            <th>{_print.admin.print_subscriptions.show.fields.actions}</th>
             {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => true]}
           </tr>
         </thead>
@@ -62,11 +63,16 @@
                   <span class="label label-default">{$printSubscription->status}</span>
                 {/if}
               </td>
+              <td>
+                {control simpleWidget 'admin.print_subscriptions.show.actions', $printSubscription}
+              </td>
               {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => false, 'print_subscription' => $printSubscription]}
             </tr>
           {/foreach}
         </tbody>
       </table>
+
+      {control paginator}
     {else}
       <p class="center well text-muted">{_print.admin.print_subscriptions.show.no_records_found}</p>
     {/if}

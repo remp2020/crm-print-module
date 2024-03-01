@@ -11,6 +11,7 @@ use Crm\ApplicationModule\Models\Menu\MenuItem;
 use Crm\ApplicationModule\Models\User\UserDataRegistrator;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Commands\ExportDailyCommand;
+use Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget;
 use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
 use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
 use Crm\PrintModule\Components\RequestNotification\RequestNotification;
@@ -37,13 +38,20 @@ class PrintModule extends CrmModule
             100,
             true
         );
-
         $printMenu->addChild($menuItem1);
+
+        $menuItem = new MenuItem(
+            $this->translator->translate('print.menu.claims'),
+            ':Print:ClaimsAdmin:',
+            'fa fa-headset',
+            200,
+            true
+        );
+        $printMenu->addChild($menuItem);
 
         $menuContainer->attachMenuItem($printMenu);
 
         // dashboard menu item
-
         $menuItem = new MenuItem(
             $this->translator->translate('print.menu.stats'),
             ':Print:Dashboard:default',
@@ -91,6 +99,14 @@ class PrintModule extends CrmModule
             'frontend.layout.top',
             EnterAddressWidget::class,
             100
+        );
+        $widgetManager->registerWidget(
+            'admin.print_subscriptions.show.actions',
+            ClaimButtonWidget::class
+        );
+        $widgetManager->registerWidget(
+            'admin.user.detail.print_export_actions',
+            ClaimButtonWidget::class
         );
     }
 

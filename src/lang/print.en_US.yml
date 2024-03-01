@@ -2,6 +2,7 @@ menu:
     stats: Print
     delivery_address: Delivery address
     print_export: Print export
+    claims: Claims
 admin:
     request_notification:
         title: Address change requests
@@ -15,6 +16,9 @@ admin:
             ending: Ending
             files_to_download: Files to download
             last_download_at: Last download at
+            actions: Actions
+            claim: Claim
+            claim_edit: Edit claim
             no_records_found: 'No records match selected filter'
         show:
             header: Export for
@@ -33,6 +37,55 @@ admin:
                 email: Email
                 state: State
                 amount: Amount
+                claims: Claims
+    print_claims:
+        back_link: Back on list
+        default:
+            header: Claims
+            table:
+                delivery_date: Delivery date
+                claimant: Claimed by
+                claimant_contact: Contact
+                created_at: Created at
+                closed_at: Close date
+                actions: Actions
+            no_items: No items found.
+            actions:
+                edit: Edit
+                close: Close
+            close_success_message: Claim has been successfully closed.
+        new:
+            header: Add claim
+        edit:
+            header: Edit claim
+        subscription_detail:
+            header: Subscriptions detail
+            header_link: Show
+            type: Type
+            subscription_type: Subscription type
+            user: User
+            address: Address
+            print_date: Delivery date
+            export_date: Export date
+        form:
+            fields:
+                description: Description
+                claimant: Claimant
+                claimant_contact: Contact
+            submit: Save
+            add_success_message: Claim has been created.
+            edit_success_message: Claim has been updated.
+        filter:
+            fields:
+                name:
+                    label: Filter
+                    placeholder: 'Name/Contact'
+                status: Claim state
+                status_open: Open
+                status_close: Closed
+            button: Filter
+            cancel_button: Cancel filter
+
     dashboard:
         header: Print stats
         title: Usage of print subscriptions

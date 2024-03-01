@@ -2,6 +2,7 @@ menu:
     stats: Print
     delivery_address: Doručovací adresa
     print_export: Print export
+    claims: Reklamace
 admin:
     request_notification:
         title: Žádosti o změnu adresy
@@ -16,6 +17,9 @@ admin:
             delivering_pcs: Doručovaných ks
             files_to_download: Soubory ke stažení
             last_download_at: Čas posledního stažení
+            actions: Akce
+            claim: Reklamovat
+            claim_edit: Upravit reklamaci
             no_records_found: 'Nebyly nalezeny žádné záznamy, které by odpovídaly filtru'
         show:
             header: Export pro
@@ -34,6 +38,56 @@ admin:
                 email: Email
                 state: Stav
                 amount: Množství
+                claims: Reklamace
+    print_claims:
+        back_link: Zpět na seznam reklamací
+        default:
+            header: Reklamace
+            table:
+                created_at: Datum vytvoření
+                delivery_date: Datum doručování
+                claimant: Reklamoval
+                claimant_contact: Kontakt
+                closed_at: Datum uzavření
+                actions: Akce
+            no_items: Nebyly nalezeny žádné záznamy.
+            actions:
+                edit: Upravit
+                close: Uzavřít
+            close_success_message: Reklamace byla úspěšně uzavřena.
+        new:
+            header: Přidat reklamaci
+        edit:
+            header: Upravit reklamaci
+        subscription_detail:
+            header: Informace o předplatném
+            header_link: Zobraz
+            type: Typ
+            subscription_type: Typ předplatného
+            user: Uživatel
+            address: Adresa
+            print_date: Datum doručování
+            export_date: Datum exportu
+        form:
+            fields:
+                description: Popis
+                claimant: Reklamoval
+                claimant_contact: Kontakt
+            submit: Uložit
+            close: Uzavrieť reklamáciu
+            add_success_message: Reklamace byla vytvorena.
+            edit_success_message: Reklamace byla aktualizována.
+        filter:
+            fields:
+                name:
+                    label: Filter
+                    placeholder: 'Meno/Kontakt'
+                status: Stav reklamace
+                status_open: Otevřená
+                status_close: Zavřeno
+            button: Filtruj
+            cancel_button: Zruš filtr
+
     dashboard:
         header: Printové štatistiky
         title: Používanost printových předplatných

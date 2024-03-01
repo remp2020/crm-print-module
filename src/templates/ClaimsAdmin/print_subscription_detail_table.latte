@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {_print.admin.print_claims.subscription_detail.header}
+        <a n:href=":Subscriptions:SubscriptionsAdmin:show $printSubscription->subscription_id" target="_blank" class="btn btn-link btn-xs pull-right">{_print.admin.print_claims.subscription_detail.header_link}</a>
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive table-clear table-left-label">
+            <tbody>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.type}:</td>
+                <td><code>{$printSubscription->type}</code></td>
+            </tr>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.subscription_type}:</td>
+                <td>{$printSubscription->subscription->subscription_type->name}</td>
+            </tr>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.user}:</td>
+                <td><a n:href=":Users:UsersAdmin:show $printSubscription->user_id" target="_blank">{$printSubscription->user->email}</a></td>
+            </tr>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.address}:</td>
+                <td>
+                    {$printSubscription->first_name} {$printSubscription->last_name} <br>
+                        {$printSubscription->address} {$printSubscription->number} <br>
+                        {$printSubscription->zip} {$printSubscription->city} <br>
+                        {$printSubscription->country->name}
+                </td>
+            </tr>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.print_date}:</td>
+                <td>{$printSubscription->export_date|localizedDate:false,false}</td>
+            </tr>
+            <tr>
+                <td>{_print.admin.print_claims.subscription_detail.export_date}:</td>
+                <td>{$printSubscription->exported_at|localizedDate:false}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

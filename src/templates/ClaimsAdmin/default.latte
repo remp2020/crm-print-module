@@ -1,0 +1,55 @@
+{block #title}{_'print.admin.print_claims.default.header'}{/block}
+
+{block #content}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">
+            {_'print.admin.print_claims.default.header'}
+        </h1>
+    </div>
+
+    <div class="col-md-12">
+        {control filterForm}
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        {if count($printClaims) > 0}
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>{_'print.admin.print_claims.default.table.created_at'}</th>
+                    <th>{_'print.admin.print_claims.default.table.delivery_date'}</th>
+                    <th>{_'print.admin.print_claims.default.table.claimant'}</th>
+                    <th>{_'print.admin.print_claims.default.table.claimant_contact'}</th>
+                    <th>{_'print.admin.print_claims.default.table.closed_at'}</th>
+                    <th>{_'print.admin.print_claims.default.table.actions'}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr n:foreach="$printClaims as $claim">
+                    <td>{$claim->created_at|userDate}</td>
+                    <td>{$claim->print_subscription->export_date|localizedDate:false,false}</td>
+                    <td>{$claim->claimant}</td>
+                    <td>{$claim->claimant_contact}</td>
+                    <td>{$claim->closed_at|userDate}</td>
+                    <td>
+                        {if $claim->closed_at === null}
+                            <a n:href="edit $claim->id" class="btn btn-sm btn-info" title="{_print.admin.print_claims.default.actions.edit}"><i class="fa fa-pen"></i></a>
+                            <a n:href="closeClaim! $claim->id" class="btn btn-sm btn-default" title="{_print.admin.print_claims.default.actions.close}"><i class="fa fa-flag-checkered"></i></a>
+                        {/if}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        {control paginator}
+
+        {else}
+            <p class="text-muted text-center well">{_'print.admin.print_claims.default.no_items'}</p>
+        {/if}
+    </div>
+</div>

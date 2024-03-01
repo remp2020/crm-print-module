@@ -45,6 +45,7 @@
             <th>{_'print.admin.print_subscriptions.default.delivering_pcs'}</th>
             <th>{_'print.admin.print_subscriptions.default.files_to_download'}</th>
             <th>{_'print.admin.print_subscriptions.default.last_download_at'}</th>
+            <th>{_'print.admin.print_subscriptions.default.actions'}</th>
           </tr>
         </thead>
         <tbody>
@@ -91,6 +92,11 @@
               {ifset $lastDownloadAt}
                 {$lastDownloadAt|userDate}
               {/ifset}
+            </td>
+            <td>
+                <a class="btn btn-sm btn-info" n:href="show $date">
+                    <i class="fa fa-eye"></i>
+                </a>
             </td>
           </tr>
         </tbody>

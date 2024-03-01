@@ -3,6 +3,7 @@
 namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
+use Crm\ApplicationModule\Components\PreviousNextPaginator\PreviousNextPaginator;
 use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FilePatternConfig;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
@@ -36,6 +37,8 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
 
     #[Persistent]
     public $type;
+
+    private const ITEMS_PER_PAGE = 100;
 
     public function startup()
     {
@@ -118,7 +121,17 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
     {
         $this->template->date = $date;
         $printExports = $this->printSubscriptionsRepository->getExport($this->type, $date, $this->text);
-        $this->template->printSubscriptions = $printExports;
+
+        $previousNextPaginator = new PreviousNextPaginator();
+        $this->addComponent($previousNextPaginator, 'paginator');
+
+        $paginator = $previousNextPaginator->getPaginator();
+        $paginator->setItemsPerPage(self::ITEMS_PER_PAGE);
+
+        $printSubscriptions = $printExports->limit($paginator->getLength(), $paginator->getOffset())->fetchAll();
+        $previousNextPaginator->setActualItemCount(count($printSubscriptions));
+
+        $this->template->printSubscriptions = $printSubscriptions;
         $this->template->printSubscriptionsCount = $printExports->count('*');
     }
 

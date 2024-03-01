@@ -4,6 +4,7 @@ services:
 			- addModule(Crm\PrintModule\PrintModule())
 
 	printSubscriptionsRepository: Crm\PrintModule\Repositories\PrintSubscriptionsRepository
+	printClaimsRepository: Crm\PrintModule\Repositories\PrintClaimsRepository
 
 	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export')
 	printExportFileSystem: League\Flysystem\Filesystem(@printExportAdapter)
@@ -17,9 +18,11 @@ services:
 	- Crm\PrintModule\Components\UserChangeAddressRequests\UserChangeAddressRequests
 	- Crm\PrintModule\Components\UserPrintExport\UserPrintExport
 	- Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget
+	printClaimButtonWidget: Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget
 	- Crm\PrintModule\Models\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
 	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
+	- Crm\PrintModule\Forms\ClaimFormFactory
 	- Crm\PrintModule\Seeders\ConfigsSeeder
 	- Crm\PrintModule\Seeders\AddressTypesSeeder
 	- Crm\PrintModule\Seeders\ContentAccessSeeder

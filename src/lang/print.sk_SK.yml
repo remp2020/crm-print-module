@@ -2,6 +2,7 @@ menu:
     stats: Print
     delivery_address: Doručovacia adresa
     print_export: Print export
+    claims: Reklamácie
 admin:
     request_notification:
         title: Žiadosti o zmenu adresy
@@ -16,6 +17,9 @@ admin:
             delivering_pcs: Doručovaných ks
             files_to_download: Súbory na stiahnutie
             last_download_at: Čas posledného stiahnutia
+            actions: Akcie
+            claim: Reklamovať
+            claim_edit: Upraviť reklamáciu
             no_records_found: 'Nenašli sa žiadne záznamy, ktoré by zodpovedali filtru'
         show:
             header: Export pre
@@ -34,6 +38,56 @@ admin:
                 email: Email
                 state: Stav
                 amount: Množstvo
+                actions: Akcie
+    print_claims:
+        back_link: Späť na zoznam reklamácií
+        default:
+            header: Reklamácie
+            table:
+                delivery_date: Dátum doručovania
+                claimant: Reklamoval
+                claimant_contact: Kontakt
+                created_at: Vytvorené
+                actions: Akcie
+                closed_at: Dátum uzavretia
+            no_items: Neboli nájdené žiadne záznamy
+            actions:
+                edit: Upraviť
+                close: Uzavrieť
+            close_success_message: Reklamácia bola úspešne uzatvorená.
+
+        new:
+            header: Pridať reklamáciu
+        edit:
+            header: Upraviť reklamáciu
+        form:
+            fields:
+                description: Popis
+                claimant: Reklamoval
+                claimant_contact: Kontakt
+            submit: Uložiť
+            add_success_message: Reklamácia bola vytvorená.
+            edit_success_message: Reklamácia bola upravená.
+        filter:
+            fields:
+                name:
+                    label: Filter
+                    placeholder: 'Meno/Kontakt'
+                status: Stav reklamácie
+                status_open: Otvorená
+                status_close: Zatvorená
+            button: Filtruj
+            cancel_button: Zruš filter
+        subscription_detail:
+            header: Informácie o predplatnom
+            header_link: Zobraz
+            type: Typ
+            subscription_type: Typ predplatného
+            user: Užívateľ
+            address: Adresa
+            print_date: Dátum doručovania
+            export_date: Dátum exportu
+
     dashboard:
         header: Printové štatistiky
         title: Použivanosť printových predplatných
