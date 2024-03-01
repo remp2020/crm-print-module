@@ -22,6 +22,7 @@ class PrintSubscriptionsPopulator extends AbstractPopulator
             }
 
             $data = [
+                'type' => 'print',
                 'user_id' => $user->id,
                 'exported_at' => $this->faker->dateTimeBetween('-1 years'),
                 'export_date' => $this->faker->dateTimeBetween('-1 years')->format('Y-m-d'),
