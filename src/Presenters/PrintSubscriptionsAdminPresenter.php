@@ -91,6 +91,8 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
                 $dateTime = DateTime::from($date);
                 $pattern = $this->filePatternConfig->evaluate($this->type, $dateTime);
                 if ($pattern) {
+                    // TODO: Path is not accessible from MountManager. We should probably this path of exports configurable neon parameter.
+                    //       Otherwise - if someone overrides `printExportAdapter` neon param, this search won't work
                     $files = Finder::findFiles($pattern)->from(APP_ROOT . '/content/export/');
                     foreach ($files as $file) {
                         $matchedFiles[] = $file->getFilename();
