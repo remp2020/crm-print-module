@@ -79,6 +79,9 @@ frontend:
             label: Mesto
             placeholder: napr. Trnava
             required: Mesto musí byť vyplnené
+        country:
+            label: Krajina
+            required: Krajina musí byť vyplnená
         submit_update: Odošli žiadosť o zmenu
         submit_create: Uložiť
 

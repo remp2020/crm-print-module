@@ -78,6 +78,9 @@ frontend:
             label: Město
             placeholder: např. Pardubice
             required: Město musí být vyplněné
+        country:
+            label: Země
+            required: Země musí být vyplněné
         submit_update: Odeslat žádost o změnu
         submit_create: Uložit
 

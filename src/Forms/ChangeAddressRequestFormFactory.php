@@ -81,6 +81,10 @@ class ChangeAddressRequestFormFactory
         $form->addText('city', $this->translator->translate('print.frontend.change_address_request_form.city.label'))
             ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.city.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.city.required'));
+        $form->addSelect('country_id', $this->translator->translate('print.frontend.change_address_request_form.country.label'), $this->countriesRepository->getDefaultCountryPair())
+            ->setOption('id', 'country_id')
+            ->setRequired($this->translator->translate('print.frontend.change_address_request_form.country.required'))
+            ->setDisabled();
 
         $userRow = $this->usersRepository->find($user->id);
         if ($this->addressesRepository->address($userRow, 'print')) {

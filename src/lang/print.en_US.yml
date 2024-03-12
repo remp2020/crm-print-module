@@ -78,6 +78,9 @@ frontend:
             label: City
             placeholder: eg. Trnava
             required: City is required
+        country:
+            label: Country
+            required: Country is required
         submit_update: Request a change of address
         submit_create: Save
 

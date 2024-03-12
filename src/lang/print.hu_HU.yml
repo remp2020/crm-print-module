@@ -75,6 +75,9 @@ frontend:
             label: Település
             placeholder: pl. Trnava
             required: Település megadása kötelező
+        country:
+            label: Ország
+            required: Ország megadása kötelező
         submit_update: Címmódosítási kérelem beküldése
         submit_create: Mentés
 
