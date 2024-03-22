@@ -31,9 +31,11 @@ class PrintSubscriptionsPopulator extends AbstractPopulator
                 'address' => $printAddress->address,
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
+                'country_id' => $printAddress->country_id,
                 'email' => $user->email ?? $user->public_name,
                 'status' => $this->getStatus(),
                 'institution_name' => $user->institution_name,
+                'meta' => '{}',
             ];
             $print->insert($data);
 
