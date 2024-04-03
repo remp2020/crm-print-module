@@ -44,7 +44,7 @@ class PrintModule extends CrmModule
             $this->translator->translate('print.menu.claims'),
             ':Print:ClaimsAdmin:',
             'fa fa-headset',
-            200,
+            201,
             true
         );
         $printMenu->addChild($menuItem);
