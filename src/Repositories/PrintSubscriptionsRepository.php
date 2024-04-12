@@ -55,7 +55,7 @@ class PrintSubscriptionsRepository extends Repository
                 ];
             }
 
-            if (in_array($row->status, ['new', 'recurrent'], true)) {
+            if (in_array($row->status, ['new', 'recurrent', 'changed'], true)) {
                 $counts[$printDate]['delivering_pcs'] += $row->delivering_pcs;
             }
 
