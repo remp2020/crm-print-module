@@ -83,6 +83,9 @@ admin:
                 status: Claim state
                 status_open: Open
                 status_close: Closed
+                from: From
+                to: To
+                type_group: Type group
             button: Filter
             cancel_button: Cancel filter
 

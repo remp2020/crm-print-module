@@ -5,13 +5,20 @@ namespace Crm\PrintModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\ApplicationModule\Components\PreviousNextPaginator\PreviousNextPaginator;
+use Crm\ApplicationModule\Models\Exports\ExcelFactory;
 use Crm\PrintModule\Forms\ClaimFormFactory;
+use Crm\PrintModule\Models\Export\PrintClaimsExport;
 use Crm\PrintModule\Repositories\PrintClaimsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\BadRequestException;
+use Nette\Application\Responses\CallbackResponse;
 use Nette\Application\UI\Form;
 use Nette\DI\Attributes\Inject;
+use Nette\Database\Table\Selection;
+use Nette\Utils\DateTime;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class ClaimsAdminPresenter extends AdminPresenter
@@ -25,17 +32,34 @@ class ClaimsAdminPresenter extends AdminPresenter
     #[Inject]
     public PrintSubscriptionsRepository $printSubscriptionsRepository;
 
-    #[Persistent]
-    public $text;
+    #[Inject]
+    public ExcelFactory $excelFactory;
+
+    #[Inject]
+    public PrintClaimsExport $printClaimsExport;
 
     #[Persistent]
+    public $text;
+    #[Persistent]
     public $status;
+    #[Persistent]
+    public $typeGroup;
+    #[Persistent]
+    public $from;
+    #[Persistent]
+    public $to;
 
     private const ITEMS_PER_PAGE = 40;
 
+    private function filterPrintClaims(): Selection
+    {
+        $to = DateTime::from($this->to)->modify('+1 day')->format('Y-m-d');
+        return $this->printClaimsRepository->all($this->text, $this->status, $this->typeGroup, $this->from, $to);
+    }
+
     public function renderDefault(): void
     {
-        $printClaims = $this->printClaimsRepository->all($this->text, $this->status);
+        $printClaims = $this->filterPrintClaims();
 
         $previousNextPaginator = new PreviousNextPaginator();
         $this->addComponent($previousNextPaginator, 'paginator');
@@ -47,6 +71,37 @@ class ClaimsAdminPresenter extends AdminPresenter
         $previousNextPaginator->setActualItemCount(count($printClaims));
 
         $this->template->printClaims = $printClaims;
+    }
+
+    public function handleDownload($format): void
+    {
+        $excelSpreadSheet = $this->excelFactory->createExcel('print_claims_' . date('y-m-d-h-i'));
+        $excelSpreadSheet->getActiveSheet()->setTitle('print_claims_' . date('y-m-d-h-i'));
+
+        $excelSpreadSheet->getActiveSheet()->fromArray($this->printClaimsExport->getExport($this->filterPrintClaims()));
+
+        if ($format === 'CSV') {
+            $writer = new Csv($excelSpreadSheet);
+            $writer->setDelimiter(';');
+            $writer->setUseBOM(true);
+            $extension = 'csv';
+        } elseif ($format === 'Excel2007') {
+            $writer = new Xlsx($excelSpreadSheet);
+            $extension = 'xlsx';
+        } else {
+            throw new \Exception('Unknown export format.');
+        }
+
+        $fileName = 'print_claims_' . date('y-m-d-H-i') . '.' . $extension;
+        $this->getHttpResponse()->addHeader('Content-Encoding', 'windows-1250');
+        $this->getHttpResponse()->addHeader('Content-Type', 'application/octet-stream; charset=windows-1250');
+        $this->getHttpResponse()->addHeader('Content-Disposition', "attachment; filename=" . $fileName);
+
+        $response = new CallbackResponse(function () use ($writer) {
+            $writer->save("php://output");
+        });
+
+        $this->sendResponse($response);
     }
 
     public function renderNew(int $printSubscriptionId): void
@@ -123,6 +178,18 @@ class ClaimsAdminPresenter extends AdminPresenter
             'open' => 'print.admin.print_claims.filter.fields.status_open',
             ])->setPrompt('---');
 
+        $form->addSelect(
+            'typeGroup',
+            'print.admin.print_claims.filter.fields.type_group',
+            $this->getTypeGroupValues()
+        )->setPrompt('---');
+
+        $form->addText('from', 'print.admin.print_claims.filter.fields.from')
+            ->setHtmlAttribute('class', 'flatpickr');
+
+        $form->addText('to', 'print.admin.print_claims.filter.fields.to')
+            ->setHtmlAttribute('class', 'flatpickr');
+
         $form->addSubmit('send', 'print.admin.print_claims.filter.button')
             ->getControlPrototype()
             ->setName('button')
@@ -133,11 +200,27 @@ class ClaimsAdminPresenter extends AdminPresenter
             $presenter->redirect('ClaimsAdmin:default', [
                 'status' => '',
                 'text' => '',
+                'typeGroup' => null,
+                'from' => null,
+                'to' => null,
             ]);
         };
         $form->onSuccess[] = [$this, 'adminFilterSubmitted'];
 
         $form->setDefaults((array)$this->params);
         return $form;
+    }
+
+    private function getTypeGroupValues(): array
+    {
+        return $this->printSubscriptionsRepository->getDatabase()
+            ->query(<<<SQL
+SELECT SUBSTRING_INDEX(`type`, '_', 1) AS `type_group` 
+FROM (
+  SELECT DISTINCT type
+  FROM `print_subscriptions` 
+) t1
+GROUP BY 1
+SQL)->fetchPairs('type_group', 'type_group');
     }
 }

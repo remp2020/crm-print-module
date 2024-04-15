@@ -76,6 +76,9 @@ admin:
                 status: Stav reklamácie
                 status_open: Otvorená
                 status_close: Zatvorená
+                from: Od
+                to: Do
+                type_group: Typ
             button: Filtruj
             cancel_button: Zruš filter
         subscription_detail:

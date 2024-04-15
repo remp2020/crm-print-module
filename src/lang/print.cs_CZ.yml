@@ -85,6 +85,9 @@ admin:
                 status: Stav reklamace
                 status_open: Otevřená
                 status_close: Zavřeno
+                from: Od
+                to: Do
+                type_group: Typ
             button: Filtruj
             cancel_button: Zruš filtr
 

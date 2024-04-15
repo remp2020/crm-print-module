@@ -43,8 +43,13 @@ class PrintClaimsRepository extends Repository
         return $this->update($row, $data);
     }
 
-    public function all(string $claimant = null, string $status = null): Selection
-    {
+    public function all(
+        string $claimant = null,
+        string $status = null,
+        string $typeGroup = null,
+        string $from = null,
+        string $to = null,
+    ): Selection {
         $selection = $this->getTable()->order('created_at DESC');
 
         if ($claimant) {
@@ -57,6 +62,18 @@ class PrintClaimsRepository extends Repository
 
         if ($status === 'open') {
             $selection->where('closed_at IS NULL');
+        }
+
+        if ($typeGroup) {
+            $selection->where('print_subscription.type LIKE ?', "{$typeGroup}%");
+        }
+
+        if ($from) {
+            $selection->where('created_at >= ?', $from);
+        }
+
+        if ($to) {
+            $selection->where('created_at <= ?', $to);
         }
 
         return $selection;

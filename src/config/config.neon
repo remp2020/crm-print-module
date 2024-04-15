@@ -33,3 +33,4 @@ services:
 	- Crm\PrintModule\Export\DailyExportView
 	- Crm\PrintModule\Models\Export\FileSystem
 	printFilePatternConfig: Crm\PrintModule\Models\Export\FilePatternConfig
+	- Crm\PrintModule\Models\Export\PrintClaimsExport
