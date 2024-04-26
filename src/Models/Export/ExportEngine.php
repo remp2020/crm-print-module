@@ -2,6 +2,7 @@
 
 namespace Crm\PrintModule\Models\Export;
 
+use Crm\PrintModule\Repositories\AddressRedirectsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionMetaRepository;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
@@ -12,10 +13,11 @@ use Nette\Utils\Json;
 class ExportEngine
 {
     public function __construct(
-        private AddressesRepository $addressesRepository,
-        private AddressesMetaRepository $addressesMetaRepository,
-        private PrintSubscriptionsRepository $printSubscriptionsRepository,
-        private SubscriptionMetaRepository $subscriptionMetaRepository,
+        private readonly AddressesRepository $addressesRepository,
+        private readonly AddressesMetaRepository $addressesMetaRepository,
+        private readonly AddressRedirectsRepository $addressRedirectsRepository,
+        private readonly PrintSubscriptionsRepository $printSubscriptionsRepository,
+        private readonly SubscriptionMetaRepository $subscriptionMetaRepository,
     ) {
     }
 
@@ -70,6 +72,11 @@ class ExportEngine
                 if (!$criteria->shouldDeliverToCountry($address->country->iso_code)) {
                     continue;
                 }
+            }
+
+            $redirect = $this->addressRedirectsRepository->getAddressCurrentRedirect($address->id)->fetch();
+            if ($redirect) {
+                $address = $redirect->redirect_address;
             }
 
             $meta = $sharedMeta;

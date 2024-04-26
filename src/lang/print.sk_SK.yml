@@ -100,6 +100,23 @@ admin:
         last_90_days_desc: Majú aktuálne printové predplatné a boli na webe za posledných 30 dní
         prior_90_days: Pred 90 dňami
         prior_90_days_desc: Majú aktuálne printové predplatné a boli naposledy na webe pred 90 dňami
+    address:
+        cant_delete: '{1}Na túto adresu je presmerovaná iná adresa: %addresses%|[2,Inf]Na túto adresu sú presmerované iné adresy: %addresses%'
+    address_redirect_form:
+        new_address: Nová adresa
+        from: Od
+        to: Do
+        note: Poznámka
+        save: Ulož
+        input_required: Táto položka je povinná.
+        description:
+            from: Čas v minulosti sa zmení na aktuálny čas.
+        error:
+            same_address_redirect: Presmerovanie nemôže byť nastavené na tú istú adresu.
+            end_time_earlier_than_start: Čas začiatku presmerovania musí byť nastavený na skorší dátum ako čas ukončenia.
+            end_time_has_to_in_future: Čas ukončenia presmerovania musí byť nastavený do budúcnosti.
+            redirect_times_overlap: V danom časovom intervale už existuje iné presmerovanie. Presmerovania sa nesmú prekrývať.
+
 frontend:
     change_user_address:
         title: Zmena doručovacej adresy
@@ -190,6 +207,19 @@ component:
     enter_address:
         attention: Upozornenie
         message: 'Aktuálne máte predplatné obsahujúce aj tlačené vydanie novín. Prosím <a style="text-decoration:underline" href="%link%">doplňte vašu adresu</a> pre doručenie novín.'
+    address_redirect_widget:
+        redirected_to_address: Presmerované na adresu
+        address_redirect: Presmerovanie adresy
+        create_new_redirect: Vytvoriť nové presmerovanie
+        redirect_saved: Presmerovanie uložené
+    address_redirect_detail:
+        redirect_terminated: Presmerovanie ukončené
+        redirect_updated: Presmerovanie upravené
+        valid_from_to: "platné od <strong>%from%</strong> do <strong>%to%</strong>"
+        terminate_redirect: Ukončiť presmerovanie
+        edit_redirect: Upraviť presmerovanie
+        address_redirect: Presmerovanie adresy
+
 form:
     print_address:
         label:

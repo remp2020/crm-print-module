@@ -98,6 +98,23 @@ admin:
         last_90_days_desc: Have ongoing print subscription and were on web in last 90 days
         prior_90_days: Prior 90 days
         prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days
+    address:
+        cant_delete: '{1}Another address is redirected to this address: %addresses%|[2,Inf]Other addresses are redirected to this address: %addresses%'
+    address_redirect_form:
+        new_address: New address
+        from: Od
+        to: Do
+        note: Note
+        save: Save
+        input_required: This field is required.
+        description:
+            from: Time in the past will be changed to current time.
+        error:
+            same_address_redirect: Redirection cannot be set to the same address.
+            end_time_earlier_than_start: The redirect start time must be set to an earlier date than the end time.
+            end_time_has_to_in_future: Redirect end time must be set to the future.
+            redirect_times_overlap: Another redirect already exists in the given time interval. Redirects must not overlap.
+
 frontend:
     change_user_address:
         title: Delivery address change
@@ -188,6 +205,19 @@ component:
     enter_address:
         attention: Attention
         message: 'You have bought subscription with access to print edition. Please <a style="text-decoration:underline" href="%link%">enter your delivery address here</a>.'
+    address_redirect_widget:
+        redirected_to_address: Redirected to address
+        address_redirect: Address redirect
+        create_new_redirect: Create a new redirect
+        redirect_saved: Redirect saved
+    address_redirect_detail:
+        redirect_terminated: Redirect terminated
+        redirect_updated: Redirect updated
+        valid_from_to: "valid from <strong>%from%</strong> to <strong>%to%</strong>"
+        terminate_redirect: Terminate redirect
+        edit_redirect: Edit redirect
+        address_redirect: Address redirect
+
 form:
     print_address:
         label:

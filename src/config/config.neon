@@ -5,6 +5,7 @@ services:
 
 	printSubscriptionsRepository: Crm\PrintModule\Repositories\PrintSubscriptionsRepository
 	printClaimsRepository: Crm\PrintModule\Repositories\PrintClaimsRepository
+	addressRedirectsRepository: Crm\PrintModule\Repositories\AddressRedirectsRepository
 
 	printExportAdapter: League\Flysystem\Local\LocalFilesystemAdapter('%appDir%/../content/export')
 	printExportFileSystem: League\Flysystem\Filesystem(@printExportAdapter)
@@ -19,15 +20,20 @@ services:
 	- Crm\PrintModule\Components\UserPrintExport\UserPrintExport
 	- Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget
 	printClaimButtonWidget: Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget
+	- Crm\PrintModule\Components\AddressRedirectWidget\AddressRedirectWidget
+	- Crm\PrintModule\Components\AddressRedirectDetail\AddressRedirectDetailFactoryInterface
+
 	- Crm\PrintModule\Models\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
 	- Crm\PrintModule\Forms\UserPrintAddressFormFactory
 	- Crm\PrintModule\Forms\ClaimFormFactory
+	- Crm\PrintModule\Forms\AddressRedirectFormFactory
 	- Crm\PrintModule\Seeders\ConfigsSeeder
 	- Crm\PrintModule\Seeders\AddressTypesSeeder
 	- Crm\PrintModule\Seeders\ContentAccessSeeder
 	- Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider
 	- Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider
+	- Crm\PrintModule\DataProviders\CanDeleteAddressDataProvider
 	- Crm\PrintModule\Commands\ExportDailyCommand
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView

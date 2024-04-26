@@ -100,6 +100,23 @@ admin:
         last_90_days_desc: Mají aktuální tištěná předplatné a byli na webu za posledních 90 dní
         prior_90_days: Pred 90 dňami
         prior_90_days_desc: Mají aktuální tištěná předplatné a byli naposledy na webu před 90 dny
+    address:
+        cant_delete: '{1}Na tuto adresu je přesměrována jiná adresa: %addresses%|[2,Inf]Na tuto adresu jsou přesměrovány jiné adresy: %addresses%'
+    address_redirect_form:
+        new_address: Nová adresa
+        from: Od
+        to: Do
+        note: Poznámka
+        save: Ulož
+        input_required: Tato položka je povinná.
+        description:
+            from: Čas v minulosti bude změněn na aktuální čas.
+        error:
+            same_address_redirect: Přesměrování nemůže být nastaveno na stejnou adresu.
+            end_time_earlier_than_start: Čas začátku přesměrování musí být nastaven na dřívější datum než čas ukončení.
+            end_time_has_to_in_future: Čas ukončení přesměrování musí být nastaven do budoucnosti.
+            redirect_times_overlap: V daném časovém intervalu již existuje jiné přesměrování. Přesměrování se nesmí překrývat.
+
 frontend:
     change_user_address:
         title: Změna doručovací adresy
@@ -189,6 +206,19 @@ component:
     enter_address:
         attention: Upozornění
         message: 'Aktuálně máte předplatné obsahující i tištěné vydání. Prosím <a style="text-decoration:underline" href="%link%">doplňte vaši adresu</a> pro doručení.'
+    address_redirect_widget:
+        redirected_to_address: Přesměrováno na adresu
+        address_redirect: Přesměrování adresy
+        create_new_redirect: Vytvořit nové přesměrování
+        redirect_saved: Přesměrování uloženo
+    address_redirect_detail:
+        redirect_terminated: Přesměrování ukončeno
+        redirect_updated: Přesměrování upraveno
+        valid_from_to: "platné od <strong>%from%</strong> do <strong>%to%</strong>"
+        terminate_redirect: Ukončit přesměrování
+        edit_redirect: Upravit přesměrování
+        address_redirect: Přesměrování adresy
+
 form:
     print_address:
         label:

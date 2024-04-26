@@ -6,17 +6,20 @@ use Crm\ApplicationModule\Application\CommandsContainerInterface;
 use Crm\ApplicationModule\Application\Managers\CallbackManagerInterface;
 use Crm\ApplicationModule\Application\Managers\SeederManager;
 use Crm\ApplicationModule\CrmModule;
+use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
 use Crm\ApplicationModule\Models\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Models\Menu\MenuItem;
 use Crm\ApplicationModule\Models\User\UserDataRegistrator;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Commands\ExportDailyCommand;
+use Crm\PrintModule\Components\AddressRedirectWidget\AddressRedirectWidget;
 use Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget;
 use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
 use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
 use Crm\PrintModule\Components\RequestNotification\RequestNotification;
 use Crm\PrintModule\Components\UserChangeAddressRequests\UserChangeAddressRequests;
 use Crm\PrintModule\Components\UserPrintExport\UserPrintExport;
+use Crm\PrintModule\DataProviders\CanDeleteAddressDataProvider;
 use Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider;
 use Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
@@ -108,6 +111,11 @@ class PrintModule extends CrmModule
             'admin.user.detail.print_export_actions',
             ClaimButtonWidget::class
         );
+        $widgetManager->registerWidget(
+            'admin.user.address.partial',
+            AddressRedirectWidget::class,
+            100
+        );
     }
 
     public function registerUserData(UserDataRegistrator $dataRegistrator)
@@ -135,5 +143,13 @@ class PrintModule extends CrmModule
             $printSubscriptionsRepository = $container->getByType(PrintSubscriptionsRepository::class);
             $printSubscriptionsRepository->removeUnusedPrintAddresses();
         });
+    }
+
+    public function registerDataProviders(DataProviderManager $dataProviderManager)
+    {
+        $dataProviderManager->registerDataProvider(
+            'users.dataprovider.address.can_delete',
+            $this->getInstance(CanDeleteAddressDataProvider::class)
+        );
     }
 }

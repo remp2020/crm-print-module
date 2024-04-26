@@ -1,0 +1,41 @@
+{if $redirects}
+    <div style="margin: 4px 0">
+        <h5>{_print.component.address_redirect_widget.redirected_to_address}</h5>
+
+        {foreach $redirects as $redirect}
+            {control "redirectDetail-$redirect->id"}
+        {/foreach}
+    </div>
+{/if}
+
+<div class="modal fade" id="address-new-redirect-modal-{$address->id}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="close-button">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <h3>{_print.component.address_redirect_widget.address_redirect} #{$address->id}</h3>
+            </div>
+            <div class="modal-body">
+                {control "form-$address->id"}
+            </div>
+        </div>
+    </div>
+</div>
+
+{ifset $openModalForAddressId}
+    {if $openModalForAddressId == $address->id}
+        <script>
+            $('#address-new-redirect-modal-'+{$address->id}).modal('show');
+        </script>
+    {/if}
+{/ifset}
+
+<div style="margin: 8px 0">
+    <a class="btn btn-default" tabindex="-1" href="#" data-toggle="modal" data-target="#address-new-redirect-modal-{$address->id}">
+        <i class="fa fa-arrow-right"></i> {_print.component.address_redirect_widget.create_new_redirect}
+    </a>
+</div>
+
+
