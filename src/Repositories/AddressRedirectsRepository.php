@@ -57,8 +57,8 @@ class AddressRedirectsRepository extends Repository
     {
         $now = $this->getNow();
         return $this->getTable()->where([
-            'from >= ?' => $now,
-            'to < ?' => $now,
+            'from <= ?' => $now,
+            'to > ?' => $now,
         ]);
     }
 
@@ -67,8 +67,8 @@ class AddressRedirectsRepository extends Repository
         $now = $this->getNow();
         return $this->getTable()->where([
             'original_address_id' => $addressId,
-            'from >= ?' => $now,
-            'to < ?' => $now,
+            'from <= ?' => $now,
+            'to > ?' => $now,
         ]);
     }
 
