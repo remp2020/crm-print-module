@@ -72,11 +72,11 @@ class ExportEngine
                 if (!$criteria->shouldDeliverToCountry($address->country->iso_code)) {
                     continue;
                 }
-            }
 
-            $redirect = $this->addressRedirectsRepository->getAddressCurrentRedirect($address->id)->fetch();
-            if ($redirect) {
-                $address = $redirect->redirect_address;
+                $redirect = $this->addressRedirectsRepository->getAddressCurrentRedirect($address->id)->fetch();
+                if ($redirect) {
+                    $address = $redirect->redirect_address;
+                }
             }
 
             $meta = $sharedMeta;
