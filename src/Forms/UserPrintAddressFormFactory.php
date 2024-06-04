@@ -41,7 +41,18 @@ class UserPrintAddressFormFactory
         $this->payment = $payment;
         $user = $this->payment->user;
 
-        $printAddress = $this->addressesRepository->address($user, $this->addressType);
+        $printAddress = null;
+        if ($payment->address_id !== null && $payment->address->type === 'print') {
+            $printAddress = $payment->address;
+        }
+        if (!$printAddress) {
+            $printAddress = $this->addressesRepository->address($user, $this->addressType);
+        }
+
+        $countryPairs = $this->countriesRepository->getDefaultCountryPair();
+        if ($printAddress) {
+            $countryPairs[$printAddress->country->id] = $printAddress->country->name;
+        }
 
         $form->addProtection();
         $form->setTranslator($this->translator);
@@ -68,7 +79,7 @@ class UserPrintAddressFormFactory
         $form->addText('city', 'print.form.print_address.label.city')
             ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.city')
             ->setRequired('print.form.print_address.required.city');
-        $form->addSelect('country_id', 'print.form.print_address.label.country_id', $this->countriesRepository->getDefaultCountryPair())
+        $form->addSelect('country_id', 'print.form.print_address.label.country_id', $countryPairs)
             ->setRequired('print.form.print_address.required.country_id');
 
         $form->addHidden('VS', $payment->variable_symbol);
@@ -96,6 +107,7 @@ class UserPrintAddressFormFactory
                 'number' => $printAddress->number,
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
+                'country_id' => $printAddress->country_id,
             ]);
         }
 
