@@ -34,6 +34,7 @@ class ClaimButtonWidget extends BaseLazyWidget
         }
 
         $this->template->printSubscription = $printSubscription;
+        $this->template->claim = $printSubscription->related('print_claims')->fetch();
         $this->template->setFile(__DIR__ . '/' . $this->templateName);
         $this->template->render();
     }

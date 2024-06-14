@@ -1,4 +1,4 @@
-{if $claim = $printSubscription->related('print_claims')->fetch()}
+{if $claim}
     <a href="{plink :Print:ClaimsAdmin:edit $claim->id}" class="btn btn-default btn-sm"><span class="fa fa-headset"></span> {_print.admin.print_subscriptions.default.claim_edit}</a>
 {else}
     <a href="{plink :Print:ClaimsAdmin:new $printSubscription->id}" class="btn btn-primary btn-sm"><span class="fa fa-headset"></span> {_print.admin.print_subscriptions.default.claim}</a>
