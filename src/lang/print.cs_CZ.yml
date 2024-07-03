@@ -38,7 +38,6 @@ admin:
                 email: Email
                 state: Stav
                 amount: Množství
-                claims: Reklamace
     print_claims:
         back_link: Zpět na seznam reklamací
         default:
@@ -74,7 +73,6 @@ admin:
                 claimant: Reklamoval
                 claimant_contact: Kontakt
             submit: Uložit
-            close: Uzavrieť reklamáciu
             add_success_message: Reklamace byla vytvorena.
             edit_success_message: Reklamace byla aktualizována.
         filter:

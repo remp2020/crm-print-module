@@ -37,7 +37,6 @@ admin:
                 email: Email
                 state: State
                 amount: Amount
-                claims: Claims
     print_claims:
         back_link: Back on list
         default:

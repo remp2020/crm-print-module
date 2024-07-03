@@ -1,1 +1,199 @@
-{}
+admin:
+    print_subscriptions:
+        show:
+            fields:
+                user_id: Nutzer:in
+                subscription_id: Abo
+                institution: Institution
+                city: Stadt
+                state: Bundesland
+                surname: Nachname
+                first_name: Vorname
+                zip_code: PLZ
+                email: E-Mail
+                address: Adresse
+                actions: Aktionen
+                amount: Menge
+            header: Export für
+            back: zurück zur Liste
+            total: Gesamt
+            no_records_found: Keine Einträge zu diesem Filter gefunden
+        default:
+            ending: Auslaufend
+            no_records_found: Keine Einträge zu diesem Filter gefunden
+            header: Exporte
+            day_of_export: Tag des Exports
+            files_to_download: Dateien zum Download
+            day_of_print: Erscheinungstag
+            claim: Reklamationen
+            claim_edit: Reklamation bearbeiten
+            new: Neu
+            continuing: Fortdauernd
+            actions: Aktionen
+            last_download_at: Letzter Download am
+            delivering_pcs: Gelieferte Stk.
+    request_notification:
+        title: Adressänderungsanfragen
+    dashboard:
+        title: Nutzung Printabos
+        last_30_days: Letzte 30 Tage
+        last_90_days: Letzte 90 Tage
+        last_90_days_desc: Haben ein laufendes Printabo und waren in den letzten 90 Tagen im Web
+        header: Print Statistiken
+        last_30_days_desc: Haben ein laufendes Printabo und waren in den letzten 30 Tagen im Web
+        prior_90_days: 90 Tage davor
+        prior_90_days_desc: Haben ein laufendes Printabo und waren in den letzten 90 Tagen im Web
+    print_claims:
+        edit:
+            header: Reklamation bearbeiten
+        new:
+            header: Reklamation hinzufügen
+        filter:
+            fields:
+                type_group: Typ
+                status: Status der Reklamation
+                status_open: Öffnen
+                status_close: Abgeschlossen
+                from: Von
+                to: Bis
+                name:
+                    label: Filter
+                    placeholder: Name/Kontakt
+            button: Filter
+            cancel_button: Filter zurücksetzen
+        subscription_detail:
+            address: Adresse
+            export_date: Exportdatum
+            header: Abo Details
+            header_link: Anzeigen
+            type: Typ
+            subscription_type: Aboart
+            print_date: Lieferdatum
+            user: Nutzer:in
+        back_link: Zurück zur Liste
+        default:
+            header: Reklamationen
+            table:
+                delivery_date: Lieferdatum
+                claimant: Eingereicht von
+                claimant_contact: Kontakt
+                created_at: Erstellt am
+                actions: Aktionen
+                closed_at: Abgeschlossen am
+            no_items: Keine Einträge gefunden.
+            actions:
+                edit: Bearbeiten
+                close: Abschließen
+            close_success_message: Reklamation erfolgreich abgeschlossen.
+        form:
+            fields:
+                description: Beschreibung
+                claimant: Nutzer:in
+                claimant_contact: Kontakt
+            submit: Speichern
+            add_success_message: Reklamation erfolgreich angelegt.
+            edit_success_message: Reklamation erfolgreich aktualisiert.
+    address_redirect_form:
+        description:
+            from: Wird auf die aktuelle Zeit geändert.
+        input_required: Diese Eingabe ist ein Pflichtfeld.
+        save: Speichern
+        error:
+            end_time_has_to_in_future: Das Ende der Weiterleitung muss in der Zukunft liegen.
+            redirect_times_overlap: Im angegebenen Zeitraum existiert bereits eine andere Umleitung. Umleitungen dürfen sich nicht überschneiden.
+            same_address_redirect: Die Umleitung kann nicht auf dieselbe Adresse eingestellt werden.
+            end_time_earlier_than_start: Der Beginn der Umleitung muss auf ein früheres Datum als das Ende eingestellt werden.
+        new_address: Neue Adresse
+        from: Von
+        to: Bis
+        note: Notiz
+    address:
+        cant_delete: '{1}Eine andere Adresse wird an diese Adresse umgeleitet: %addresses%|[2,Inf]Andere Adressen werden an diese Adresse umgeleitet: %addresses%'
+frontend:
+    change_user_address:
+        title: Änderung der Zustelladresse
+        new_address: Neue Zustelladresse
+        changed: Ihre Adresse wurde erfolgreich geändert
+        actual_address: Derzeitige Zustelladresse
+        scheduled: Ihre Anfrage wird von unserem Kundenservice ehestmöglich bearbeitete.
+    change_address_request_form:
+        last_name:
+            required: Nachname ist ein Pflichtfeld
+            label: Nachname
+        phone_number:
+            label: Telefonnummer
+        first_name:
+            required: Vorname ist ein Pflichtfeld
+            label: Vorname
+        address:
+            required: Straße ist ein Pflichtfeld
+            label: Straße
+        number:
+            label: Hausnummer
+            placeholder: z.B. 14/21
+            required: Hausnummer ist ein Pflichtfeld
+        zip:
+            label: PLZ
+            required: PLZ ist ein Pflichtfeld
+        city:
+            label: Stadt
+            required: Stadt ist ein Pflichtfeld
+        submit_update: Adressänderung beantragen
+        country:
+            label: Land
+            required: Land ist ein Pflichtfeld
+menu:
+    delivery_address: Lieferadresse
+    print_export: Print Export
+    stats: Print
+    claims: Reklamationen
+component:
+    user_change_address_requests:
+        fields:
+            when: Wann
+            type: Art
+            old_address: Alte Adresse
+            new_address: Neue Adresse
+            address: Adresse
+            state: Status
+            actions: Aktionen
+        decline: Ablehnen
+        header: Adressänderungen
+        no_record: Kein Eintrag
+        accept_and_change: Akzeptieren und ändern
+        messages:
+            address_changed: Adresse erfolgreich geändert.
+            change_declined: Anfrage abgelehnt. Die Adresse wurde nicht geändert.
+    payment_success_print_widget:
+        print_address_where: Wohin soll die Zeitung zugestellt werden?
+        fill_print_address: Wählen Sie die Zustelladresse aus
+        saved: Gespeichert
+        need_to_fill_print_address: Sie müssen die Zustelladresse auswählen, um fortzufahren.
+        pls_fill_print_address: Sie haben ein Printabo. Bitte wählen Sie die Zustelladresse aus.
+    requests_notification:
+        header: Adressänderungen
+    user_print_export:
+        fields:
+            first_name: Vorname
+            address: Adresse
+            city: Stadt
+            zip_code: PLZ
+            day_of_export: Tag des Exports
+            email: E-Mail
+            type: Typ
+            surname: Nachname
+            state: Bundesland
+            day_of_print: Erscheinungstag
+            institution: Institution
+        header: Printexporte
+        not_present_in_print_export: In keinem Printexport vorhanden.
+    admin_filter:
+        filter: Filter
+        text: 'Nachname / Vorname / Adresse:'
+        cancel_filter: Filter zurücksetzen
+    enter_address:
+        attention: Achtung
+        message: Sie haben ein Printabo bestellt. Bitte <a style="text-decoration:underline" href="%link%">geben Sie Ihre Zustelladresse hier ein </a>.
+    address_redirect_widget:
+        redirected_to_address: Weiterleitungsadresse
+        address_redirect: Adressweiterleitung
