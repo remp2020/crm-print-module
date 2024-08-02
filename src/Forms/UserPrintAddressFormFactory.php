@@ -3,11 +3,11 @@
 namespace Crm\PrintModule\Forms;
 
 use Contributte\Translation\Translator;
+use Crm\ApplicationModule\Forms\Controls\CountriesSelectItemsBuilder;
 use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
 use Crm\UsersModule\DataProviders\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;
-use Crm\UsersModule\Repositories\CountriesRepository;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 use Nette\Utils\ArrayHash;
@@ -26,11 +26,11 @@ class UserPrintAddressFormFactory
     private $addressType;
 
     public function __construct(
-        private Translator $translator,
-        private AddressesRepository $addressesRepository,
-        private AddressChangeRequestsRepository $addressChangeRequestsRepository,
-        private CountriesRepository $countriesRepository,
-        private DataProviderManager $dataProviderManager,
+        private readonly Translator $translator,
+        private readonly AddressesRepository $addressesRepository,
+        private readonly AddressChangeRequestsRepository $addressChangeRequestsRepository,
+        private readonly DataProviderManager $dataProviderManager,
+        private readonly CountriesSelectItemsBuilder $countriesSelectItemsBuilder,
     ) {
     }
 
@@ -52,7 +52,7 @@ class UserPrintAddressFormFactory
         }
         $this->printAddress = $printAddress;
 
-        $countryPairs = $this->countriesRepository->getDefaultCountryPair();
+        $countryPairs = $this->countriesSelectItemsBuilder->getDefaultCountryPair();
         if ($printAddress) {
             $countryPairs[$printAddress->country->id] = $printAddress->country->name;
         }

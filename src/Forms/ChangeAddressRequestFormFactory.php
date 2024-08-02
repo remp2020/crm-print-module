@@ -2,6 +2,7 @@
 
 namespace Crm\PrintModule\Forms;
 
+use Crm\ApplicationModule\Forms\Controls\CountriesSelectItemsBuilder;
 use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
 use Crm\UsersModule\DataProviders\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
@@ -27,12 +28,13 @@ class ChangeAddressRequestFormFactory
     private $request;
 
     public function __construct(
-        private UsersRepository $usersRepository,
-        private AddressChangeRequestsRepository $addressChangeRequestsRepository,
-        private AddressesRepository $addressesRepository,
-        private CountriesRepository $countriesRepository,
-        private Translator $translator,
-        private DataProviderManager $dataProviderManager,
+        private readonly UsersRepository $usersRepository,
+        private readonly AddressChangeRequestsRepository $addressChangeRequestsRepository,
+        private readonly AddressesRepository $addressesRepository,
+        private readonly CountriesRepository $countriesRepository,
+        private readonly Translator $translator,
+        private readonly DataProviderManager $dataProviderManager,
+        private readonly CountriesSelectItemsBuilder $countriesSelectItemsBuilder,
     ) {
     }
 
@@ -81,7 +83,7 @@ class ChangeAddressRequestFormFactory
         $form->addText('city', $this->translator->translate('print.frontend.change_address_request_form.city.label'))
             ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.city.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.city.required'));
-        $form->addSelect('country_id', $this->translator->translate('print.frontend.change_address_request_form.country.label'), $this->countriesRepository->getDefaultCountryPair())
+        $form->addSelect('country_id', $this->translator->translate('print.frontend.change_address_request_form.country.label'), $this->countriesSelectItemsBuilder->getDefaultCountryPair())
             ->setOption('id', 'country_id')
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.country.required'))
             ->setDisabled();
