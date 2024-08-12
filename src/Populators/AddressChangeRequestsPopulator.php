@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Populators;
 
 use Crm\ApplicationModule\Populators\AbstractPopulator;
-use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
+use Crm\UsersModule\Models\AddressChangeRequest\StatusEnum;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 class AddressChangeRequestsPopulator extends AbstractPopulator
@@ -45,11 +45,7 @@ class AddressChangeRequestsPopulator extends AbstractPopulator
 
     private function getStatus()
     {
-        $items = [
-            AddressChangeRequestsRepository::STATUS_NEW,
-            AddressChangeRequestsRepository::STATUS_ACCEPTED,
-            AddressChangeRequestsRepository::STATUS_REJECTED,
-        ];
+        $items = StatusEnum::values();
         return $items[random_int(0, count($items) - 1)];
     }
 
