@@ -16,10 +16,13 @@ use Crm\PrintModule\Components\AddressRedirectWidget\AddressRedirectWidget;
 use Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget;
 use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
 use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
+use Crm\PrintModule\Components\PrintAddressTransferSummaryWidget\PrintAddressTransferSummaryWidget;
+use Crm\PrintModule\Components\PrintSubscriptionsTransferSummaryWidget\PrintSubscriptionsTransferSummaryWidget;
 use Crm\PrintModule\Components\RequestNotification\RequestNotification;
 use Crm\PrintModule\Components\UserChangeAddressRequests\UserChangeAddressRequests;
 use Crm\PrintModule\Components\UserPrintExport\UserPrintExport;
 use Crm\PrintModule\DataProviders\CanDeleteAddressDataProvider;
+use Crm\PrintModule\DataProviders\SubscriptionTransferFormDataProvider;
 use Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider;
 use Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
@@ -116,6 +119,14 @@ class PrintModule extends CrmModule
             AddressRedirectWidget::class,
             100
         );
+        $widgetManager->registerWidget(
+            'admin.subscriptions.transfer.summary.content',
+            PrintAddressTransferSummaryWidget::class
+        );
+        $widgetManager->registerWidget(
+            'admin.subscriptions.transfer.summary.right',
+            PrintSubscriptionsTransferSummaryWidget::class
+        );
     }
 
     public function registerUserData(UserDataRegistrator $dataRegistrator)
@@ -149,7 +160,11 @@ class PrintModule extends CrmModule
     {
         $dataProviderManager->registerDataProvider(
             'users.dataprovider.address.can_delete',
-            $this->getInstance(CanDeleteAddressDataProvider::class)
+            $this->getInstance(CanDeleteAddressDataProvider::class),
+        );
+        $dataProviderManager->registerDataProvider(
+            'subscriptions.dataprovider.transfer',
+            $this->getInstance(SubscriptionTransferFormDataProvider::class),
         );
     }
 }

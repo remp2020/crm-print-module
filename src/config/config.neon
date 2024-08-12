@@ -22,6 +22,8 @@ services:
 	printClaimButtonWidget: Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget
 	- Crm\PrintModule\Components\AddressRedirectWidget\AddressRedirectWidget
 	- Crm\PrintModule\Components\AddressRedirectDetail\AddressRedirectDetailFactoryInterface
+	- Crm\PrintModule\Components\PrintAddressTransferSummaryWidget\PrintAddressTransferSummaryWidget
+	- Crm\PrintModule\Components\PrintSubscriptionsTransferSummaryWidget\PrintSubscriptionsTransferSummaryWidget
 
 	- Crm\PrintModule\Models\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
@@ -34,6 +36,8 @@ services:
 	- Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider
 	- Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider
 	- Crm\PrintModule\DataProviders\CanDeleteAddressDataProvider
+	- Crm\PrintModule\DataProviders\SubscriptionTransfer\AddressToTransferRetriever
+	- Crm\PrintModule\DataProviders\SubscriptionTransferFormDataProvider
 	- Crm\PrintModule\Commands\ExportDailyCommand
 	- Crm\PrintModule\Export\DailyExportDataSource
 	- Crm\PrintModule\Export\DailyExportView

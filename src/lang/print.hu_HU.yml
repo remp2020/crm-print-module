@@ -39,6 +39,8 @@ admin:
         last_90_days_desc: Nyomtatott számra előfizetők az utolsó 90 napból
         prior_90_days: Előző 90 nap
         prior_90_days_desc: Nyomtatott számra előfizetők az prior előző 90 nap
+    subscription_transfer:
+        copy_address: Másolja ki a nyomtatási címet
 frontend:
     change_user_address:
         title: Kézbesítési cím módosítása
@@ -129,6 +131,11 @@ component:
     enter_address:
         attention: Figyelmeztetés
         message: 'Aktuális előfizetése a nyomtatott lap küldését is tartalmazza. Kérjük, <a style="text-decoration:underline" href="%link%">adja meg a kézbesítési címet itt</a>.'
+    print_address_transfer_summary_widget:
+        header: Nyomtatási cím
+    print_subscriptions_transfer_summary_widget:
+        header: Információ az utolsó nyomatszállításról
+        no_subscriptions: Nincs nyomtatott kézbesítés
 form:
     print_address:
         label:

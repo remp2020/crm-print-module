@@ -113,6 +113,8 @@ admin:
             end_time_earlier_than_start: The redirect start time must be set to an earlier date than the end time.
             end_time_has_to_in_future: Redirect end time must be set to the future.
             redirect_times_overlap: Another redirect already exists in the given time interval. Redirects must not overlap.
+    subscription_transfer:
+        copy_address: Copy the print address
 
 frontend:
     change_user_address:
@@ -216,6 +218,11 @@ component:
         terminate_redirect: Terminate redirect
         edit_redirect: Edit redirect
         address_redirect: Address redirect
+    print_address_transfer_summary_widget:
+        header: Print address
+    print_subscriptions_transfer_summary_widget:
+        header: Information about the last print delivery
+        no_subscriptions: No print delivery
 
 form:
     print_address:

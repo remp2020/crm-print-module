@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {_print.component.print_subscriptions_transfer_summary_widget.header}
+      </div>
+
+      <div class="panel-body">
+        {if $printSubscription !== null}
+          <a href="{plink :Print:PrintSubscriptionsAdmin:show, $printSubscription->export_date->format('Y-m-d'), 'type' => $printSubscription->type, 'text' => $printSubscription->last_name}" target="_blank">
+            <strong>{_print.admin.print_subscriptions.default.day_of_print}</strong>: {$printSubscription->export_date|date('Y-m-d')}<br>
+          </a>
+          {if $printSubscription->institution_name}
+            <strong>{$printSubscription->institution_name}</strong><br>
+          {/if}
+          {if $printSubscription->first_name || $printSubscription->last_name}
+            <strong>{=($printSubscription->first_name . ' ' . $printSubscription->last_name)|trim}</strong><br>
+          {/if}
+          {if $printSubscription->address}
+            {$printSubscription->address}<br>
+          {/if}
+          {if $printSubscription->zip || $printSubscription->city}
+            {=$printSubscription->zip . ' ' . $printSubscription->city|trim}<br>
+          {/if}
+          {if $printSubscription->country_id}
+            {$printSubscription->country->name}<br>
+          {/if}
+          {$printSubscription->phone_number}
+        {else}
+          {_print.component.print_subscriptions_transfer_summary_widget.no_subscriptions}
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>

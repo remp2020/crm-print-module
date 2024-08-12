@@ -109,6 +109,8 @@ admin:
         note: Notiz
     address:
         cant_delete: '{1}Eine andere Adresse wird an diese Adresse umgeleitet: %addresses%|[2,Inf]Andere Adressen werden an diese Adresse umgeleitet: %addresses%'
+    subscription_transfer:
+        copy_address: Kopiere Druckadresse
 frontend:
     change_user_address:
         title: Änderung der Zustelladresse

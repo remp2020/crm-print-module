@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {_print.component.print_address_transfer_summary_widget.header}
+      </div>
+      <div class="panel-body">
+        {if $address->company_name}
+          <strong>{$address->company_name}</strong><br>
+        {/if}
+        {if $address->first_name || $address->last_name}
+          <strong>{=($address->first_name . ' ' . $address->last_name)|trim}</strong><br>
+        {/if}
+        {if $address->address}
+          {$address->address}<br>
+        {/if}
+        {if $address->zip || $address->city}
+          {=$address->zip . ' ' . $address->city|trim}<br>
+        {/if}
+        {if $address->country_id}
+          {$address->country->name}<br>
+        {/if}
+        {$address->phone_number}
+      </div>
+    </div>
+  </div>
+</div>

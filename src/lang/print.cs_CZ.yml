@@ -114,6 +114,8 @@ admin:
             end_time_earlier_than_start: Čas začátku přesměrování musí být nastaven na dřívější datum než čas ukončení.
             end_time_has_to_in_future: Čas ukončení přesměrování musí být nastaven do budoucnosti.
             redirect_times_overlap: V daném časovém intervalu již existuje jiné přesměrování. Přesměrování se nesmí překrývat.
+    subscription_transfer:
+        copy_address: Zkopírovat printovú adresu
 
 frontend:
     change_user_address:
@@ -216,6 +218,11 @@ component:
         terminate_redirect: Ukončit přesměrování
         edit_redirect: Upravit přesměrování
         address_redirect: Přesměrování adresy
+    print_address_transfer_summary_widget:
+        header: Printová adresa
+    print_subscriptions_transfer_summary_widget:
+        header: Informace o posledním doručení printu
+        no_subscriptions: Žádné doručení printu
 
 form:
     print_address:
