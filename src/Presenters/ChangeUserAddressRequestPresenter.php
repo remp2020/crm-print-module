@@ -25,7 +25,7 @@ class ChangeUserAddressRequestPresenter extends FrontendPresenter
     {
         $this->onlyLoggedIn();
         $userRow = $this->usersRepository->find($this->getUser()->id);
-        $address = $this->addressesRepository->address($userRow, 'print');
+        $address = $this->addressesRepository->address($userRow, 'print', true);
         $this->template->address = $address;
         $this->template->userRow = $userRow;
     }

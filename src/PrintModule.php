@@ -7,6 +7,7 @@ use Crm\ApplicationModule\Application\Managers\CallbackManagerInterface;
 use Crm\ApplicationModule\Application\Managers\SeederManager;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
+use Crm\ApplicationModule\Models\Event\LazyEventEmitter;
 use Crm\ApplicationModule\Models\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Models\Menu\MenuItem;
 use Crm\ApplicationModule\Models\User\UserDataRegistrator;
@@ -14,6 +15,7 @@ use Crm\ApplicationModule\Models\Widget\LazyWidgetManagerInterface;
 use Crm\PrintModule\Commands\ExportDailyCommand;
 use Crm\PrintModule\Components\AddressRedirectWidget\AddressRedirectWidget;
 use Crm\PrintModule\Components\ClaimButtonWidget\ClaimButtonWidget;
+use Crm\PrintModule\Components\DefaultPrintAddressWidget\DefaultPrintAddressWidget;
 use Crm\PrintModule\Components\EnterAddressWidget\EnterAddressWidget;
 use Crm\PrintModule\Components\PaymentSuccessPrintWidget\PaymentSuccessPrintWidget;
 use Crm\PrintModule\Components\PrintAddressTransferSummaryWidget\PrintAddressTransferSummaryWidget;
@@ -25,10 +27,12 @@ use Crm\PrintModule\DataProviders\CanDeleteAddressDataProvider;
 use Crm\PrintModule\DataProviders\SubscriptionTransferFormDataProvider;
 use Crm\PrintModule\DataProviders\User\AddressChangeRequestsUserDataProvider;
 use Crm\PrintModule\DataProviders\User\PrintAddressesUserDataProvider;
+use Crm\PrintModule\Events\NewPrintAddressEventHandler;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\PrintModule\Seeders\AddressTypesSeeder;
 use Crm\PrintModule\Seeders\ConfigsSeeder;
 use Crm\PrintModule\Seeders\ContentAccessSeeder;
+use Crm\UsersModule\Events\NewAddressEvent;
 use Nette\DI\Container;
 
 class PrintModule extends CrmModule
@@ -127,6 +131,10 @@ class PrintModule extends CrmModule
             'admin.subscriptions.transfer.summary.right',
             PrintSubscriptionsTransferSummaryWidget::class
         );
+        $widgetManager->registerWidget(
+            'admin.user.address.partial',
+            DefaultPrintAddressWidget::class,
+        );
     }
 
     public function registerUserData(UserDataRegistrator $dataRegistrator)
@@ -165,6 +173,14 @@ class PrintModule extends CrmModule
         $dataProviderManager->registerDataProvider(
             'subscriptions.dataprovider.transfer',
             $this->getInstance(SubscriptionTransferFormDataProvider::class),
+        );
+    }
+
+    public function registerLazyEventHandlers(LazyEventEmitter $emitter)
+    {
+        $emitter->addListener(
+            NewAddressEvent::class,
+            NewPrintAddressEventHandler::class,
         );
     }
 }

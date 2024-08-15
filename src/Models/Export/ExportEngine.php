@@ -45,7 +45,8 @@ class ExportEngine
             } elseif ($criteria->getKey() == 'dennikn_magazine') {
                 $address = $this->addressesRepository->address($user, 'magazine_print');
                 if (!$address) {
-                    $address = $this->addressesRepository->address($user, 'print');
+                    $address = $this->addressesRepository->address($user, 'print', true)
+                        ?? $this->addressesRepository->address($user, 'print');
                 }
             } else {
                 $address = $row->address;
@@ -55,7 +56,8 @@ class ExportEngine
                 $address = $this->addressesRepository->address($user, 'print_other');
             }
             if (!$address) {
-                $address = $this->addressesRepository->address($user, 'print');
+                $address = $this->addressesRepository->address($user, 'print', true)
+                    ?? $this->addressesRepository->address($user, 'print');
             }
 
             if (!$address) {

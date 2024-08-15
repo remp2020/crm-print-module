@@ -223,6 +223,9 @@ component:
     print_subscriptions_transfer_summary_widget:
         header: Information about the last print delivery
         no_subscriptions: No print delivery
+    default_print_address_widget:
+        change_default: Set as default print address
+        change_success: Default print address changed.
 
 form:
     print_address:

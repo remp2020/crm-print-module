@@ -226,6 +226,9 @@ component:
     print_subscriptions_transfer_summary_widget:
         header: Informácie o poslednom doručení printu
         no_subscriptions: Žiadne doručenie printu
+    default_print_address_widget:
+        change_default: Nastaviť ako predvolenú poštovú adresu
+        change_success: Predvolená poštovná adresa zmenená.
 
 form:
     print_address:

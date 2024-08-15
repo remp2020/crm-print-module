@@ -21,6 +21,8 @@ class UserPrintAddressFormFactory
     /** @var ActiveRow */
     private $payment;
 
+    private ?ActiveRow $printAddress;
+
     private $addressType;
 
     public function __construct(
@@ -28,7 +30,7 @@ class UserPrintAddressFormFactory
         private AddressesRepository $addressesRepository,
         private AddressChangeRequestsRepository $addressChangeRequestsRepository,
         private CountriesRepository $countriesRepository,
-        private DataProviderManager $dataProviderManager
+        private DataProviderManager $dataProviderManager,
     ) {
     }
 
@@ -46,8 +48,9 @@ class UserPrintAddressFormFactory
             $printAddress = $payment->address;
         }
         if (!$printAddress) {
-            $printAddress = $this->addressesRepository->address($user, $this->addressType);
+            $printAddress = $this->addressesRepository->address($user, $this->addressType, true);
         }
+        $this->printAddress = $printAddress;
 
         $countryPairs = $this->countriesRepository->getDefaultCountryPair();
         if ($printAddress) {
@@ -131,24 +134,22 @@ class UserPrintAddressFormFactory
         $user = $this->payment->user;
 
         if (isset($values['first_name'])) {
-            $printAddress = $this->addressesRepository->address($user, $this->addressType);
-
             $changeRequest = $this->addressChangeRequestsRepository->add(
-                $user,
-                $printAddress,
-                $values->first_name,
-                $values->last_name,
-                null,
-                $values->address,
-                $values->number,
-                $values->city,
-                $values->zip,
-                $values->country_id,
-                null,
-                null,
-                null,
-                $values->phone_number,
-                $this->addressType
+                user: $user,
+                parentAddress: $this->printAddress,
+                firstName: $values->first_name,
+                lastName: $values->last_name,
+                companyName: null,
+                address: $values->address,
+                number: $values->number,
+                city: $values->city,
+                zip: $values->zip,
+                countryId: $values->country_id,
+                companyId: null,
+                companyTaxId: null,
+                companyVatId: null,
+                phoneNumber: $values->phone_number,
+                type: $this->addressType
             );
 
             if ($changeRequest) {

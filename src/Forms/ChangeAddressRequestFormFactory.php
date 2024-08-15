@@ -43,7 +43,7 @@ class ChangeAddressRequestFormFactory
 
         $row = $this->loadUserRow();
 
-        $printAddress = $this->addressesRepository->address($row, 'print');
+        $printAddress = $this->addressesRepository->address($row, 'print', true);
 
         $defaults = [];
         if ($printAddress) {
@@ -87,7 +87,7 @@ class ChangeAddressRequestFormFactory
             ->setDisabled();
 
         $userRow = $this->usersRepository->find($user->id);
-        if ($this->addressesRepository->address($userRow, 'print')) {
+        if ($printAddress) {
             $form->addSubmit('send', $this->translator->translate('print.frontend.change_address_request_form.submit_update'));
         } else {
             $form->addSubmit('send', $this->translator->translate('print.frontend.change_address_request_form.submit_create'));
@@ -112,24 +112,24 @@ class ChangeAddressRequestFormFactory
     {
         $userRow = $this->loadUserRow();
 
-        $printAddress = $this->addressesRepository->address($userRow, 'print');
+        $printAddress = $this->addressesRepository->address($userRow, 'print', true);
 
         $this->request = $request = $this->addressChangeRequestsRepository->add(
-            $userRow,
-            $printAddress,
-            $values['first_name'],
-            $values['last_name'],
-            null,
-            $values['address'],
-            $values['number'],
-            $values['city'],
-            $values['zip'],
-            $this->countriesRepository->defaultCountry()->id,
-            null,
-            null,
-            null,
-            $values['phone_number'],
-            'print'
+            user: $userRow,
+            parentAddress: $printAddress,
+            firstName: $values['first_name'],
+            lastName: $values['last_name'],
+            companyName: null,
+            address: $values['address'],
+            number: $values['number'],
+            city: $values['city'],
+            zip: $values['zip'],
+            countryId: $this->countriesRepository->defaultCountry()->id,
+            companyId: null,
+            companyTaxId: null,
+            companyVatId: null,
+            phoneNumber: $values['phone_number'],
+            type: 'print'
         );
 
         if (!$printAddress) {

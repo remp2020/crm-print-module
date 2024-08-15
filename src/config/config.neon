@@ -24,6 +24,9 @@ services:
 	- Crm\PrintModule\Components\AddressRedirectDetail\AddressRedirectDetailFactoryInterface
 	- Crm\PrintModule\Components\PrintAddressTransferSummaryWidget\PrintAddressTransferSummaryWidget
 	- Crm\PrintModule\Components\PrintSubscriptionsTransferSummaryWidget\PrintSubscriptionsTransferSummaryWidget
+	- Crm\PrintModule\Components\DefaultPrintAddressWidget\DefaultPrintAddressWidget
+
+	- Crm\PrintModule\Events\NewPrintAddressEventHandler
 
 	- Crm\PrintModule\Models\Export\ExportEngine
 	- Crm\PrintModule\Forms\ChangeAddressRequestFormFactory
