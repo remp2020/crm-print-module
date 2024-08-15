@@ -21,6 +21,6 @@ class AddressToTransferRetriever
             return $address;
         }
 
-        return $this->addressesRepository->address($subscription->user, 'print');
+        return $this->addressesRepository->address($subscription->user, 'print', true);
     }
 }
