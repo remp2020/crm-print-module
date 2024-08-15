@@ -3,7 +3,7 @@
 namespace Crm\PrintModule\Forms;
 
 use Crm\PrintModule\Repositories\AddressRedirectsRepository;
-use Crm\UsersModule\Models\Address\AddressesLister;
+use Crm\UsersModule\Forms\Controls\AddressesSelectItemsBuilder;
 use Crm\UsersModule\Repositories\AddressesRepository;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
@@ -16,7 +16,7 @@ class AddressRedirectFormFactory
         private readonly Translator $translator,
         private readonly AddressesRepository $addressesRepository,
         private readonly AddressRedirectsRepository $addressRedirectsRepository,
-        private readonly AddressesLister $addressesLister,
+        private readonly AddressesSelectItemsBuilder $addressesSelectItemsBuilder,
     ) {
     }
 
@@ -51,7 +51,7 @@ class AddressRedirectFormFactory
             $form->addHidden('redirect_id', $redirectId->id);
         }
 
-        $addresses = $this->addressesLister->addressesForSelect($address->user, 'print');
+        $addresses = $this->addressesSelectItemsBuilder->buildSimpleWithTypes($address->user, 'print');
         unset($addresses[$address->id]); // do not allow redirect to same address
 
         $form->addSelect(
