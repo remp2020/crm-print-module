@@ -38,7 +38,7 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
 
         $address = $this->addressToTransferRetriever->retrieve($subscription);
         if ($address !== null) {
-            $form->addCheckbox('copy_address', 'print.admin.subscription_transfer.copy_address');
+            $form->addCheckbox('copy_print_address', 'print.admin.subscription_transfer.copy_address');
         }
     }
 
@@ -49,7 +49,7 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
             return;
         }
 
-        if (!$formData->copy_address) {
+        if (!$formData->copy_print_address) {
             return;
         }
 
