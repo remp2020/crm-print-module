@@ -47,3 +47,5 @@ services:
 	- Crm\PrintModule\Models\Export\FileSystem
 	printFilePatternConfig: Crm\PrintModule\Models\Export\FilePatternConfig
 	- Crm\PrintModule\Models\Export\PrintClaimsExport
+
+	printExportSchedule: Crm\PrintModule\Export\PrintExportSchedule
