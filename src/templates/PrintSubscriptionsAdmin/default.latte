@@ -64,22 +64,24 @@
             <td>{$export['delivering_pcs'] ?? 0}</td>
             <td>
               {var $lastDownloadAt = null}
-              {foreach $export['files'] ?? [] as $file}
-                {if isset($lastFileDownloads[$file]) && $lastFileDownloads[$file] > $lastDownloadAt}
-                  {var $lastDownloadAt = $lastFileDownloads[$file]}
-                {/if}
+              {if !empty($export['files'])}
+                {foreach $export['files'] as $file}
+                  {if isset($lastFileDownloads[$file]) && $lastFileDownloads[$file] > $lastDownloadAt}
+                    {var $lastDownloadAt = $lastFileDownloads[$file]}
+                  {/if}
 
-                <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file}">
+                  <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file}">
+                    <i class="fa fa-download"></i>
+                  </a>
+                {/foreach}
+              {else}
+                <a n:if="file_exists(APP_ROOT . '/content/export/' . $type . '-' . $date . '.xls')" class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile  $type . '-' . $date . '.xls'}">
                   <i class="fa fa-download"></i>
                 </a>
-              {/foreach}
-
-              <a n:if="file_exists(APP_ROOT . '/content/export/' . $type . '-' . $date . '.xls')" class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile  $type . '-' . $date . '.xls'}">
-                <i class="fa fa-download"></i>
-              </a>
-              <a n:if="file_exists(APP_ROOT . '/content/export/' . $type . '-' . $date . '.csv')" class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile  $type . '-' . $date . '.csv'}">
-                <i class="fa fa-download"></i>
-              </a>
+                <a n:if="file_exists(APP_ROOT . '/content/export/' . $type . '-' . $date . '.csv')" class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile  $type . '-' . $date . '.csv'}">
+                  <i class="fa fa-download"></i>
+                </a>
+              {/if}
 
               {* ble ble ble - asi by bolo dobre spravit na to widget *}
               {if in_array($type, ['tyzden_print_new', 'tyzden_print_special'])}
