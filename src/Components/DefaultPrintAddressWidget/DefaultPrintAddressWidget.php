@@ -6,6 +6,7 @@ use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\UsersModule\Repositories\AddressesRepository;
 use Nette\Database\Table\ActiveRow;
+use Nette\Localization\Translator;
 
 class DefaultPrintAddressWidget extends BaseLazyWidget
 {
@@ -14,6 +15,7 @@ class DefaultPrintAddressWidget extends BaseLazyWidget
     public function __construct(
         LazyWidgetManager $lazyWidgetManager,
         private readonly AddressesRepository $addressesRepository,
+        private readonly Translator $translator,
     ) {
         parent::__construct($lazyWidgetManager);
     }
@@ -37,7 +39,10 @@ class DefaultPrintAddressWidget extends BaseLazyWidget
     {
         $address = $this->addressesRepository->find($addressId);
         $this->setDefaultAddress($address);
-        $this->getPresenter()->flashMessage('print.component.default_print_address_widget.change_success');
+        // TODO: missing CZ translation
+        $this->getPresenter()->flashMessage($this->translator->translate(
+            'print.component.default_print_address_widget.change_success'
+        ));
         $this->redirect('this');
     }
 
