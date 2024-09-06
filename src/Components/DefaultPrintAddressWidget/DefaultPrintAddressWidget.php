@@ -39,7 +39,6 @@ class DefaultPrintAddressWidget extends BaseLazyWidget
     {
         $address = $this->addressesRepository->find($addressId);
         $this->setDefaultAddress($address);
-        // TODO: missing CZ translation
         $this->getPresenter()->flashMessage($this->translator->translate(
             'print.component.default_print_address_widget.change_success'
         ));
