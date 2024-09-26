@@ -45,6 +45,7 @@ admin:
                 delivery_date: Delivery date
                 claimant: Claimed by
                 claimant_contact: Contact
+                claim_type: Claim type
                 created_at: Created at
                 closed_at: Close date
                 actions: Actions
@@ -53,6 +54,17 @@ admin:
                 edit: Edit
                 close: Close
             close_success_message: Claim has been successfully closed.
+        show:
+            header: Claim
+            claim_panel_header: Claim info
+            user: User
+            created_at: Created at
+            exported_at: Exported at
+            claim_type: Claim type
+            description: Description
+            claimant: Claimant
+            claimant_contact: Claimant contact
+            closed_at: Closed at
         new:
             header: Add claim
         edit:
@@ -71,6 +83,7 @@ admin:
                 description: Description
                 claimant: Claimant
                 claimant_contact: Contact
+                claim_type: Claim type
             submit: Save
             add_success_message: Claim has been created.
             edit_success_message: Claim has been updated.
@@ -85,6 +98,7 @@ admin:
                 from: From
                 to: To
                 type_group: Type group
+                claim_type: Claim type
             button: Filter
             cancel_button: Cancel filter
 
@@ -261,3 +275,15 @@ config:
     print_export_issue:
         name: Issue name
         description: "Issue name in print export (e.g. DENIK N)"
+
+model:
+    claim_type:
+        not_delivered: "Not delivered"
+        incomplete_delivery: "Incomplete delivery"
+        wrong_newspaper: "Wrong newspaper"
+        delivery_information: "Delivery information"
+        incorrect_count: "Incorrect count"
+        not_delivered_dont_deliver: "Not delivered, do not deliver"
+        late_delivery: "Late delivery"
+        damaged: "Damaged"
+        after_end: "After end"

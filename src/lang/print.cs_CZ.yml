@@ -47,6 +47,7 @@ admin:
                 delivery_date: Datum doručování
                 claimant: Reklamoval
                 claimant_contact: Kontakt
+                claim_type: Typ reklamace
                 closed_at: Datum uzavření
                 actions: Akce
             no_items: Nebyly nalezeny žádné záznamy.
@@ -54,6 +55,17 @@ admin:
                 edit: Upravit
                 close: Uzavřít
             close_success_message: Reklamace byla úspěšně uzavřena.
+        show:
+            header: Reklamace
+            claim_panel_header: Informace o reklamaci
+            user: Používatel
+            created_at: Vytvořeno
+            exported_at: Doručováno
+            claim_type: Typ reklamace
+            description: Popis
+            claimant: Reklamoval
+            claimant_contact: Kontakt
+            closed_at: Uzavřena
         new:
             header: Přidat reklamaci
         edit:
@@ -72,6 +84,7 @@ admin:
                 description: Popis
                 claimant: Reklamoval
                 claimant_contact: Kontakt
+                claim_type: Typ reklamace
             submit: Uložit
             add_success_message: Reklamace byla vytvorena.
             edit_success_message: Reklamace byla aktualizována.
@@ -86,6 +99,7 @@ admin:
                 from: Od
                 to: Do
                 type_group: Typ
+                claim_type: Typ reklamace
             button: Filtruj
             cancel_button: Zruš filtr
 
@@ -261,3 +275,15 @@ config:
     print_export_issue:
         name: Název vydání
         description: "Název vydání v tištěném exportu (např. DENIK N)"
+
+model:
+    claim_type:
+        not_delivered: "Nedoručeno"
+        incomplete_delivery: "Neúplné doručení"
+        wrong_newspaper: "Doručeny jiné noviny"
+        delivery_information: "Informace doručovateli"
+        incorrect_count: "Chybný počet"
+        not_delivered_dont_deliver: "Nedoručeno, nedoposílat"
+        late_delivery: "Pozdní doručení"
+        damaged: "Poškozeno"
+        after_end: "Po ukončení"

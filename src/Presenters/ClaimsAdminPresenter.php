@@ -7,6 +7,7 @@ use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\ApplicationModule\Components\PreviousNextPaginator\PreviousNextPaginator;
 use Crm\ApplicationModule\Models\Exports\ExcelFactory;
 use Crm\PrintModule\Forms\ClaimFormFactory;
+use Crm\PrintModule\Models\ClaimType;
 use Crm\PrintModule\Models\Export\PrintClaimsExport;
 use Crm\PrintModule\Repositories\PrintClaimsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
@@ -48,13 +49,15 @@ class ClaimsAdminPresenter extends AdminPresenter
     public $from;
     #[Persistent]
     public $to;
+    #[Persistent]
+    public $claimType;
 
     private const ITEMS_PER_PAGE = 40;
 
     private function filterPrintClaims(): Selection
     {
         $to = DateTime::from($this->to)->modify('+1 day')->format('Y-m-d');
-        return $this->printClaimsRepository->all($this->text, $this->status, $this->typeGroup, $this->from, $to);
+        return $this->printClaimsRepository->all($this->text, $this->status, $this->typeGroup, $this->from, $to, $this->claimType);
     }
 
     public function renderDefault(): void
@@ -71,6 +74,7 @@ class ClaimsAdminPresenter extends AdminPresenter
         $previousNextPaginator->setActualItemCount(count($printClaims));
 
         $this->template->printClaims = $printClaims;
+        $this->template->claimPairs = ClaimType::pairs();
     }
 
     public function handleDownload($format): void
@@ -102,6 +106,18 @@ class ClaimsAdminPresenter extends AdminPresenter
         });
 
         $this->sendResponse($response);
+    }
+
+    public function renderShow(int $printClaimId): void
+    {
+        $printClaim = $this->printClaimsRepository->find($printClaimId);
+        if (!$printClaim) {
+            throw new BadRequestException("Print claim not found (id: {$printClaimId})");
+        }
+
+        $this->template->printClaim = $printClaim;
+        $this->template->printSubscription = $printClaim->print_subscription;
+        $this->template->claimPairs = ClaimType::pairs();
     }
 
     public function renderNew(int $printSubscriptionId): void
@@ -173,6 +189,9 @@ class ClaimsAdminPresenter extends AdminPresenter
             ->setHtmlAttribute('placeholder', 'print.admin.print_claims.filter.fields.name.placeholder')
             ->setHtmlAttribute('autofocus');
 
+        $form->addSelect('claimType', 'print.admin.print_claims.filter.fields.claim_type', ClaimType::pairs())
+            ->setPrompt('---');
+
         $form->addSelect('status', 'print.admin.print_claims.filter.fields.status', [
             'closed' => 'print.admin.print_claims.filter.fields.status_close',
             'open' => 'print.admin.print_claims.filter.fields.status_open',
@@ -200,6 +219,7 @@ class ClaimsAdminPresenter extends AdminPresenter
             $presenter->redirect('ClaimsAdmin:default', [
                 'status' => '',
                 'text' => '',
+                'claimType' => null,
                 'typeGroup' => null,
                 'from' => null,
                 'to' => null,

@@ -15,7 +15,8 @@ class PrintClaimsRepository extends Repository
         ActiveRow $printSubscription,
         string $description,
         string $claimant,
-        string $claimantContact
+        string $claimantContact,
+        string $claimType
     ) {
         $now = new \DateTime();
 
@@ -24,6 +25,7 @@ class PrintClaimsRepository extends Repository
             'description' => $description,
             'claimant' => $claimant,
             'claimant_contact' => $claimantContact,
+            'claim_type' => $claimType,
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -49,6 +51,7 @@ class PrintClaimsRepository extends Repository
         string $typeGroup = null,
         string $from = null,
         string $to = null,
+        string $claimType = null,
     ): Selection {
         $selection = $this->getTable()->order('created_at DESC');
 
@@ -74,6 +77,10 @@ class PrintClaimsRepository extends Repository
 
         if ($to) {
             $selection->where('created_at <= ?', $to);
+        }
+
+        if ($claimType) {
+            $selection->where('claim_type', $claimType);
         }
 
         return $selection;

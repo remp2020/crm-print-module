@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Crm\PrintModule\Forms;
 
 use Contributte\Translation\Translator;
+use Crm\PrintModule\Models\ClaimType;
 use Crm\PrintModule\Repositories\PrintClaimsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Nette\Application\UI\Form;
@@ -48,6 +49,9 @@ class ClaimFormFactory
             ];
         }
 
+        $form->addSelect('claim_type', 'print.admin.print_claims.form.fields.claim_type', ClaimType::pairs())
+            ->setRequired();
+
         $form->addTextArea('description', 'print.admin.print_claims.form.fields.description', 80, 5)
             ->setMaxLength(400)
             ->setRequired();
@@ -80,7 +84,8 @@ class ClaimFormFactory
                 $printSubscription,
                 $values->description,
                 $values->claimant,
-                $values->claimant_contact
+                $values->claimant_contact,
+                $values->claim_type,
             );
 
             ($this->onCreate)($printClaim);

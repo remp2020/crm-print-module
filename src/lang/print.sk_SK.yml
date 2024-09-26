@@ -47,6 +47,7 @@ admin:
                 delivery_date: Dátum doručovania
                 claimant: Reklamoval
                 claimant_contact: Kontakt
+                claim_type: Typ reklamácie
                 created_at: Vytvorené
                 actions: Akcie
                 closed_at: Dátum uzavretia
@@ -55,7 +56,17 @@ admin:
                 edit: Upraviť
                 close: Uzavrieť
             close_success_message: Reklamácia bola úspešne uzatvorená.
-
+        show:
+            header: Reklamácia
+            claim_panel_header: Informácie o reklamácii
+            user: Používateľ
+            created_at: Vytvorené
+            exported_at: Doručované
+            claim_type: Typ reklamácie
+            description: Popis
+            claimant: Reklamoval
+            claimant_contact: Kontakt
+            closed_at: Uzavretá
         new:
             header: Pridať reklamáciu
         edit:
@@ -65,6 +76,7 @@ admin:
                 description: Popis
                 claimant: Reklamoval
                 claimant_contact: Kontakt
+                claim_type: Typ reklamácie
             submit: Uložiť
             add_success_message: Reklamácia bola vytvorená.
             edit_success_message: Reklamácia bola upravená.
@@ -79,6 +91,7 @@ admin:
                 from: Od
                 to: Do
                 type_group: Typ
+                claim_type: Typ reklamácie
             button: Filtruj
             cancel_button: Zruš filter
         subscription_detail:
@@ -264,3 +277,15 @@ config:
     print_export_issue:
         name: Názov vydania
         description: "Názov vydania v printovom exporte (napr. DENNIK N)"
+
+model:
+    claim_type:
+        not_delivered: "Nedoručené"
+        incomplete_delivery: "Neúplné doručenie"
+        wrong_newspaper: "Doručené iné noviny"
+        delivery_information: "Informácie doručovateľovi"
+        incorrect_count: "Chybný počet"
+        not_delivered_dont_deliver: "Nedoručené, nedoposielať"
+        late_delivery: "Neskoré doručenie"
+        damaged: "Poškodené"
+        after_end: "Po ukončení"

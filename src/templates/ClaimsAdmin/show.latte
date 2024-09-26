@@ -1,0 +1,36 @@
+{block #title}{_print.admin.print_claims.edit.header}{/block}
+
+{block #content}
+
+<div class="row">
+    <div class="col-md-12">
+        <a n:href=":Print:ClaimsAdmin:default"><i class="fa fa-angle-left"></i> {_print.admin.print_claims.back_link}</a>
+        <div class="page-header">
+            <h1>{_print.admin.print_claims.show.header}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{_print.admin.print_claims.show.claim_panel_header}</div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <b>{_print.admin.print_claims.show.user}:</b> <a n:href=":Users:UsersAdmin:show $printClaim->print_subscription->user_id">{$printClaim->print_subscription->user->email}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>{_print.admin.print_claims.show.created_at}:</b> <span class="text-muted">{$printClaim->created_at|userDate}</span>
+                </li>
+                <li class="list-group-item">
+                    <b>{_print.admin.print_claims.show.exported_at}:</b> <span class="text-muted">{$printClaim->print_subscription->export_date->format('d.m.Y')}</span>
+                </li>
+                <li class="list-group-item"><b>{_print.admin.print_claims.show.claim_type}:</b> {_$claimPairs[$printClaim->claim_type] ?? null}</li>
+                <li class="list-group-item"><b>{_print.admin.print_claims.show.description}:</b> {$printClaim->description}</li>
+                <li class="list-group-item"><b>{_print.admin.print_claims.show.claimant}:</b> {$printClaim->claimant}</li>
+                <li class="list-group-item"><b>{_print.admin.print_claims.show.claimant_contact}:</b> {$printClaim->claimant_contact}</li>
+                <li class="list-group-item"><b>{_print.admin.print_claims.show.closed_at}:</b> {$printClaim->closed_at|userDate}</li>
+            </ul>
+        </div>
+    </div>
+</div>

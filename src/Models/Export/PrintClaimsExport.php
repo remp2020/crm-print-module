@@ -2,10 +2,19 @@
 
 namespace Crm\PrintModule\Models\Export;
 
+use Crm\PrintModule\Models\ClaimType;
+use Nette\Localization\Translator;
+
 class PrintClaimsExport
 {
+    public function __construct(
+        private readonly Translator $translator
+    ) {
+    }
+
     private const EXPORT_HEADER = [
         'print_subscription_id',
+        'claim_type',
         'description',
         'claimant',
         'claimant_contact',
@@ -43,6 +52,7 @@ class PrintClaimsExport
 
                 $tableData[] = [
                     $row->print_subscription_id,
+                    $this->translator->translate(ClaimType::pairs()[$row->claim_type] ?? null),
                     $row->description,
                     $row->claimant,
                     $row->claimant_contact,

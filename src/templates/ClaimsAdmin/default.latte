@@ -31,6 +31,7 @@
                     <th>{_'print.admin.print_claims.default.table.delivery_date'}</th>
                     <th>{_'print.admin.print_claims.default.table.claimant'}</th>
                     <th>{_'print.admin.print_claims.default.table.claimant_contact'}</th>
+                    <th>{_'print.admin.print_claims.default.table.claim_type'}</th>
                     <th>{_'print.admin.print_claims.default.table.closed_at'}</th>
                     <th>{_'print.admin.print_claims.default.table.actions'}</th>
                 </tr>
@@ -41,8 +42,10 @@
                     <td>{$claim->print_subscription->export_date|localizedDate:false,false}</td>
                     <td>{$claim->claimant}</td>
                     <td>{$claim->claimant_contact}</td>
+                    <td>{_$claimPairs[$claim->claim_type] ?? null}</td>
                     <td>{$claim->closed_at|userDate}</td>
                     <td>
+                        <a n:href="show $claim->id" class="btn btn-sm btn-info" title="{_print.admin.print_claims.default.actions.show}"><i class="fa fa-eye"></i></a>
                         {if $claim->closed_at === null}
                             <a n:href="edit $claim->id" class="btn btn-sm btn-info" title="{_print.admin.print_claims.default.actions.edit}"><i class="fa fa-pen"></i></a>
                             <a n:href="closeClaim! $claim->id" class="btn btn-sm btn-default" title="{_print.admin.print_claims.default.actions.close}"><i class="fa fa-flag-checkered"></i></a>
