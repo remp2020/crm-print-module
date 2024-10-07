@@ -1,0 +1,15 @@
+<td>{$addressChange->deleted_at|userDate}</td>
+<td><span class="label label-danger">deleted</span></td>
+<td><span class="label label-default">{$addressChange->type}</span></td>
+<td>
+    <strong n:if="$addressChange->first_name || $addressChange->last_name">{$addressChange->first_name} {$addressChange->last_name}<br/></strong>
+    <strong n:if="$addressChange->company_name">
+        {$addressChange->company_name}<br/>
+    </strong>
+        {$addressChange->address} {$addressChange->number}<br/>
+        {$addressChange->zip} {$addressChange->city}<br/>
+        {$addressChange->phone_number}
+</td>
+<td></td>
+<td class="text-muted">#{$addressChange->id}</td>
+<td></td>

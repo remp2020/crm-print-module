@@ -6,6 +6,8 @@ use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
+use Crm\UsersModule\Repositories\AddressesRepository;
+use Nette\Database\Table\Selection;
 
 /**
  * This widget fetches all address change requests for specific user
@@ -16,22 +18,17 @@ use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
  */
 class UserChangeAddressRequests extends BaseLazyWidget
 {
-    private $templateName = 'user_change_address_requests.latte';
+    private string $templateName = 'user_change_address_requests.latte';
+    private ?int $totalCount = null;
 
-    /** @var AddressChangeRequestsRepository */
-    private $changeRequestsRepository;
-
-    /** @var Translator */
-    private $translator;
 
     public function __construct(
         LazyWidgetManager $lazyWidgetManager,
-        AddressChangeRequestsRepository $changeRequestsRepository,
-        Translator $translator
+        private readonly AddressChangeRequestsRepository $changeRequestsRepository,
+        private readonly AddressesRepository $addressesRepository,
+        private readonly Translator $translator
     ) {
         parent::__construct($lazyWidgetManager);
-        $this->changeRequestsRepository = $changeRequestsRepository;
-        $this->translator = $translator;
     }
 
     public function header($id = '')
@@ -52,9 +49,8 @@ class UserChangeAddressRequests extends BaseLazyWidget
     {
         $this->template->userId = $id;
 
-        $addressChangeRequests = $this->changeRequestsRepository->userRequests($id);
-        $this->template->addressChangeRequests = $addressChangeRequests;
-        $this->template->totalAddressChangeRequests = $this->totalCount($id);
+        $this->template->addressChanges = $this->getUserAddressChanges($id);
+        $this->template->totalAddressChanges = $this->totalCount($id);
 
         $this->template->setFile(__DIR__ . '/' . $this->templateName);
         $this->template->render();
@@ -76,13 +72,43 @@ class UserChangeAddressRequests extends BaseLazyWidget
         $this->presenter->redirect(':Users:UsersAdmin:Show', $request->user_id);
     }
 
-    private $totalCount = null;
-
     private function totalCount($id)
     {
-        if ($this->totalCount == null) {
-            $this->totalCount = $this->changeRequestsRepository->userRequests($id)->count('*');
+        if ($this->totalCount === null) {
+            $this->totalCount = $this->userRequests($id)->count('*')
+                + $this->userDeletedAddresses($id)->count('*');
         }
         return $this->totalCount;
+    }
+
+    private function getUserAddressChanges($userId): array
+    {
+        $requests = $this->userRequests($userId)->fetchAll();
+        $addresses = $this->userDeletedAddresses($userId)->fetchAll();
+
+        $mergedArray = [... $requests, ...$addresses];
+        usort($mergedArray, static function ($a, $b) {
+            // only address has deleted_at, both address and change request have created_at
+            return ($b['deleted_at'] ?? $b['created_at']) <=> ($a['deleted_at'] ?? $a['created_at']);
+        });
+
+        return $mergedArray;
+    }
+
+    private function userRequests($userId): Selection
+    {
+        return $this->changeRequestsRepository->getTable()
+            ->where('user_id', $userId)
+            ->order('created_at DESC');
+    }
+
+    private function userDeletedAddresses($userId): Selection
+    {
+        return $this->addressesRepository->getTable()
+            ->where([
+                'user_id' => $userId,
+            ])
+            ->where('deleted_at IS NOT NULL')
+            ->order('deleted_at DESC');
     }
 }

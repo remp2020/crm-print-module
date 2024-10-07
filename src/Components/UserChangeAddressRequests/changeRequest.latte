@@ -1,0 +1,36 @@
+<td>{$addressChange->created_at|userDate}</td>
+<td>
+    {if $addressChange->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
+        <span class="label label-warning">{$addressChange->status}</span>
+    {elseif $addressChange->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_ACCEPTED}
+        <span class="label label-success">{$addressChange->status}</span>
+    {elseif $addressChange->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_REJECTED}
+        <span class="label label-danger">{$addressChange->status}</span>
+    {/if}
+</td>
+<td><span class="label label-default">{$addressChange->type}</span></td>
+<td>
+    {if $addressChange->address_id}
+        <strong n:if="$addressChange->old_first_name || $addressChange->old_last_name">{$addressChange->old_first_name} {$addressChange->old_last_name}<br/></strong>
+        <strong n:if="$addressChange->old_company_name">{$addressChange->old_company_name}<br/></strong>
+    {$addressChange->old_address} {$addressChange->old_number}<br/>
+    {$addressChange->old_zip} {$addressChange->old_city}<br/>
+        {$addressChange->old_phone_number}
+    {else}
+        -
+    {/if}
+</td>
+<td>
+    <strong n:if="$addressChange->first_name || $addressChange->last_name">{$addressChange->first_name} {$addressChange->last_name}<br/></strong>
+    <strong n:if="$addressChange->company_name">{$addressChange->company_name}<br/></strong>
+    {$addressChange->address} {$addressChange->number}<br/>
+			{$addressChange->zip} {$addressChange->city}<br/>
+			{$addressChange->phone_number}
+</td>
+<td class="text-muted">{if $addressChange->address_id}#{$addressChange->address_id}{else}n/a{/if}</td>
+<td>
+    {if $addressChange->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
+        <a href="{link AcceptAddressChangeRequest! $addressChange->id}" class="btn btn-primary"><i class="fa fa-check"></i> {_print.component.user_change_address_requests.accept_and_change}</a>
+        <a href="{link RejectAddressChangeRequest! $addressChange->id}" class="btn btn-warning"><i class="fa fa-times"></i> {_print.component.user_change_address_requests.decline}</a>
+    {/if}
+</td>

@@ -1,4 +1,4 @@
-{if $totalAddressChangeRequests == 0}
+{if totalAddressChanges == 0}
  <div class="bs-callout bs-callout-info">
    <h4>{_print.component.user_change_address_requests.no_record}</h4>
    <p class="lead">{_print.component.user_change_address_requests.user_does_not_want_to_change_address}</p>
@@ -15,44 +15,13 @@
 	 <th>{_print.component.user_change_address_requests.fields.actions}</th>
    </thead>
    <tbody>
-	 {foreach $addressChangeRequests as $request}
+	 {foreach $addressChanges as $addressChange}
 	   <tr>
-		 <td>{$request->created_at|userDate}</td>
-		 <td>
-		   {if $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
-			 <span class="label label-warning">{$request->status}</span>
-		   {elseif $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_ACCEPTED}
-			 <span class="label label-success">{$request->status}</span>
-		   {elseif $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_REJECTED}
-			 <span class="label label-danger">{$request->status}</span>
-		   {/if}
-		 </td>
-		   <td><span class="label label-default">{$request->type}</span></td>
-		 <td>
-		   {if $request->address_id}
-			   <strong n:if="$request->old_first_name || $request->old_last_name">{$request->old_first_name} {$request->old_last_name}<br/></strong>
-			   <strong n:if="$request->old_company_name">{$request->old_company_name}<br/></strong>
-			   {$request->old_address} {$request->old_number}<br/>
-			   {$request->old_zip} {$request->old_city}<br/>
-			   {$request->old_phone_number}
+		   {ifset $addressChange->deleted_at}
+			   {include 'address.latte', addressChange: $addressChange}
 		   {else}
-			 -
-		   {/if}
-		 </td>
-		 <td>
-		   	<strong n:if="$request->first_name || $request->last_name">{$request->first_name} {$request->last_name}<br/></strong>
-		   	<strong n:if="$request->company_name">{$request->company_name}<br/></strong>
-			{$request->address} {$request->number}<br/>
-			{$request->zip} {$request->city}<br/>
-			{$request->phone_number}
-		 </td>
-		 <td class="text-muted">{if $request->address_id}#{$request->address_id}{else}n/a{/if}</td>
-		 <td>
-		   {if $request->status == \Crm\UsersModule\Repositories\AddressChangeRequestsRepository::STATUS_NEW}
-			 <a href="{link AcceptAddressChangeRequest! $request->id}" class="btn btn-primary"><i class="fa fa-check"></i> {_print.component.user_change_address_requests.accept_and_change}</a>
-			 <a href="{link RejectAddressChangeRequest! $request->id}" class="btn btn-warning"><i class="fa fa-times"></i> {_print.component.user_change_address_requests.decline}</a>
-		   {/if}
-		 </td>
+               {include 'changeRequest.latte', addressChange: $addressChange}
+		   {/ifset}
 	   </tr>
 	 {/foreach}
    </tbody>
