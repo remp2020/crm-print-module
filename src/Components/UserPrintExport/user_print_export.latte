@@ -61,6 +61,8 @@
                     {else}
                         <span class="label label-default">{$printSubscription->status}</span>
                     {/if}
+
+                    {control simpleWidget 'admin.user.detail.print_export_state', $printSubscription}
                 </td>
                 <td>
                     {control simpleWidget 'admin.user.detail.print_export_actions', $printSubscription}
