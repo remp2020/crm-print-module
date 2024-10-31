@@ -23,7 +23,8 @@ class ChangeAddressRequestFormFactory
     /* callback function */
     public $onUserUpdate;
 
-    private $user;
+    private User $user;
+    private string $addressType;
 
     private $request;
 
@@ -38,25 +39,29 @@ class ChangeAddressRequestFormFactory
     ) {
     }
 
-    public function create(User $user): Form
+    public function create(User $user, string $addressType = 'print'): Form
     {
         $form = new Form;
+
         $this->user = $user;
+        $this->addressType = $addressType;
 
         $row = $this->loadUserRow();
-
-        $printAddress = $this->addressesRepository->address($row, 'print', true);
+        $addressRow = $this->addressesRepository->address($row, $addressType, true);
+        if (!$addressRow) {
+            $addressRow = $this->addressesRepository->address($row, $addressType);
+        }
 
         $defaults = [];
-        if ($printAddress) {
+        if ($addressRow) {
             $defaults = [
-                'first_name' => $printAddress->first_name,
-                'last_name' => $printAddress->last_name,
-                'phone_number' => $printAddress->phone_number,
-                'address' => $printAddress->address,
-                'number' => $printAddress->number,
-                'zip' => $printAddress->zip,
-                'city' => $printAddress->city,
+                'first_name' => $addressRow->first_name,
+                'last_name' => $addressRow->last_name,
+                'phone_number' => $addressRow->phone_number,
+                'address' => $addressRow->address,
+                'number' => $addressRow->number,
+                'zip' => $addressRow->zip,
+                'city' => $addressRow->city,
             ];
         }
 
@@ -89,7 +94,7 @@ class ChangeAddressRequestFormFactory
             ->setDisabled();
 
         $userRow = $this->usersRepository->find($user->id);
-        if ($printAddress) {
+        if ($addressRow) {
             $form->addSubmit('send', $this->translator->translate('print.frontend.change_address_request_form.submit_update'));
         } else {
             $form->addSubmit('send', $this->translator->translate('print.frontend.change_address_request_form.submit_create'));
@@ -102,7 +107,7 @@ class ChangeAddressRequestFormFactory
         /** @var AddressFormDataProviderInterface[] $providers */
         $providers = $this->dataProviderManager->getProviders('print.dataprovider.change_address_form', AddressFormDataProviderInterface::class);
         foreach ($providers as $sorting => $provider) {
-            $form = $provider->provide(['form' => $form, 'addressType' => 'print', 'user' => $userRow]);
+            $form = $provider->provide(['form' => $form, 'addressType' => $this->addressType, 'user' => $userRow]);
         }
 
         $form->onSuccess[] = [$this, 'formSucceededAfterProviders'];
@@ -114,7 +119,7 @@ class ChangeAddressRequestFormFactory
     {
         $userRow = $this->loadUserRow();
 
-        $printAddress = $this->addressesRepository->address($userRow, 'print', true);
+        $printAddress = $this->addressesRepository->address($userRow, $this->addressType, true);
 
         $this->request = $request = $this->addressChangeRequestsRepository->add(
             user: $userRow,
@@ -131,7 +136,7 @@ class ChangeAddressRequestFormFactory
             companyTaxId: null,
             companyVatId: null,
             phoneNumber: $values['phone_number'],
-            type: 'print'
+            type: $this->addressType
         );
 
         if (!$printAddress) {
@@ -152,7 +157,7 @@ class ChangeAddressRequestFormFactory
     public function formSucceededAfterProviders(Form $form, $values): void
     {
         $userRow = $this->loadUserRow();
-        $printAddress = $this->addressesRepository->address($userRow, 'print');
+        $printAddress = $this->addressesRepository->address($userRow, $this->addressType);
 
         if (!$printAddress) {
             $this->onUserUpdate->__invoke($form, $this->request);
