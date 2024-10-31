@@ -1,7 +1,7 @@
 {snippet printAddressFormSnippet}
     <div id="printFormHeader" class="additionalform-header {if $control['userPrintAddressForm']['done']->value != 0}done{/if}">
         <div class="additionalform-header-box" data-target="#{$control['userPrintAddressForm']->getElementPrototype()->id|noescape}">
-            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+            <i class="fa-regular fa-newspaper" aria-hidden="true"></i>
             {_print.component.payment_success_print_widget.print_address_where}
             <div class="open">{_print.component.payment_success_print_widget.fill_print_address} <i class="fa fa-chevron-down" aria-hidden="true"></i></div>
             <div class="done">{_print.component.payment_success_print_widget.saved} <i class="fa fa-check" aria-hidden="true"></i></div>
