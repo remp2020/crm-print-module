@@ -42,7 +42,7 @@ class ExportEngine
 
             if (in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'], true)) {
                 $address = $row->address;
-            } elseif (in_array($criteria->getKey(), ['dennikn_magazine', 'dennikn_magazine_preliminary'], true)) {
+            } elseif (in_array($criteria->getKey(), ['dennikn_magazine', 'dennikn_magazine_preliminary', 'dennikn_heroine', 'dennikn_heroine_preliminary'], true)) {
                 $address = $this->addressesRepository->address($user, 'magazine_print');
                 if (!$address) {
                     $address = $this->addressesRepository->address($user, 'print', true)
