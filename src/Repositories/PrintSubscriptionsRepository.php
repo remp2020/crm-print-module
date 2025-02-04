@@ -217,11 +217,26 @@ SQL;
             ->where('export_date', $previousExportDate)
             ->where('status != ?', self::STATUS_REMOVED);
 
-        $this->getTable()
+        $recurrents = $this->getTable()
             ->where('user_id', $temp)
             ->where(['type' => $type])
             ->where('export_date', $printExportDate->format('Y-m-d'))
-            ->update(['status' => self::STATUS_RECURRENT]);
+            ->order('print_subscriptions.id');
+
+        $lastId = 0;
+        while (true) {
+            $recurrentRecords = (clone $recurrents)->where('id > ?', $lastId)->fetchAll();
+            if (!count($recurrentRecords)) {
+                break;
+            }
+
+            foreach ($recurrentRecords as $printSubscription) {
+                $lastId = $printSubscription->id;
+                $this->update($printSubscription, [
+                    'status' => self::STATUS_RECURRENT,
+                ]);
+            }
+        }
 
         $temp = $this->getTable()
             ->select('user_id')
