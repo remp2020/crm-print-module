@@ -212,43 +212,35 @@ SQL;
         $previousExportDate = $date[0]->export_date;
         $printExportDate->setTime(0, 0);
 
-        $temp = $this->getTable()->select('user_id')
+        $userIds = $this->getTable()->select('user_id')
             ->where(['type' => $type])
             ->where('export_date', $previousExportDate)
-            ->where('status != ?', self::STATUS_REMOVED);
+            ->where('status != ?', self::STATUS_REMOVED)
+            ->fetchPairs('user_id', 'user_id');
 
-        $recurrents = $this->getTable()
-            ->where('user_id', $temp)
-            ->where(['type' => $type])
-            ->where('export_date', $printExportDate->format('Y-m-d'))
-            ->order('print_subscriptions.id');
-
-        $lastId = 0;
-        while (true) {
-            $recurrentRecords = (clone $recurrents)->where('id > ?', $lastId)->fetchAll();
-            if (!count($recurrentRecords)) {
-                break;
-            }
-
-            foreach ($recurrentRecords as $printSubscription) {
-                $lastId = $printSubscription->id;
-                $this->update($printSubscription, [
-                    'status' => self::STATUS_RECURRENT,
-                ]);
-            }
+        if (count($userIds)) {
+            $this->getTable()
+                ->where('user_id IN (?)', $userIds)
+                ->where(['type' => $type])
+                ->where('export_date', $printExportDate->format('Y-m-d'))
+                ->update(['status' => self::STATUS_RECURRENT]);
         }
 
-        $temp = $this->getTable()
+        $userIds = $this->getTable()
             ->select('user_id')
             ->where(['type' => $type])
-            ->where('export_date', $printExportDate->format('Y-m-d'));
+            ->where('export_date', $printExportDate->format('Y-m-d'))
+            ->fetchPairs('user_id', 'user_id');
 
         $printEnded = $this->getTable()
             ->select('*')
             ->where(['type' => $type])
-            ->where('user_id NOT', $temp)
             ->where('export_date', $previousExportDate)
             ->where('status != ?', self::STATUS_REMOVED);
+
+        if (count($userIds)) {
+            $printEnded->where('user_id NOT IN (?)', $userIds);
+        }
 
         foreach ($printEnded as $row) {
             $this->add(
@@ -276,28 +268,35 @@ SQL;
 
         $printExportDate->setTime(0, 0);
 
-        $temp = $this->getTable()->select('subscription_id')
+        $subscriptionIds = $this->getTable()->select('subscription_id')
             ->where(['type' => $type])
             ->where('export_date', $previousExportDate)
-            ->where('status != ?', 'removed');
+            ->where('status != ?', 'removed')
+            ->fetchPairs('subscription_id', 'subscription_id');
 
-        $this->getTable()
-            ->where('subscription_id', $temp)
-            ->where(['type' => $type])
-            ->where('export_date', $printExportDate)
-            ->update(['status' => 'recurrent']);
+        if (count($subscriptionIds)) {
+            $this->getTable()
+                ->where('subscription_id IN (?)', $subscriptionIds)
+                ->where(['type' => $type])
+                ->where('export_date', $printExportDate)
+                ->update(['status' => 'recurrent']);
+        }
 
-        $temp = $this->getTable()
+        $subscriptionIds = $this->getTable()
             ->select('subscription_id')
             ->where(['type' => $type])
-            ->where('export_date', $printExportDate);
+            ->where('export_date', $printExportDate)
+            ->fetchPairs('subscription_id', 'subscription_id');
 
         $printEnded = $this->getTable()
             ->select('*')
             ->where(['type' => $type])
-            ->where('subscription_id NOT', $temp)
             ->where('export_date', $previousExportDate)
             ->where('status != ?', 'removed');
+
+        if (count($subscriptionIds)) {
+            $printEnded->where('subscription_id NOT IN (?)', $subscriptionIds);
+        }
 
         foreach ($printEnded as $row) {
             $this->add(
@@ -325,16 +324,19 @@ SQL;
 
         $printExportDate->setTime(0, 0);
 
-        $temp = $this->getTable()->select('subscription_id')
+        $subscriptionIds = $this->getTable()->select('subscription_id')
             ->where(['type' => $type])
             ->where('export_date', $previousExportDate)
-            ->where('status != ?', 'removed');
+            ->where('status != ?', 'removed')
+            ->fetchPairs('subscription_id', 'subscription_id');
 
-        $this->getTable()
-            ->where('subscription_id', $temp)
-            ->where(['type' => $type])
-            ->where('export_date', $printExportDate)
-            ->update(['status' => 'recurrent']);
+        if (count($subscriptionIds)) {
+            $this->getTable()
+                ->where('subscription_id IN (?)', $subscriptionIds)
+                ->where(['type' => $type])
+                ->where('export_date', $printExportDate)
+                ->update(['status' => 'recurrent']);
+        }
 
         // nastavime na recurrent userov ktorym sa zmenilo predplatne (cize uz to neupdatla query vyssie) ale presli na dalsie
         // aktualne pri predlzeni ich to davalo stale ako new
