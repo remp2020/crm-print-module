@@ -2,10 +2,10 @@
 
 namespace Crm\PrintModule\Components\AddressRedirectDetail;
 
+use Crm\ApplicationModule\UI\Form;
 use Crm\PrintModule\Forms\AddressRedirectFormFactory;
 use Crm\PrintModule\Repositories\AddressRedirectsRepository;
 use Nette\Application\UI\Control;
-use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
 

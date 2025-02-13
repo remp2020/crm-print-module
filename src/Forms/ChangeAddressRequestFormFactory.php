@@ -4,13 +4,13 @@ namespace Crm\PrintModule\Forms;
 
 use Crm\ApplicationModule\Forms\Controls\CountriesSelectItemsBuilder;
 use Crm\ApplicationModule\Models\DataProvider\DataProviderManager;
+use Crm\ApplicationModule\UI\Form;
 use Crm\UsersModule\DataProviders\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;
 use Crm\UsersModule\Repositories\CountriesRepository;
 use Crm\UsersModule\Repositories\UsersRepository;
 use Nette\Application\BadRequestException;
-use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Security\User;
 use Tomaj\Form\Renderer\BootstrapRenderer;

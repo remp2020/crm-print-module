@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Crm\PrintModule\Forms;
 
 use Contributte\Translation\Translator;
+use Crm\ApplicationModule\UI\Form;
 use Crm\PrintModule\Models\ClaimType;
 use Crm\PrintModule\Repositories\PrintClaimsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
-use Nette\Application\UI\Form;
 use Nette\Database\Table\ActiveRow;
 use Tomaj\Form\Renderer\BootstrapRenderer;
 
