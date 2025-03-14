@@ -78,6 +78,9 @@ class ExportEngine
                 $redirect = $this->addressRedirectsRepository->getAddressCurrentRedirect($address->id)->fetch();
                 if ($redirect) {
                     $address = $redirect->redirect_address;
+                    $sharedMeta = array_merge($sharedMeta, [
+                        'redirect_from_address_id' => $redirect->original_address_id,
+                    ]);
                 }
             }
 
