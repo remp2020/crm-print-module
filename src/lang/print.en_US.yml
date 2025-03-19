@@ -150,7 +150,7 @@ frontend:
         phone_number:
             label: Phone number
             placeholder: Phone number for delivery
-        address:
+        street:
             label: Street
             placeholder: Street
             required: Street is required
@@ -189,7 +189,7 @@ component:
             when: When
             state: State
             type: Type
-            old_address: Old Address
+            old_street: Old Address
             new_address: New Address
             address: Address
             actions: Actions
@@ -247,7 +247,7 @@ form:
             name: First name
             last_name: Last name
             phone_number: Phone number
-            address: Street
+            street: Street
             number: House number
             zip: ZIP
             city: City
@@ -256,7 +256,7 @@ form:
         required:
             name: "First name is required (delivery address)"
             last_name: "Last name is required (delivery address)"
-            address: "Address is required (delivery address)"
+            street: "Address is required (delivery address)"
             number: "House number is required (delivery address)"
             zip: "ZIP is required (delivery address)"
             city: "City is required (delivery address)"
@@ -265,7 +265,7 @@ form:
             name: First name for delivery
             last_name: Last name for delivery
             phone_number: Phone number for delivery
-            address: Street
+            street: Street
             number: eg. 145/41
             zip: eg. 08102
             city: eg. Trnava

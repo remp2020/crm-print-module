@@ -33,7 +33,7 @@ class AddressChangeRequestsPopulator extends AbstractPopulator
                 'updated_at' => $this->faker->dateTimeBetween('-2 years'),
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
-                'address' => $this->faker->streetAddress,
+                'street' => $this->faker->streetAddress,
                 'phone_number' => $this->faker->phoneNumber,
                 'city' => $this->faker->city,
                 'zip' => $this->faker->postcode,

@@ -105,7 +105,7 @@ class PrintSubscriptionsRepository extends Repository
             'institution_name' => $address->company_name ?? $user->institution_name,
             'first_name' => $address?->first_name,
             'last_name' => $address?->last_name,
-            'address' => $address?->address,
+            'address' => $address?->street, // TODO[crm#2368]: change also print_subscriptions.address?
             'number' => $address?->number,
             'zip' => $address?->zip,
             'city' => $address?->city,

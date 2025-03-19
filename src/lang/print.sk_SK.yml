@@ -152,7 +152,7 @@ frontend:
         phone_number:
             label: Tel. číslo
             placeholder: vaše telefónne číslo
-        address:
+        street:
             label: Ulica
             placeholder: napíšte ulicu
             required: Ulica musí byť vyplnená
@@ -191,7 +191,7 @@ component:
             when: Kedy
             state: Stav
             type: Typ
-            old_address: Stará Adresa
+            old_street: Stará Adresa
             new_address: Nová Adresa
             address: Adresa
             actions: Akcie
@@ -249,7 +249,7 @@ form:
             name: Meno
             last_name: Priezvisko
             phone_number: Tel. číslo
-            address: Ulica
+            street: Ulica
             number: Číslo domu
             zip: PSČ
             city: Mesto
@@ -258,7 +258,7 @@ form:
         required:
             name: "Musíte vyplniť Vaše meno (adresa doručenia)"
             last_name: "Musíte vyplniť Vaše priezvisko (adresa doručenia)"
-            address: "Musíte zadať ulicu (adresa doručenia)"
+            street: "Musíte zadať ulicu (adresa doručenia)"
             number: "Musíte zadať číslo domu (adresa doručenia)"
             zip: "Musíte zadať PSČ (adresa doručenia)"
             city: "Musíte zadať mesto (adresa doručenia)"
@@ -267,7 +267,7 @@ form:
             name: krstné meno pre doručenie
             last_name: priezvisko pre doručenie
             phone_number: vaše telefónne číslo
-            address: napíšte ulicu
+            street: napíšte ulicu
             number: napr. 145/41
             zip: napr. 08102
             city: napr. Trnava

@@ -58,7 +58,7 @@ class ChangeAddressRequestFormFactory
                 'first_name' => $addressRow->first_name,
                 'last_name' => $addressRow->last_name,
                 'phone_number' => $addressRow->phone_number,
-                'address' => $addressRow->address,
+                'street' => $addressRow->street,
                 'number' => $addressRow->number,
                 'zip' => $addressRow->zip,
                 'city' => $addressRow->city,
@@ -76,9 +76,9 @@ class ChangeAddressRequestFormFactory
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.last_name.required'));
         $form->addText('phone_number', $this->translator->translate('print.frontend.change_address_request_form.phone_number.label'))
             ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.phone_number.placeholder'));
-        $form->addText('address', $this->translator->translate('print.frontend.change_address_request_form.address.label'))
-            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.address.placeholder'))
-            ->setRequired($this->translator->translate('print.frontend.change_address_request_form.address.required'));
+        $form->addText('street', $this->translator->translate('print.frontend.change_address_request_form.street.label'))
+            ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.street.placeholder'))
+            ->setRequired($this->translator->translate('print.frontend.change_address_request_form.street.required'));
         $form->addText('number', $this->translator->translate('print.frontend.change_address_request_form.number.label'))
             ->setHtmlAttribute('placeholder', $this->translator->translate('print.frontend.change_address_request_form.number.placeholder'))
             ->setRequired($this->translator->translate('print.frontend.change_address_request_form.number.required'));
@@ -127,7 +127,7 @@ class ChangeAddressRequestFormFactory
             firstName: $values['first_name'],
             lastName: $values['last_name'],
             companyName: null,
-            address: $values['address'],
+            street: $values['street'],
             number: $values['number'],
             city: $values['city'],
             zip: $values['zip'],

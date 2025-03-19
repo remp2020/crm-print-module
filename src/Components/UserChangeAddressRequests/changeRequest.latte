@@ -13,7 +13,7 @@
     {if $addressChange->address_id}
         <strong n:if="$addressChange->old_first_name || $addressChange->old_last_name">{$addressChange->old_first_name} {$addressChange->old_last_name}<br/></strong>
         <strong n:if="$addressChange->old_company_name">{$addressChange->old_company_name}<br/></strong>
-    {$addressChange->old_address} {$addressChange->old_number}<br/>
+    {$addressChange->old_street} {$addressChange->old_number}<br/>
     {$addressChange->old_zip} {$addressChange->old_city}<br/>
         {$addressChange->old_phone_number}
     {else}
@@ -23,7 +23,7 @@
 <td>
     <strong n:if="$addressChange->first_name || $addressChange->last_name">{$addressChange->first_name} {$addressChange->last_name}<br/></strong>
     <strong n:if="$addressChange->company_name">{$addressChange->company_name}<br/></strong>
-    {$addressChange->address} {$addressChange->number}<br/>
+    {$addressChange->street} {$addressChange->number}<br/>
 			{$addressChange->zip} {$addressChange->city}<br/>
 			{$addressChange->phone_number}
 </td>

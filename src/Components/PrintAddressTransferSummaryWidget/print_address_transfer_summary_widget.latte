@@ -11,8 +11,8 @@
         {if $address->first_name || $address->last_name}
           <strong>{=($address->first_name . ' ' . $address->last_name)|trim}</strong><br>
         {/if}
-        {if $address->address}
-          {=($address->address . ' ' . $address->number)|trim}<br>
+        {if $address->street}
+          {=($address->street . ' ' . $address->number)|trim}<br>
         {/if}
         {if $address->zip || $address->city}
           {=$address->zip . ' ' . $address->city|trim}<br>

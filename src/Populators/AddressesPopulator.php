@@ -27,7 +27,7 @@ class AddressesPopulator extends AbstractPopulator
                 'updated_at' => $this->faker->dateTimeBetween('-2 years'),
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
-                'address' => $this->faker->streetAddress,
+                'street' => $this->faker->streetAddress,
                 'number' => $this->faker->buildingNumber,
                 'phone_number' => $this->faker->phoneNumber,
                 'company_name' => $this->faker->company,

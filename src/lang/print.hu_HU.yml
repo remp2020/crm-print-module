@@ -61,7 +61,7 @@ frontend:
         phone_number:
             label: Telefonszám
             placeholder: az ön telefonszáma
-        address:
+        street:
             label: Utca
             placeholder: írja be az utcanevet
             required: Utcanév megadása kötelező
@@ -100,7 +100,7 @@ component:
             when: Mikor
             state: Állapot
             type: Típus
-            old_address: Régi cím
+            old_street: Régi cím
             new_address: Új cím
             address: Cím
             actions: Műveletek
@@ -142,7 +142,7 @@ form:
             name: Keresztnév
             last_name: Vezetéknév
             phone_number: Telefonszám
-            address: Utca
+            street: Utca
             number: Házszám
             zip: Irányítószám
             city: Település
@@ -151,7 +151,7 @@ form:
         required:
             name: "Keresztnév kitöltése kötelező (kézbesítési cím)"
             last_name: "Vezetéknév kitöltése kötelező (kézbesítési cím)"
-            address: "Utcanév kitöltése kötelező (kézbesítési cím)"
+            street: "Utcanév kitöltése kötelező (kézbesítési cím)"
             number: "Házszám kitöltése kötelező (kézbesítési cím)"
             zip: "Irányítószám kitöltése kötelező (kézbesítési cím)"
             city: "Település kitöltése kötelező (kézbesítési cím)"
@@ -160,7 +160,7 @@ form:
             name: keresztnév kézbesítéshez
             last_name: vezetéknév kézbesítéshez
             phone_number: az ön telefonszáma
-            address: írja be az utcanevet
+            street: írja be az utcanevet
             number: pl. 145/41
             zip: pl. 08102
             city: pl. Trnava

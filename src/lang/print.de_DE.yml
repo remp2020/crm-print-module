@@ -127,7 +127,7 @@ frontend:
         first_name:
             required: Vorname ist ein Pflichtfeld
             label: Vorname
-        address:
+        street:
             required: Straße ist ein Pflichtfeld
             label: Straße
         number:
@@ -154,7 +154,7 @@ component:
         fields:
             when: Wann
             type: Art
-            old_address: Alte Adresse
+            old_street: Alte Adresse
             new_address: Neue Adresse
             address: Adresse
             state: Status

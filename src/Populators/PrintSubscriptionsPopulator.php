@@ -28,7 +28,7 @@ class PrintSubscriptionsPopulator extends AbstractPopulator
                 'export_date' => $this->faker->dateTimeBetween('-1 years')->format('Y-m-d'),
                 'first_name' => $printAddress->first_name,
                 'last_name' => $printAddress->last_name,
-                'address' => $printAddress->address,
+                'address' => $printAddress->street, // TODO[crm#2368]: change also print_subscriptions.address?
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
                 'country_id' => $printAddress->country_id,

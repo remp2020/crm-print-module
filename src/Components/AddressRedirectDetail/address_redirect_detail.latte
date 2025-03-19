@@ -4,7 +4,7 @@
     </div>
     <div style="flex-grow: 1">
         {$redirect->redirect_address->first_name} {$redirect->redirect_address->last_name},
-        {$redirect->redirect_address->address} {$redirect->redirect_address->number},
+        {$redirect->redirect_address->street} {$redirect->redirect_address->number},
         {$redirect->redirect_address->zip} {$redirect->redirect_address->city}
         <small><span class="text-muted">(#{$redirect->redirect_address->id})</span></small>
         <br />

@@ -70,9 +70,9 @@ class UserPrintAddressFormFactory
             ->setRequired('print.form.print_address.required.last_name');
         $form->addText('phone_number', 'print.form.print_address.label.phone_number')
             ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.phone_number');
-        $form->addText('address', 'print.form.print_address.label.address')
-            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.address')
-            ->setRequired('print.form.print_address.required.address');
+        $form->addText('street', 'print.form.print_address.label.street')
+            ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.street')
+            ->setRequired('print.form.print_address.required.street');
         $form->addText('number', 'print.form.print_address.label.number')
             ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.number')
             ->setRequired('print.form.print_address.required.number');
@@ -106,7 +106,7 @@ class UserPrintAddressFormFactory
                 'first_name' => $printAddress->first_name,
                 'last_name' => $printAddress->last_name,
                 'phone_number' => $printAddress->phone_number,
-                'address' => $printAddress->address,
+                'street' => $printAddress->street,
                 'number' => $printAddress->number,
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
@@ -140,7 +140,7 @@ class UserPrintAddressFormFactory
                 firstName: $values->first_name,
                 lastName: $values->last_name,
                 companyName: null,
-                address: $values->address,
+                street: $values->street,
                 number: $values->number,
                 city: $values->city,
                 zip: $values->zip,
