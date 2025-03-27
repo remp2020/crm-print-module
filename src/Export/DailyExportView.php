@@ -73,7 +73,7 @@ class DailyExportView implements ViewInterface
                     $meta->address_change_request_id ?? null, // address_id
                     $printSubscription->id, // ext_id
                     str_replace("\n", ", ", $name), // name
-                    $printSubscription->address, // street
+                    $printSubscription->street, // street
                     $printSubscription->number, // number
                     $printSubscription->city, // city
                     $printSubscription->zip, // zip

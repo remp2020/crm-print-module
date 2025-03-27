@@ -44,7 +44,7 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
         return [
             'first_name' => 'GDPR removal',
             'last_name' => 'GDPR removal',
-            'address' => 'GDPR removal',
+            'street' => 'GDPR removal',
             'number' => 'GDPR removal',
             'zip' => 'GDPR removal',
             'city' => 'GDPR removal',

@@ -16,8 +16,8 @@
           {if $printSubscription->first_name || $printSubscription->last_name}
             <strong>{=($printSubscription->first_name . ' ' . $printSubscription->last_name)|trim}</strong><br>
           {/if}
-          {if $printSubscription->address}
-            {=($printSubscription->address . ' ' . $printSubscription->number)|trim}<br>
+          {if $printSubscription->street}
+            {=($printSubscription->street . ' ' . $printSubscription->number)|trim}<br>
           {/if}
           {if $printSubscription->zip || $printSubscription->city}
             {=$printSubscription->zip . ' ' . $printSubscription->city|trim}<br>

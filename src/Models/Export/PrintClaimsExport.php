@@ -66,7 +66,7 @@ class PrintClaimsExport
                     $row->print_subscription->export_date,
                     $row->print_subscription->first_name,
                     $row->print_subscription->last_name,
-                    $row->print_subscription->address . ' ' . $row->print_subscription->number,
+                    $row->print_subscription->street . ' ' . $row->print_subscription->number,
                     $row->print_subscription->zip,
                     $row->print_subscription->city,
                     $row->print_subscription->phone_number,

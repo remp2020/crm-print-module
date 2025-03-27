@@ -44,13 +44,13 @@
         </thead>
         <tbody>
           {foreach $printSubscriptions as $printSubscription}
-            <tr {if (($printSubscription->first_name == '' || $printSubscription->last_name == '') && $printSubscription->institution_name == '') || $printSubscription->address == '' || $printSubscription->city == '' } class="danger" {/if}>
+            <tr {if (($printSubscription->first_name == '' || $printSubscription->last_name == '') && $printSubscription->institution_name == '') || $printSubscription->street == '' || $printSubscription->city == '' } class="danger" {/if}>
               <td><a href="{link :Users:UsersAdmin:Show $printSubscription->user_id}">{$printSubscription->user_id}</a></td>
               <td><a href="{link :Subscriptions:SubscriptionsAdmin:Show $printSubscription->subscription_id}">{$printSubscription->subscription_id}</a></td>
               <td>{$printSubscription->institution_name}</td>
               <td>{$printSubscription->first_name}</td>
               <td>{$printSubscription->last_name}</td>
-              <td>{$printSubscription->address}&nbsp;{$printSubscription->number}</td>
+              <td>{$printSubscription->street}&nbsp;{$printSubscription->number}</td>
               <td>{$printSubscription->city}</td>
               <td>{$printSubscription->zip}</td>
               <td>{$printSubscription->email}</td>
