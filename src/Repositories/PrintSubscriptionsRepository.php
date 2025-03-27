@@ -105,7 +105,7 @@ class PrintSubscriptionsRepository extends Repository
             'institution_name' => $address->company_name ?? $user->institution_name,
             'first_name' => $address?->first_name,
             'last_name' => $address?->last_name,
-            'address' => $address?->street, // TODO[crm#2368]: change also print_subscriptions.address?
+            'street' => $address?->street,
             'number' => $address?->number,
             'zip' => $address?->zip,
             'city' => $address?->city,
@@ -127,7 +127,7 @@ class PrintSubscriptionsRepository extends Repository
     {
         $where = ['type' => $type];
         if ($text != '') {
-            $where['address LIKE ? OR first_name LIKE ? OR last_name LIKE ?'] = [
+            $where['street LIKE ? OR first_name LIKE ? OR last_name LIKE ?'] = [
                 "%{$text}%",
                 "%{$text}%",
                 "%{$text}%"
@@ -137,7 +137,7 @@ class PrintSubscriptionsRepository extends Repository
             $where['status'] = $status;
         }
         $where['export_date'] = $date;
-        return $this->getTable()->where($where)->order('status, first_name, last_name, address ASC');
+        return $this->getTable()->where($where)->order('status, first_name, last_name, street ASC');
     }
 
     final public function getExportData($type, \DateTime $exportDate, \DateTime $printDate = null)
@@ -148,7 +148,7 @@ class PrintSubscriptionsRepository extends Repository
         if ($printDate) {
             $where['DATE(exported_at)'] = $printDate->format('Y-m-d');
         }
-        return $this->getTable()->where($where)->order('first_name, last_name, address ASC');
+        return $this->getTable()->where($where)->order('first_name, last_name, street ASC');
     }
 
     final public function deleteList($type, $date)
