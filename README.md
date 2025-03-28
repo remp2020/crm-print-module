@@ -67,13 +67,13 @@ If for some reason user doesn't enter the address, she's reminded by notificatio
 You can always replace this widget with your own implementation by overriding the default widget in your custom module:
 
 ```php
-public function registerWidgets(\Crm\ApplicationModule\Widget\WidgetManagerInterface $widgetManager)
+public function registerLazyWidgets(\Crm\ApplicationModule\Widget\LazyWidgetManagerInterface $lazyWidgetManager)
 {
     // ...
-    $widgetManager->overrideWidget(
+    $lazyWidgetManager->overrideWidget(
         'frontend.layout.top',
-        $this->getInstance(\Crm\PrintModule\Components\EnterAddressWidget::class),
-        $this->getInstance(\Crm\FooModule\Components\EnterAddressWidget::class),
+        \Crm\PrintModule\Components\EnterAddressWidget::class,
+        \Crm\FooModule\Components\EnterAddressWidget::class,
         100
     );
     // ...
