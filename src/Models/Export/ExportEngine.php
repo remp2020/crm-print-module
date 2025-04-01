@@ -5,7 +5,7 @@ namespace Crm\PrintModule\Models\Export;
 use Crm\PrintModule\Repositories\AddressRedirectsRepository;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionMetaRepository;
-use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
+use Crm\UsersModule\Models\AddressChangeRequest\AddressChangeRequestStatusEnum;
 use Crm\UsersModule\Repositories\AddressesMetaRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;
 use Nette\Utils\Json;
@@ -85,7 +85,7 @@ class ExportEngine
             if ($address) {
                 $changeRequest = $address->related('address_change_requests')
                     ->where([
-                        'status' => AddressChangeRequestsRepository::STATUS_ACCEPTED,
+                        'status' => AddressChangeRequestStatusEnum::Accepted->value,
                     ])
                     ->order('updated_at DESC')
                     ->limit(1)
