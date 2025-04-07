@@ -253,7 +253,7 @@ form:
             number: Číslo domu
             zip: PSČ
             city: Mesto
-            country_id: Krajina
+            country: Krajina
             save: Uložiť údaje
         required:
             name: "Musíte vyplniť Vaše meno (adresa doručenia)"
@@ -262,7 +262,7 @@ form:
             number: "Musíte zadať číslo domu (adresa doručenia)"
             zip: "Musíte zadať PSČ (adresa doručenia)"
             city: "Musíte zadať mesto (adresa doručenia)"
-            country_id: "Musíte zvoliť krajinu (adresa doručenia)"
+            country: "Musíte zvoliť krajinu (adresa doručenia)"
         placeholder:
             name: krstné meno pre doručenie
             last_name: priezvisko pre doručenie

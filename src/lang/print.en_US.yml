@@ -251,7 +251,7 @@ form:
             number: House number
             zip: ZIP
             city: City
-            country_id: Country
+            country: Country
             save: Save
         required:
             name: "First name is required (delivery address)"
@@ -260,7 +260,7 @@ form:
             number: "House number is required (delivery address)"
             zip: "ZIP is required (delivery address)"
             city: "City is required (delivery address)"
-            country_id: "You have to select country (delivery address)"
+            country: "You have to select country (delivery address)"
         placeholder:
             name: First name for delivery
             last_name: Last name for delivery

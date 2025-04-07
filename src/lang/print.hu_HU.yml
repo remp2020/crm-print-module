@@ -146,7 +146,7 @@ form:
             number: Házszám
             zip: Irányítószám
             city: Település
-            country_id: Ország
+            country: Ország
             save: Adatok mentése
         required:
             name: "Keresztnév kitöltése kötelező (kézbesítési cím)"
@@ -155,7 +155,7 @@ form:
             number: "Házszám kitöltése kötelező (kézbesítési cím)"
             zip: "Irányítószám kitöltése kötelező (kézbesítési cím)"
             city: "Település kitöltése kötelező (kézbesítési cím)"
-            country_id: "Válasszon országot (kézbesítési cím)"
+            country: "Válasszon országot (kézbesítési cím)"
         placeholder:
             name: keresztnév kézbesítéshez
             last_name: vezetéknév kézbesítéshez

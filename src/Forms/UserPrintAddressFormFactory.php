@@ -9,6 +9,7 @@ use Crm\ApplicationModule\UI\Form;
 use Crm\UsersModule\DataProviders\AddressFormDataProviderInterface;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;
+use Crm\UsersModule\Repositories\CountriesRepository;
 use Nette\Database\Table\ActiveRow;
 use Nette\Utils\ArrayHash;
 use Tomaj\Form\Renderer\BootstrapRenderer;
@@ -31,6 +32,7 @@ class UserPrintAddressFormFactory
         private readonly AddressChangeRequestsRepository $addressChangeRequestsRepository,
         private readonly DataProviderManager $dataProviderManager,
         private readonly CountriesSelectItemsBuilder $countriesSelectItemsBuilder,
+        private readonly CountriesRepository $countriesRepository,
     ) {
     }
 
@@ -52,9 +54,9 @@ class UserPrintAddressFormFactory
         }
         $this->printAddress = $printAddress;
 
-        $countryPairs = $this->countriesSelectItemsBuilder->getDefaultCountryPair();
+        $countryPairs = $this->countriesSelectItemsBuilder->getDefaultCountryIsoPair();
         if ($printAddress) {
-            $countryPairs[$printAddress->country->id] = $printAddress->country->name;
+            $countryPairs[$printAddress->country->iso_code] = $printAddress->country->name;
         }
 
         $form->addProtection();
@@ -82,8 +84,8 @@ class UserPrintAddressFormFactory
         $form->addText('city', 'print.form.print_address.label.city')
             ->setHtmlAttribute('placeholder', 'print.form.print_address.placeholder.city')
             ->setRequired('print.form.print_address.required.city');
-        $form->addSelect('country_id', 'print.form.print_address.label.country_id', $countryPairs)
-            ->setRequired('print.form.print_address.required.country_id');
+        $form->addSelect('country', 'print.form.print_address.label.country', $countryPairs)
+            ->setRequired('print.form.print_address.required.country');
 
         $form->addHidden('VS', $payment->variable_symbol);
 
@@ -102,6 +104,7 @@ class UserPrintAddressFormFactory
         ];
 
         if ($printAddress) {
+            $country = $this->countriesRepository->find($printAddress->country_id);
             $defaults = array_merge($defaults, [
                 'first_name' => $printAddress->first_name,
                 'last_name' => $printAddress->last_name,
@@ -110,7 +113,7 @@ class UserPrintAddressFormFactory
                 'number' => $printAddress->number,
                 'zip' => $printAddress->zip,
                 'city' => $printAddress->city,
-                'country_id' => $printAddress->country_id,
+                'country' => $country->iso_code,
             ]);
         }
 
@@ -134,6 +137,7 @@ class UserPrintAddressFormFactory
         $user = $this->payment->user;
 
         if (isset($values['first_name'])) {
+            $country = $this->countriesRepository->findByIsoCode($values->country);
             $changeRequest = $this->addressChangeRequestsRepository->add(
                 user: $user,
                 parentAddress: $this->printAddress,
@@ -144,7 +148,7 @@ class UserPrintAddressFormFactory
                 number: $values->number,
                 city: $values->city,
                 zip: $values->zip,
-                countryId: $values->country_id,
+                countryId: $country->id,
                 companyId: null,
                 companyTaxId: null,
                 companyVatId: null,
