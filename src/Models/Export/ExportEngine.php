@@ -39,6 +39,7 @@ class ExportEngine
             }
 
             $user = $row->user;
+            $meta = $sharedMeta;
 
             if (in_array($criteria->getKey(), ['tyzden_daily', 'tyzden_print_special', 'tyzden_print_new'], true)) {
                 $address = $row->address;
@@ -78,13 +79,12 @@ class ExportEngine
                 $redirect = $this->addressRedirectsRepository->getAddressCurrentRedirect($address->id)->fetch();
                 if ($redirect) {
                     $address = $redirect->redirect_address;
-                    $sharedMeta = array_merge($sharedMeta, [
+                    $meta = array_merge($meta, [
                         'redirect_from_address_id' => $redirect->original_address_id,
                     ]);
                 }
             }
 
-            $meta = $sharedMeta;
             if ($address) {
                 $changeRequest = $address->related('address_change_requests')
                     ->where([
@@ -94,7 +94,7 @@ class ExportEngine
                     ->limit(1)
                     ->fetch();
                 if ($changeRequest) {
-                    $meta = array_merge($sharedMeta, $this->addressesMetaRepository->values($address, $changeRequest)->fetchPairs('key', 'value'), [
+                    $meta = array_merge($meta, $this->addressesMetaRepository->values($address, $changeRequest)->fetchPairs('key', 'value'), [
                         'address_change_request_id' => $changeRequest->id,
                     ]);
                 }
