@@ -60,6 +60,22 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
         $this->subscriptionsRepository->update($subscription, [
             'address_id' => $copiedAddress->id,
         ]);
+
+        $payment = $this->paymentsRepository->subscriptionPayment($subscription);
+        if ($payment && $payment->address) {
+            if ($payment->address->id === $address->id) {
+                $this->paymentsRepository->update($payment, [
+                    'address_id' => $copiedAddress->id,
+                ]);
+            } else {
+                [$copiedPaymentAddress, $paymentAddressChangeRequest] = $this->copyAddress($userToTransferTo, $payment->address);
+                $this->copyAddressMeta($payment->address, $copiedPaymentAddress, $paymentAddressChangeRequest);
+
+                $this->paymentsRepository->update($payment, [
+                    'address_id' => $copiedPaymentAddress->id,
+                ]);
+            }
+        }
     }
 
     public function isTransferable(ActiveRow $subscription): bool
@@ -108,5 +124,12 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
                 $sourceAddressMeta->value,
             );
         }
+
+        $this->addressesMetaRepository->add(
+            $copiedAddress,
+            $addressChangeRequest,
+            SubscriptionTransferDataProviderInterface::META_KEY_TRANSFERRED_FROM_USER,
+            $sourceAddress->user_id,
+        );
     }
 }
