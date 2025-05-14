@@ -2,7 +2,7 @@
 
 namespace Crm\PrintModule\DataProviders;
 
-use Crm\ApplicationModule\Models\DataProvider\DataProviderException;
+use Crm\PaymentsModule\Repositories\PaymentsRepository;
 use Crm\PrintModule\DataProviders\SubscriptionTransfer\AddressToTransferRetriever;
 use Crm\SubscriptionsModule\DataProviders\SubscriptionTransferDataProviderInterface;
 use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
@@ -18,6 +18,7 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
         private readonly AddressChangeRequestsRepository $addressChangeRequestsRepository,
         private readonly AddressesMetaRepository $addressesMetaRepository,
         private readonly SubscriptionsRepository $subscriptionsRepository,
+        private readonly PaymentsRepository $paymentsRepository,
     ) {
     }
 
@@ -26,30 +27,12 @@ class SubscriptionTransferFormDataProvider implements SubscriptionTransferDataPr
      */
     public function provide(array $params): void
     {
-        if (!isset($params['form'])) {
-            throw new DataProviderException('form param missing');
-        }
-        if (!isset($params['subscription'])) {
-            throw new DataProviderException('subscription param missing');
-        }
-
-        $form = $params['form'];
-        $subscription = $params['subscription'];
-
-        $address = $this->addressToTransferRetriever->retrieve($subscription);
-        if ($address !== null) {
-            $form->addCheckbox('copy_print_address', 'print.admin.subscription_transfer.copy_address');
-        }
     }
 
     public function transfer(ActiveRow $subscription, ActiveRow $userToTransferTo, ArrayHash $formData): void
     {
         $address = $this->addressToTransferRetriever->retrieve($subscription);
         if ($address === null) {
-            return;
-        }
-
-        if (!$formData->copy_print_address) {
             return;
         }
 
