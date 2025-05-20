@@ -66,12 +66,12 @@
               {var $lastDownloadAt = null}
               {if !empty($export['files'])}
                 {foreach $export['files'] as $file}
-                  {if isset($lastFileDownloads[$file]) && $lastFileDownloads[$file] > $lastDownloadAt}
-                    {var $lastDownloadAt = $lastFileDownloads[$file]}
+                  {if isset($lastFileDownloads[$file['name']]) && $lastFileDownloads[$file['name']] > $lastDownloadAt}
+                    {var $lastDownloadAt = $lastFileDownloads[$file['name']]}
                   {/if}
 
-                  <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file}">
-                    <i class="fa fa-download"></i>
+                  <a class="btn btn-sm btn-primary" href="{link ContentAdmin:exportFile $file['name']}">
+                    <i class="fa fa-download"></i> <small class="muted">{$file['size']}</small>
                   </a>
                 {/foreach}
               {else}

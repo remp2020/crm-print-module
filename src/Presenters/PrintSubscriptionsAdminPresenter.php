@@ -96,7 +96,10 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
                     $files = Finder::findFiles($pattern)->from(APP_ROOT . '/content/export/');
                     foreach ($files as $file) {
                         $matchedFiles[] = $file->getFilename();
-                        $exportList[$date]['files'][] = $file->getFilename();
+                        $exportList[$date]['files'][] = [
+                            'name' => $file->getFilename(),
+                            'size' => $this->getHumanFileSize($file->getSize()),
+                        ];
                     }
                 }
             }
@@ -114,6 +117,17 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
         $this->template->years = $years;
         $this->template->actualYear = $year;
         $this->template->lastFileDownloads = $lastFileDownloads;
+    }
+
+    private function getHumanFileSize($size): string
+    {
+        $unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        $factor = floor((strlen($size) - 1) / 3);
+        $decimals = 2;
+        if ($factor == 0) { // Ensure bytes are displayed without decimals if less than 1KB
+            $decimals = 0;
+        }
+        return sprintf("%.{$decimals}f", $size / pow(1024, $factor)) . ' ' . @$unit[$factor];
     }
 
     /**
