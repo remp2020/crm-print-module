@@ -26,7 +26,7 @@ class RequestNotification extends BaseLazyWidget
     public function __construct(
         LazyWidgetManager $lazyWidgetManager,
         AddressChangeRequestsRepository $changeRequestsRepository,
-        Translator $translator
+        Translator $translator,
     ) {
         parent::__construct($lazyWidgetManager);
         $this->changeRequestsRepository = $changeRequestsRepository;

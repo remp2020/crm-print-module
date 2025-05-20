@@ -16,7 +16,7 @@ class PrintClaimsRepository extends Repository
         string $description,
         string $claimant,
         string $claimantContact,
-        string $claimType
+        string $claimType,
     ) {
         $now = new \DateTime();
 

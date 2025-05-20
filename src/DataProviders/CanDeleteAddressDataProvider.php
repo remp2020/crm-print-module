@@ -34,10 +34,10 @@ class CanDeleteAddressDataProvider implements CanDeleteAddressDataProviderInterf
                     [
                         'addresses' => implode(
                             ', ',
-                            array_map(fn($a) => '#'. $a->original_address_id, $addressesRedirectedTo)
-                        )
-                    ]
-                )
+                            array_map(fn($a) => '#'. $a->original_address_id, $addressesRedirectedTo),
+                        ),
+                    ],
+                ),
             ];
         }
 

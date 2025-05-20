@@ -136,7 +136,7 @@ class ChangeAddressRequestFormFactory
             companyTaxId: null,
             companyVatId: null,
             phoneNumber: $values['phone_number'],
-            type: $this->addressType
+            type: $this->addressType,
         );
 
         if (!$printAddress) {

@@ -57,7 +57,7 @@ class AddressRedirectFormFactory
         $form->addSelect(
             'redirect_address_id',
             $this->translator->translate('print.admin.address_redirect_form.new_address'),
-            $addresses
+            $addresses,
         )
             ->setRequired('print.admin.address_redirect_form.input_required')
             ->setPrompt('--');

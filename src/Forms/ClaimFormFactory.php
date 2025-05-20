@@ -22,7 +22,7 @@ class ClaimFormFactory
     public function __construct(
         private Translator $translator,
         private PrintClaimsRepository $printClaimsRepository,
-        private PrintSubscriptionsRepository $printSubscriptionsRepository
+        private PrintSubscriptionsRepository $printSubscriptionsRepository,
     ) {
     }
 

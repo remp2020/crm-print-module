@@ -24,7 +24,7 @@ class EnterAddressWidget extends BaseLazyWidget
     public function __construct(
         LazyWidgetManager $lazyWidgetManager,
         ActualUserSubscription $actualUserSubscription,
-        AddressesRepository $addressesRepository
+        AddressesRepository $addressesRepository,
     ) {
         parent::__construct($lazyWidgetManager);
         $this->actualUserSubscription = $actualUserSubscription;

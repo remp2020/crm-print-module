@@ -36,7 +36,7 @@ class ContentAccessSeeder implements ISeeder
                 $name,
                 $description,
                 $class,
-                $sorting
+                $sorting,
             );
             $this->output->writeln("  <comment>* content access <info>{$name}</info> created</comment>");
         } else {

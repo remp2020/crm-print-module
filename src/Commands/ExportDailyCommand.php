@@ -35,7 +35,7 @@ class ExportDailyCommand extends Command
             ->addArgument(
                 'date',
                 InputArgument::OPTIONAL,
-                'Date to create print subscriptions list'
+                'Date to create print subscriptions list',
             );
     }
 

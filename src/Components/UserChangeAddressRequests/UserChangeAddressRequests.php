@@ -26,7 +26,7 @@ class UserChangeAddressRequests extends BaseLazyWidget
         LazyWidgetManager $lazyWidgetManager,
         private readonly AddressChangeRequestsRepository $changeRequestsRepository,
         private readonly AddressesRepository $addressesRepository,
-        private readonly Translator $translator
+        private readonly Translator $translator,
     ) {
         parent::__construct($lazyWidgetManager);
     }

@@ -46,7 +46,7 @@ class PrintModule extends CrmModule
             ':Print:PrintSubscriptionsAdmin:',
             'fa fa-truck',
             100,
-            true
+            true,
         );
         $printMenu->addChild($menuItem1);
 
@@ -55,7 +55,7 @@ class PrintModule extends CrmModule
             ':Print:ClaimsAdmin:',
             'fa fa-headset',
             201,
-            true
+            true,
         );
         $printMenu->addChild($menuItem);
 
@@ -66,7 +66,7 @@ class PrintModule extends CrmModule
             $this->translator->translate('print.menu.stats'),
             ':Print:Dashboard:default',
             'fa fa-newspaper',
-            450
+            450,
         );
         $menuContainer->attachMenuItemToForeignModule('#dashboard', $printMenu, $menuItem);
     }
@@ -78,7 +78,7 @@ class PrintModule extends CrmModule
             ':Print:ChangeUserAddressRequest:changeAddressRequest',
             '',
             500,
-            true
+            true,
         );
         $menuContainer->attachMenuItem($menuItem);
     }
@@ -88,48 +88,48 @@ class PrintModule extends CrmModule
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
             UserPrintExport::class,
-            777
+            777,
         );
         $widgetManager->registerWidget(
             'admin.user.detail.bottom',
             UserChangeAddressRequests::class,
-            1100
+            1100,
         );
         $widgetManager->registerWidget(
             'admin.users.top',
             RequestNotification::class,
-            1000
+            1000,
         );
         $widgetManager->registerWidget(
             'payment.address',
-            PaymentSuccessPrintWidget::class
+            PaymentSuccessPrintWidget::class,
         );
 
         $widgetManager->registerWidget(
             'frontend.layout.top',
             EnterAddressWidget::class,
-            100
+            100,
         );
         $widgetManager->registerWidget(
             'admin.print_subscriptions.show.actions',
-            ClaimButtonWidget::class
+            ClaimButtonWidget::class,
         );
         $widgetManager->registerWidget(
             'admin.user.detail.print_export_actions',
-            ClaimButtonWidget::class
+            ClaimButtonWidget::class,
         );
         $widgetManager->registerWidget(
             'admin.user.address.partial',
             AddressRedirectWidget::class,
-            100
+            100,
         );
         $widgetManager->registerWidget(
             'admin.subscriptions.transfer.summary.content',
-            PrintAddressTransferSummaryWidget::class
+            PrintAddressTransferSummaryWidget::class,
         );
         $widgetManager->registerWidget(
             'admin.subscriptions.transfer.summary.right',
-            PrintSubscriptionsTransferSummaryWidget::class
+            PrintSubscriptionsTransferSummaryWidget::class,
         );
         $widgetManager->registerWidget(
             'admin.user.address.partial',

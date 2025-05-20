@@ -200,7 +200,7 @@ class ClaimsAdminPresenter extends AdminPresenter
         $form->addSelect(
             'typeGroup',
             'print.admin.print_claims.filter.fields.type_group',
-            $this->getTypeGroupValues()
+            $this->getTypeGroupValues(),
         )->setPrompt('---');
 
         $form->addText('from', 'print.admin.print_claims.filter.fields.from')

@@ -26,7 +26,7 @@ class UserPrintExport extends BaseLazyWidget
     public function __construct(
         LazyWidgetManager $lazyWidgetManager,
         PrintSubscriptionsRepository $printSubscriptionsRepository,
-        Translator $translator
+        Translator $translator,
     ) {
         parent::__construct($lazyWidgetManager);
         $this->printSubscriptionsRepository = $printSubscriptionsRepository;

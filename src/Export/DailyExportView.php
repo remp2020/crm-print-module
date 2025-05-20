@@ -18,7 +18,7 @@ class DailyExportView implements ViewInterface
 
     public function __construct(
         ExcelFactory $excelFactory,
-        ApplicationMountManager $mountManager
+        ApplicationMountManager $mountManager,
     ) {
         $this->excelFactory = $excelFactory;
         $this->mountManager = $mountManager;

@@ -14,7 +14,7 @@ class PrintAddressesUserDataProvider implements UserDataProviderInterface
     private $printSubscriptionsRepository;
 
     public function __construct(
-        PrintSubscriptionsRepository $printSubscriptionsRepository
+        PrintSubscriptionsRepository $printSubscriptionsRepository,
     ) {
         $this->printSubscriptionsRepository = $printSubscriptionsRepository;
     }

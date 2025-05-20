@@ -8,7 +8,7 @@ use Nette\Localization\Translator;
 class PrintClaimsExport
 {
     public function __construct(
-        private readonly Translator $translator
+        private readonly Translator $translator,
     ) {
     }
 
@@ -35,7 +35,7 @@ class PrintClaimsExport
         'country',
         'email',
         'status',
-        'institution_name'
+        'institution_name',
     ];
 
     public function getExport($printClaims): array

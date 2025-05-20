@@ -14,7 +14,7 @@ class ChangeUserAddressRequestPresenter extends FrontendPresenter
 
     public function __construct(
         ChangeAddressRequestFormFactory $changeAddressRequestFormFactory,
-        AddressesRepository $addressesRepository
+        AddressesRepository $addressesRepository,
     ) {
         parent::__construct();
         $this->changeAddressRequestFormFactory = $changeAddressRequestFormFactory;

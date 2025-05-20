@@ -30,7 +30,7 @@ class PrintSubscriptionsRepository extends Repository
         private AddressesRepository $addressesRepository,
         private UsersRepository $usersRepository,
         private CountriesRepository $countriesRepository,
-        Storage $cacheStorage = null
+        Storage $cacheStorage = null,
     ) {
         parent::__construct($database, $cacheStorage);
     }
@@ -91,7 +91,7 @@ class PrintSubscriptionsRepository extends Repository
         ActiveRow $address = null,
         $status = 'new',
         $exportAt = null,
-        $meta = 'null'
+        $meta = 'null',
     ) {
         if ($meta === "[]") {
             $meta = "{}";
@@ -130,7 +130,7 @@ class PrintSubscriptionsRepository extends Repository
             $where['street LIKE ? OR first_name LIKE ? OR last_name LIKE ?'] = [
                 "%{$text}%",
                 "%{$text}%",
-                "%{$text}%"
+                "%{$text}%",
             ];
         }
         if ($status) {
@@ -250,7 +250,7 @@ SQL;
                 exportDate: $printExportDate,
                 address: $row->addr,
                 status: self::STATUS_REMOVED,
-                exportAt: $exportAt
+                exportAt: $exportAt,
             );
         }
     }
@@ -306,7 +306,7 @@ SQL;
                 exportDate: $printExportDate,
                 address: $row->addr,
                 status: self::STATUS_REMOVED,
-                exportAt: $exportAt
+                exportAt: $exportAt,
             );
         }
     }
@@ -416,7 +416,7 @@ GROUP BY today.id
                 exportDate: $printExportDate,
                 address: $address,
                 status: self::STATUS_REMOVED,
-                exportAt: $exportAt
+                exportAt: $exportAt,
             );
         }
     }
