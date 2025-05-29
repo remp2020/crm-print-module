@@ -133,10 +133,10 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
     /**
      * @admin-access-level read
      */
-    public function renderShow($date)
+    public function renderShow($date, $status)
     {
         $this->template->date = $date;
-        $printExports = $this->printSubscriptionsRepository->getExport($this->type, $date, $this->text);
+        $printExports = $this->printSubscriptionsRepository->getExport($this->type, $date, $this->text, $status);
 
         $previousNextPaginator = new PreviousNextPaginator();
         $this->addComponent($previousNextPaginator, 'paginator');
