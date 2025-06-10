@@ -9,6 +9,8 @@ use Crm\UsersModule\DataProviders\AddressesUserDataProvider;
 use Crm\UsersModule\Repositories\AddressesRepository;
 use Crm\UsersModule\Repositories\CountriesRepository;
 use Crm\UsersModule\Repositories\UsersRepository;
+use Crm\UsersModule\ViewObjects\Address;
+use Crm\UsersModule\ViewObjects\Country;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
@@ -88,7 +90,7 @@ class PrintSubscriptionsRepository extends Repository
         $subscriptionId,
         ActiveRow $user,
         \DateTime $exportDate,
-        ActiveRow $address = null,
+        ActiveRow|Address $address = null,
         $status = 'new',
         $exportAt = null,
         $meta = 'null',
@@ -96,21 +98,26 @@ class PrintSubscriptionsRepository extends Repository
         if ($meta === "[]") {
             $meta = "{}";
         }
+
+        if ($address instanceof ActiveRow) {
+            $address = Address::fromActiveRow($address);
+        }
+
         return $this->insert([
             'type' => $type,
             'subscription_id' => $subscriptionId,
             'user_id' => $user->id,
             'exported_at' => $exportAt ?: new DateTime(),
             'export_date' => $exportDate->format('Y-m-d'),
-            'institution_name' => $address->company_name ?? $user->institution_name,
-            'first_name' => $address?->first_name,
-            'last_name' => $address?->last_name,
+            'institution_name' => $address->companyName ?? $user->institution_name,
+            'first_name' => $address?->firstName,
+            'last_name' => $address?->lastName,
             'street' => $address?->street,
             'number' => $address?->number,
             'zip' => $address?->zip,
             'city' => $address?->city,
-            'phone_number' => $address?->phone_number,
-            'country_id' => $address?->country_id ?? $this->countriesRepository->defaultCountry()->id,
+            'phone_number' => $address?->phoneNumber,
+            'country_id' => $address?->country->id ?? $this->countriesRepository->defaultCountry()->id,
             'email' => $user->email ?? $user->public_name,
             'status' => $status,
             'address_id' => $address?->id,
@@ -248,11 +255,36 @@ SQL;
                 subscriptionId: $row->subscription_id,
                 user: $row->user,
                 exportDate: $printExportDate,
-                address: $row->addr,
+                address: $this->printSubscriptionToAddress($row),
                 status: self::STATUS_REMOVED,
                 exportAt: $exportAt,
             );
         }
+    }
+
+    public function printSubscriptionToAddress(ActiveRow $printSubscriptionRow): Address
+    {
+        $country = $this->countriesRepository->find($printSubscriptionRow->country_id);
+        if (!$country) {
+            throw new \RuntimeException("Country with ID [{$printSubscriptionRow->country_id}] not found");
+        }
+
+        return new Address(
+            id: null,
+            type: null,
+            firstName: $printSubscriptionRow->first_name,
+            lastName: $printSubscriptionRow->last_name,
+            street: $printSubscriptionRow->street,
+            number: $printSubscriptionRow->number,
+            city: $printSubscriptionRow->city,
+            zip: $printSubscriptionRow->zip,
+            country: Country::fromActiveRow($country),
+            phoneNumber: $printSubscriptionRow->phone_number,
+            companyName: null,
+            companyId: null,
+            companyTaxId: null,
+            companyVatId: null,
+        );
     }
 
     /**
