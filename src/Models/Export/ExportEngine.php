@@ -72,6 +72,10 @@ class ExportEngine
             }
 
             if ($address) {
+                // country should be set for all print addresses
+                if (!isset($address->country) || $address->country === null) {
+                    throw new \Exception("Address is missing country. Address ID: [$address->id]. User ID: [$user->id].");
+                }
                 if (!$criteria->shouldDeliverToCountry($address->country->iso_code)) {
                     continue;
                 }
