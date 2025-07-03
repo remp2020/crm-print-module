@@ -156,6 +156,7 @@ component:
             type: Art
             old_street: Alte Adresse
             new_address: Neue Adresse
+            addresses_meta: Neue Metadaten
             address: Adresse
             state: Status
             actions: Aktionen

@@ -191,6 +191,7 @@ component:
             type: Type
             old_street: Old Address
             new_address: New Address
+            addresses_meta: New metadata
             address: Address
             actions: Actions
         accept_and_change: Accept and change

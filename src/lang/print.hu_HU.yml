@@ -102,6 +102,7 @@ component:
             type: Típus
             old_street: Régi cím
             new_address: Új cím
+            addresses_meta: Új metaadat
             address: Cím
             actions: Műveletek
         accept_and_change: Módosítás elfogadása

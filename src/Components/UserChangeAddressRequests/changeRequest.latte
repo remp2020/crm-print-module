@@ -27,6 +27,11 @@
 			{$addressChange->zip} {$addressChange->city}<br/>
 			{$addressChange->phone_number}
 </td>
+<td>
+    {foreach $addressChangesMeta[$addressChange->id] as $meta}
+        <strong>{$meta->key}:</strong> {$meta->value}{sep}<br>{/sep}
+    {/foreach}
+</td>
 <td class="text-muted">{if $addressChange->address_id}#{$addressChange->address_id}{else}n/a{/if}</td>
 <td>
     {if $addressChange->status === \Crm\UsersModule\Models\AddressChangeRequest\AddressChangeRequestStatusEnum::New->value}

@@ -49,8 +49,11 @@ class UserChangeAddressRequests extends BaseLazyWidget
     {
         $this->template->userId = $id;
 
-        $this->template->addressChanges = $this->getUserAddressChanges($id);
+        [$addressChanges, $rowMeta] = $this->getUserAddressChanges($id);
+
         $this->template->totalAddressChanges = $this->totalCount($id);
+        $this->template->addressChanges = $addressChanges;
+        $this->template->addressChangesMeta = $rowMeta;
 
         $this->template->setFile(__DIR__ . '/' . $this->templateName);
         $this->template->render();
@@ -84,15 +87,20 @@ class UserChangeAddressRequests extends BaseLazyWidget
     private function getUserAddressChanges($userId): array
     {
         $requests = $this->userRequests($userId)->fetchAll();
-        $addresses = $this->userDeletedAddresses($userId)->fetchAll();
+        $deletedAddresses = $this->userDeletedAddresses($userId)->fetchAll();
 
-        $mergedArray = [... $requests, ...$addresses];
-        usort($mergedArray, static function ($a, $b) {
+        $rowMeta = [];
+        foreach ($requests as $request) {
+            $rowMeta[$request->id] = $request->related('addresses_meta')->fetchAll();
+        }
+
+        $rows = [... $requests, ...$deletedAddresses];
+        usort($rows, static function ($a, $b) {
             // only address has deleted_at, both address and change request have created_at
             return ($b['deleted_at'] ?? $b['created_at']) <=> ($a['deleted_at'] ?? $a['created_at']);
         });
 
-        return $mergedArray;
+        return [$rows, $rowMeta];
     }
 
     private function userRequests($userId): Selection

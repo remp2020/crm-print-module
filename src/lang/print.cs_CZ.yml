@@ -191,6 +191,7 @@ component:
             type: Typ
             old_street: Stará Adresa
             new_address: Nová Adresa
+            addresses_meta: Nová metadata
             address: Adresa
             actions: Akce
         accept_and_change: Akceptuj a změň
