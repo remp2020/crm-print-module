@@ -4,6 +4,7 @@ namespace Crm\PrintModule\Components\UserPrintExport;
 
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Models\Widget\DetailWidgetInterface;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 
@@ -13,7 +14,7 @@ use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
  *
  * @package Crm\PrintModule\Components
  */
-class UserPrintExport extends BaseLazyWidget
+class UserPrintExport extends BaseLazyWidget implements DetailWidgetInterface
 {
     private $templateName = 'user_print_export.latte';
 
@@ -33,7 +34,7 @@ class UserPrintExport extends BaseLazyWidget
         $this->translator = $translator;
     }
 
-    public function header($id = '')
+    public function header($id = ''): string
     {
         $header = $this->translator->translate('print.component.user_print_export.header');
         if ($id) {

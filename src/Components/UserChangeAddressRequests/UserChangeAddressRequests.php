@@ -4,6 +4,7 @@ namespace Crm\PrintModule\Components\UserChangeAddressRequests;
 
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Models\Widget\BaseLazyWidget;
+use Crm\ApplicationModule\Models\Widget\DetailWidgetInterface;
 use Crm\ApplicationModule\Models\Widget\LazyWidgetManager;
 use Crm\UsersModule\Repositories\AddressChangeRequestsRepository;
 use Crm\UsersModule\Repositories\AddressesRepository;
@@ -16,7 +17,7 @@ use Nette\Database\Table\Selection;
  *
  * @package Crm\PrintModule\Components
  */
-class UserChangeAddressRequests extends BaseLazyWidget
+class UserChangeAddressRequests extends BaseLazyWidget implements DetailWidgetInterface
 {
     private string $templateName = 'user_change_address_requests.latte';
     private ?int $totalCount = null;
@@ -31,7 +32,7 @@ class UserChangeAddressRequests extends BaseLazyWidget
         parent::__construct($lazyWidgetManager);
     }
 
-    public function header($id = '')
+    public function header($id = ''): string
     {
         $header = $this->translator->translate('print.component.user_change_address_requests.header');
         if ($id) {

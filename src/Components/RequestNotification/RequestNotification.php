@@ -33,7 +33,7 @@ class RequestNotification extends BaseLazyWidget
         $this->translator = $translator;
     }
 
-    public function header($id = '')
+    public function header()
     {
         return $this->translator->translate('print.component.requests_notification.header');
     }
