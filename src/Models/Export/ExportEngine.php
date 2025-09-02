@@ -23,11 +23,9 @@ class ExportEngine
 
     public function run(ExportCriteria $criteria, SourceInterface $source, ViewInterface $view, $sharedMeta = [])
     {
-        $data = $source->loadData($criteria);
-
         $printExportDate = $criteria->getExportTo();
 
-        foreach ($data as $row) {
+        foreach ($source->loadData($criteria) as $row) {
             // if only new subscribers should be processed, check if subscription already has a record
             if ($criteria->getBackIssues()
                 && $this->printSubscriptionsRepository->getTable()
