@@ -122,7 +122,7 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
     private function getHumanFileSize($size): string
     {
         $unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        $factor = floor((strlen($size) - 1) / 3);
+        $factor = (int) floor((strlen($size) - 1) / 3);
         $decimals = 2;
         if ($factor == 0) { // Ensure bytes are displayed without decimals if less than 1KB
             $decimals = 0;
