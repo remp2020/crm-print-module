@@ -49,3 +49,8 @@ services:
 	- Crm\PrintModule\Models\Export\PrintClaimsExport
 
 	printExportSchedule: Crm\PrintModule\Export\PrintExportSchedule
+
+	userAddressListConfig:
+		setup:
+			- addIconMapping(print, fa-truck)
+			- addAlwaysVisibleTypes(print)
