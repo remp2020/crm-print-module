@@ -1,5 +1,5 @@
 {if $redirects}
-    <div style="margin: 4px 0">
+    <div>
         <h5>{_print.component.address_redirect_widget.redirected_to_address}</h5>
 
         {foreach $redirects as $redirect}
@@ -32,10 +32,8 @@
     {/if}
 {/ifset}
 
-<div style="margin: 8px 0">
-    <a class="btn btn-sm btn-default" tabindex="-1" href="#" data-toggle="modal" data-target="#address-new-redirect-modal-{$address->id}">
+<div>
+    <a class="btn btn-xs btn-default" tabindex="-1" href="#" data-toggle="modal" data-target="#address-new-redirect-modal-{$address->id}">
         <i class="fa fa-arrow-right"></i> {_print.component.address_redirect_widget.create_new_redirect}
     </a>
 </div>
-
-
