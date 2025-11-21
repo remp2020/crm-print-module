@@ -113,7 +113,7 @@ admin:
         prior_90_days: Pred 90 dňami
         prior_90_days_desc: Mají aktuální tištěná předplatné a byli naposledy na webu před 90 dny
     address:
-        cant_delete: '{1}Na tuto adresu je přesměrována jiná adresa: %addresses%|[2,Inf]Na tuto adresu jsou přesměrovány jiné adresy: %addresses%'
+        cant_delete: '{1}Na tuto adresu je přesměrována jiná adresa: %addresses%. Ukončete přesměrování a zkuste to znovu.|[2,Inf]Na tuto adresu jsou přesměrovány jiné adresy: %addresses%. Ukončete přesměrování a zkuste to znovu.'
     address_redirect_form:
         new_address: Nová adresa
         from: Od

@@ -23,6 +23,7 @@ class CanDeleteAddressDataProvider implements CanDeleteAddressDataProviderInterf
 
         $addressesRedirectedTo = $this->addressRedirectsRepository
             ->getAddressesRedirectedTo($params['address']->id)
+            ->where(['to >= ?' => new \DateTime()])
             ->fetchAll();
 
         if ($addressesRedirectedTo) {

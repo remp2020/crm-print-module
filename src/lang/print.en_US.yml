@@ -112,7 +112,7 @@ admin:
         prior_90_days: Prior 90 days
         prior_90_days_desc: Have ongoing print subscription and were on web prior last 90 days
     address:
-        cant_delete: '{1}Another address is redirected to this address: %addresses%|[2,Inf]Other addresses are redirected to this address: %addresses%'
+        cant_delete: '{1}Another address is redirected to this address: %addresses%. Terminate the redirection and try again.|[2,Inf]Other addresses are redirected to this address: %addresses%. Terminate the redirects and try again.'
     address_redirect_form:
         new_address: New address
         from: Od
