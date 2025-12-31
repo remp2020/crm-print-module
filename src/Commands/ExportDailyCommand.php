@@ -39,7 +39,7 @@ class ExportDailyCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         ini_set('memory_limit', '512M');
         if ($inputDate = $input->getArgument('date')) {
