@@ -8,28 +8,14 @@ use Crm\ApplicationModule\UI\Form;
 use Crm\PrintModule\Models\Config;
 use Crm\PrintModule\Models\Export\FilePatternConfig;
 use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
-use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Crm\UsersModule\Repositories\UserActionsLogRepository;
 use Nette\Application\Attributes\Persistent;
-use Nette\DI\Attributes\Inject;
 use Nette\Utils\DateTime;
 use Nette\Utils\Finder;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class PrintSubscriptionsAdminPresenter extends AdminPresenter
 {
-    #[Inject]
-    public PrintSubscriptionsRepository $printSubscriptionsRepository;
-
-    #[Inject]
-    public SubscriptionsRepository $subscriptionsRepository;
-
-    #[Inject]
-    public FilePatternConfig $filePatternConfig;
-
-    #[Inject]
-    public UserActionsLogRepository $userActionsLogRepository;
-
     #[Persistent]
     public $date;
 
@@ -39,6 +25,14 @@ class PrintSubscriptionsAdminPresenter extends AdminPresenter
     public $type;
 
     private const ITEMS_PER_PAGE = 100;
+
+    public function __construct(
+        private readonly PrintSubscriptionsRepository $printSubscriptionsRepository,
+        private readonly FilePatternConfig $filePatternConfig,
+        private readonly UserActionsLogRepository $userActionsLogRepository,
+    ) {
+        parent::__construct();
+    }
 
     public function startup()
     {

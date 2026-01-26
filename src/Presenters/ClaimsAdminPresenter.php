@@ -15,7 +15,6 @@ use Crm\PrintModule\Repositories\PrintSubscriptionsRepository;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
-use Nette\DI\Attributes\Inject;
 use Nette\Database\Table\Selection;
 use Nette\Utils\DateTime;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
@@ -24,21 +23,6 @@ use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class ClaimsAdminPresenter extends AdminPresenter
 {
-    #[Inject]
-    public ClaimFormFactory $claimFormFactory;
-
-    #[Inject]
-    public PrintClaimsRepository $printClaimsRepository;
-
-    #[Inject]
-    public PrintSubscriptionsRepository $printSubscriptionsRepository;
-
-    #[Inject]
-    public ExcelFactory $excelFactory;
-
-    #[Inject]
-    public PrintClaimsExport $printClaimsExport;
-
     #[Persistent]
     public $text;
     #[Persistent]
@@ -53,6 +37,16 @@ class ClaimsAdminPresenter extends AdminPresenter
     public $claimType;
 
     private const ITEMS_PER_PAGE = 40;
+
+    public function __construct(
+        private readonly ClaimFormFactory $claimFormFactory,
+        private readonly PrintClaimsRepository $printClaimsRepository,
+        private readonly PrintSubscriptionsRepository $printSubscriptionsRepository,
+        private readonly ExcelFactory $excelFactory,
+        private readonly PrintClaimsExport $printClaimsExport,
+    ) {
+        parent::__construct();
+    }
 
     private function filterPrintClaims(): Selection
     {

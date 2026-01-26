@@ -8,17 +8,11 @@ use Crm\UsersModule\Repositories\AddressesRepository;
 
 class ChangeUserAddressRequestPresenter extends FrontendPresenter
 {
-    private $changeAddressRequestFormFactory;
-
-    private $addressesRepository;
-
     public function __construct(
-        ChangeAddressRequestFormFactory $changeAddressRequestFormFactory,
-        AddressesRepository $addressesRepository,
+        private readonly ChangeAddressRequestFormFactory $changeAddressRequestFormFactory,
+        private readonly AddressesRepository $addressesRepository,
     ) {
         parent::__construct();
-        $this->changeAddressRequestFormFactory = $changeAddressRequestFormFactory;
-        $this->addressesRepository = $addressesRepository;
     }
 
     public function renderChangeAddressRequest()
