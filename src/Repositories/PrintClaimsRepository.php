@@ -46,12 +46,12 @@ class PrintClaimsRepository extends Repository
     }
 
     public function all(
-        string $claimant = null,
-        string $status = null,
-        string $typeGroup = null,
-        string $from = null,
-        string $to = null,
-        string $claimType = null,
+        ?string $claimant = null,
+        ?string $status = null,
+        ?string $typeGroup = null,
+        ?string $from = null,
+        ?string $to = null,
+        ?string $claimType = null,
     ): Selection {
         $selection = $this->getTable()->order('created_at DESC');
 

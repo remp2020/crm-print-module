@@ -32,7 +32,7 @@ class PrintSubscriptionsRepository extends Repository
         private AddressesRepository $addressesRepository,
         private UsersRepository $usersRepository,
         private CountriesRepository $countriesRepository,
-        Storage $cacheStorage = null,
+        ?Storage $cacheStorage = null,
     ) {
         parent::__construct($database, $cacheStorage);
     }
@@ -90,7 +90,7 @@ class PrintSubscriptionsRepository extends Repository
         $subscriptionId,
         ActiveRow $user,
         \DateTime $exportDate,
-        ActiveRow|Address $address = null,
+        ActiveRow|Address|null $address = null,
         $status = 'new',
         $exportAt = null,
         $meta = 'null',
@@ -147,7 +147,7 @@ class PrintSubscriptionsRepository extends Repository
         return $this->getTable()->where($where)->order('status, first_name, last_name, street ASC');
     }
 
-    final public function getExportData($type, \DateTime $exportDate, \DateTime $printDate = null)
+    final public function getExportData($type, \DateTime $exportDate, ?\DateTime $printDate = null)
     {
         $where = [];
         $where['type'] = $type;

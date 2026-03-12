@@ -26,7 +26,7 @@ class ClaimFormFactory
     ) {
     }
 
-    public function create(ActiveRow $printSubscription, int $printClaimId = null): Form
+    public function create(ActiveRow $printSubscription, ?int $printClaimId = null): Form
     {
         $form = new Form();
 
