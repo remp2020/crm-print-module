@@ -122,7 +122,7 @@ class ExportEngine
             $rows = $this->printSubscriptionsRepository->getExportData($criteria->getKey(), $printExportDate);
             foreach ($rows as $row) {
                 $subscription = $row->subscription;
-                if ($subscription->created_at->format('Y-m-d') != $subscription->modified_at->format('Y-m-d')) {
+                if ($subscription->created_at->format('Y-m-d') != $subscription->updated_at->format('Y-m-d')) {
                     $this->printSubscriptionsRepository->update($row, ['status' => 'updated']);
                 }
             }
