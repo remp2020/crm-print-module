@@ -46,7 +46,6 @@ class ConfigsSeeder implements ISeeder
                 ->setDisplayName('print.config.print_export_issue.name')
                 ->setDescription('print.config.print_export_issue.description')
                 ->setType(ApplicationConfig::TYPE_STRING)
-                ->setAutoload(false)
                 ->setConfigCategory($category)
                 ->setSorting(20)
                 ->save();
