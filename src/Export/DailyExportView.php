@@ -12,16 +12,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 class DailyExportView implements ViewInterface
 {
-    private $excelFactory;
-
-    private $mountManager;
-
     public function __construct(
-        ExcelFactory $excelFactory,
-        ApplicationMountManager $mountManager,
+        private readonly ExcelFactory $excelFactory,
+        private readonly ApplicationMountManager $applicationMountManager,
     ) {
-        $this->excelFactory = $excelFactory;
-        $this->mountManager = $mountManager;
     }
 
     public function generateExportFile(ExportCriteria $criteria, \Traversable $data)
@@ -90,8 +84,8 @@ class DailyExportView implements ViewInterface
 
         $f = fopen('php://memory', 'rb+');
         $csvWriter->save($f);
-        $path = $this->mountManager->getFilePath(FileSystem::DEFAULT_BUCKET_NAME, $fileName);
-        $this->mountManager->writeStream($path, $f);
+        $path = $this->applicationMountManager->getFilePath(FileSystem::DEFAULT_BUCKET_NAME, $fileName);
+        $this->applicationMountManager->writeStream($path, $f);
         fclose($f);
 
         return $path;
