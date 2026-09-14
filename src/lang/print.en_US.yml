@@ -141,30 +141,30 @@ frontend:
     change_address_request_form:
         first_name:
             label: First name
-            placeholder: First name for delivery
+            placeholder: First name
             required: First name is required
         last_name:
             label: Last name
-            placeholder: Last name for delivery
+            placeholder: Last name
             required: Last name is required
         phone_number:
             label: Phone number
-            placeholder: Phone number for delivery
+            placeholder: Phone number
         street:
             label: Street
             placeholder: Street
             required: Street is required
         number:
             label: House number
-            placeholder: eg. 145
+            placeholder: 145
             required: House number is required
         zip:
             label: ZIP
-            placeholder: eg. 08102
+            placeholder: 08102
             required: ZIP is required
         city:
             label: City
-            placeholder: eg. Trnava
+            placeholder: Paris
             required: City is required
         country:
             label: Country
