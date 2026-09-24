@@ -65,7 +65,7 @@ class UserChangeAddressRequests extends BaseLazyWidget implements DetailWidgetIn
         $request = $this->changeRequestsRepository->find($requestId);
         $this->changeRequestsRepository->acceptRequest($request);
         $this->flashMessage($this->translator->translate('print.component.user_change_address_requests.messages.address_changed'));
-        $this->presenter->redirect(':Users:UsersAdmin:Show', $request->user_id);
+        $this->getPresenter()->redirect(':Users:UsersAdmin:Show', $request->user_id);
     }
 
     public function handleRejectAddressChangeRequest($requestId)
@@ -73,7 +73,7 @@ class UserChangeAddressRequests extends BaseLazyWidget implements DetailWidgetIn
         $request = $this->changeRequestsRepository->find($requestId);
         $this->changeRequestsRepository->rejectRequest($request);
         $this->flashMessage($this->translator->translate('print.component.user_change_address_requests.messages.change_declined'));
-        $this->presenter->redirect(':Users:UsersAdmin:Show', $request->user_id);
+        $this->getPresenter()->redirect(':Users:UsersAdmin:Show', $request->user_id);
     }
 
     private function totalCount($id)
