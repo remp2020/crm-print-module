@@ -46,7 +46,7 @@ class UserPrintAddressFormFactory
         $user = $this->payment->user;
 
         $printAddress = null;
-        if ($payment->address_id !== null && $payment->address->type === 'print') {
+        if ($payment->address_id !== null && $payment->address->type === $this->addressType) {
             $printAddress = $payment->address;
         }
         if (!$printAddress) {
