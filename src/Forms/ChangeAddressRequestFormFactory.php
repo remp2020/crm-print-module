@@ -121,6 +121,15 @@ class ChangeAddressRequestFormFactory
 
         $printAddress = $this->addressesRepository->address($userRow, $this->addressType, true);
 
+        // country select is disabled (and omitted from values) by default; data providers may enable it
+        $country = $this->countriesRepository->defaultCountry();
+        if (isset($values['country'])) {
+            $country = $this->countriesRepository->findByIsoCode($values['country']);
+            if (!$country) {
+                throw new BadRequestException("Invalid country ISO code: {$values['country']}");
+            }
+        }
+
         $this->request = $request = $this->addressChangeRequestsRepository->add(
             user: $userRow,
             parentAddress: $printAddress,
@@ -131,7 +140,7 @@ class ChangeAddressRequestFormFactory
             number: $values['number'],
             city: $values['city'],
             zip: $values['zip'],
-            countryId: $this->countriesRepository->defaultCountry()->id,
+            countryId: $country->id,
             companyId: null,
             companyTaxId: null,
             companyVatId: null,
