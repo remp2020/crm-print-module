@@ -16,7 +16,7 @@ class PrintExportSchedule implements PrintExportScheduleInterface
             return null;
         }
 
-        $printExportDate = new \DateTime($exportRunDate->format(\DateTime::ATOM));
+        $printExportDate = \DateTime::createFromInterface($exportRunDate);
         $printExportDate->setTime(8, 0);
 
         $holidaySchedule = [
