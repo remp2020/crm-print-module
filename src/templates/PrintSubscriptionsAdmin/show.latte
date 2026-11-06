@@ -39,7 +39,7 @@
             <th>{_print.admin.print_subscriptions.show.fields.email}</th>
             <th>{_print.admin.print_subscriptions.show.fields.state}</th>
             <th>{_print.admin.print_subscriptions.show.fields.actions}</th>
-            {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => true]}
+            {control simpleWidget, 'admin.print_subscriptions.additional_info', ['header' => true]}
           </tr>
         </thead>
         <tbody>
@@ -64,9 +64,9 @@
                 {/if}
               </td>
               <td>
-                {control simpleWidget 'admin.print_subscriptions.show.actions', $printSubscription}
+                {control simpleWidget, 'admin.print_subscriptions.show.actions', $printSubscription}
               </td>
-              {control simpleWidget 'admin.print_subscriptions.additional_info', ['header' => false, 'print_subscription' => $printSubscription]}
+              {control simpleWidget, 'admin.print_subscriptions.additional_info', ['header' => false, 'print_subscription' => $printSubscription]}
             </tr>
           {/foreach}
         </tbody>

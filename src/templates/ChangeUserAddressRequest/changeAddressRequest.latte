@@ -10,12 +10,12 @@
 <div class="row">
 	<div class="col-md-12">
 
-		{control snippet 'change-address-head'}
+		{control snippet, 'change-address-head'}
 
 		{if $address}
 			<h3>{_print.frontend.change_user_address.actual_address}</h3>
 			<blockquote>
-				{control simpleWidget 'frontend.user.address.partial', $address}
+				{control simpleWidget, 'frontend.user.address.partial', $address}
 			</blockquote>
 		{/if}
 
